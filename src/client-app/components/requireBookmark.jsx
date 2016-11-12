@@ -7,7 +7,7 @@ const requireBookmark = Bookmark => {
     class RequireBookmark extends Component {
         static propTypes = {
             bookmark: PropTypes.shape({
-                id: PropTypes.number.isRequired,
+                id: PropTypes.any.isRequired,
                 title: PropTypes.string.isRequired,
                 url: PropTypes.string.isRequired
             }),

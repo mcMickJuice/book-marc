@@ -17,7 +17,7 @@ const ViewBookmark = ({bookmark}) => {
 
 ViewBookmark.propTypes = {
     bookmark: PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.any.isRequired,
         title: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired
     })

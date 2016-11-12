@@ -8,8 +8,8 @@ module.exports = function (app) {
 
     app.use(webpackDevMiddleware(compiler, {
         publicPath: config.output.publicPath,
-        stats: { colors: true },
-        quiet: true
+        quiet: true,
+        stats: { colors: true }
     }))
 
     app.use(webpackHotMiddleware(compiler, {

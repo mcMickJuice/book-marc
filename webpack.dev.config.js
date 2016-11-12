@@ -1,9 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-// var Dashboard = require('webpack-dashboard')
-// var WebpackDashboard = require('webpack-dashboard/plugin')
-
-// var dashboard = new Dashboard();
 
 var babelSettings = {
     cacheDirectory: true,
@@ -37,7 +33,6 @@ module.exports = {
     },
     devtool: 'eval-source-map',
     plugins: [
-        // new WebpackDashboard(dashboard.setData),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('development'),

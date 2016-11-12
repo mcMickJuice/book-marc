@@ -1,7 +1,7 @@
 import {PropTypes} from 'react'
 
 const bookmarkShape = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.any.isRequired,
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired
 }

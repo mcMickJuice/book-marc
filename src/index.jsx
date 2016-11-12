@@ -1,8 +1,8 @@
 import React from 'react'
 import {render} from 'react-dom'
 import {AppContainer} from 'react-hot-loader';
-import configureStore from './app/redux/configureStore'
-import Root from './app/Root'
+import configureStore from './client-app/redux/configureStore'
+import Root from './client-app/Root'
 import './site'
 
 const mount = document.getElementById('mount');
@@ -14,8 +14,8 @@ render(<AppContainer>
 
 
 if (module.hot) {
-    module.hot.accept('./app/Root', () => {
-        const NextRoot = require('./app/Root').default;
+    module.hot.accept('./client-app/Root', () => {
+        const NextRoot = require('./client-app/Root').default;
         render(<AppContainer>
             <NextRoot store={store} />
         </AppContainer>, mount)
