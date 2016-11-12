@@ -1,24 +1,19 @@
-var express = require('express');
 var path = require('path');
 var proxy = require('express-http-proxy')
 var webpackMiddleware = require('./webpack-middleware')
+var webServer = require('./webServer')
 
-var app = express();
-
+//need to invert this so that app is exported
+//db json middleware
 var proxyMiddleware = proxy('http://localhost:3030', {
     forwardPath: (req, res) => {
         var path = require('url').parse(req.baseUrl).path;
         return path;
     } 
 })
-app.use('/api/*', proxyMiddleware);
 
-app.use(express.static(path.resolve(__dirname)))
+webServer.app.use('/api/*', proxyMiddleware);
 
-webpackMiddleware(app);
+webpackMiddleware(webServer.app);
 
-app.all('/*', function(req, res) {
-    res.sendFile(path.resolve(__dirname,'./index.html'))
-})
-
-app.listen(3000, () => console.log('listening on port 3000'))
+webServer.start(3000, () => console.log('server started from app.js'))
