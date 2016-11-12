@@ -1,0 +1,32 @@
+import React, {PropTypes} from 'react';
+import {bookmarkShapeWithReview} from '../common/bookmarkShape'
+import BookmarkRow from './BookmarkRow'
+
+const BookmarkListing = ({bookmarks}) => {
+    const bookmarkRows = bookmarks.map(b => {
+        return <BookmarkRow key={b.id} bookmark={b} />
+    })
+
+    return (
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Title</td>
+                        <td>Url</td>
+                        <td>Ranking</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {bookmarkRows}
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+BookmarkListing.propTypes = {
+    bookmarks: PropTypes.arrayOf(bookmarkShapeWithReview).isRequired
+}
+
+export default BookmarkListing;
