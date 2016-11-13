@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+require('dotenv').config();
 
 var babelSettings = {
     cacheDirectory: true,
