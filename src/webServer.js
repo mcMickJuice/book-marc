@@ -11,8 +11,6 @@ app.use(bodyParser.json());
 
 module.exports.app = app;
 
-
-
 module.exports.start = function start(port, callback) {
 routes.use(app);    
 

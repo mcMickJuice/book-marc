@@ -1,5 +1,5 @@
-const {createConn} = require('./dbClient');
-const {toViewModel} = require('./mongoHelper');
+const {createConn, ObjectId} = require('./dbClient');
+const {toViewModel, fromViewModel} = require('./mongoHelper');
 
 const BOOKMARC_DB = 'bookmarc'
 const BOOKMARC_COLLECTION = 'bookmarks';
@@ -31,6 +31,37 @@ module.exports.getBookmarks = () => {
                     db.close()
                     return bookmarks.map(toViewModel)
                 });
+        })
+}
+
+
+module.exports.updateBookmarkDescription = bookmark => {
+    return updateBookmark(bookmark.id, {
+        description: bookmark.description
+    })
+}
+
+module.exports.updateBookmarkRating = bookmark => {
+    return updateBookmark(bookmark.id, {
+        rating: bookmark.rating
+    })
+}
+
+module.exports.updateBookmarkAsRead = bookmark => {
+    return updateBookmark(bookmark.id, {
+        isRead: true
+    })
+}
+
+const updateBookmark = (id, updateObj) => {
+    return createConn(BOOKMARC_DB)
+        .then(db => {
+            const coll = db.collection(BOOKMARC_COLLECTION);
+
+            return coll.updateOne({ _id: new ObjectId(id) }, { $set: updateObj })
+                .then(() => {
+                    db.close();
+                })
         })
 }
 

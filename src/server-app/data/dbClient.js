@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectId} = require('mongodb');
 const {dbUrl} = require('../config');
 
 //dbCallback err, db
@@ -12,4 +12,5 @@ const createConn = (databaseName) => {
 }
 
 module.exports.createConn = createConn;
+module.exports.ObjectId = ObjectId;
 

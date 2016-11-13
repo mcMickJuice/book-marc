@@ -15,9 +15,32 @@ const getBookmarks = (req, res) => {
         })
 }
 
+const updateBookmarkDescription = (req, res) => {
+    bookmarcClient.updateBookmarkDescription(req.body)
+        .then(() => {
+            res.send(/*http 200?*/);
+        })
+}
 
-module.exports = function registerRoutes(app) {
+const updateBookmarkRating = (req, res) => {
+    bookmarcClient.updateBookmarkRating(req.body)
+        .then(() => {
+            res.send(/*http 200?*/);
+        })
+}
+
+const markBookmarkAsRead = (req, res) => {
+    bookmarcClient.updateBookmarkAsRead(req.body)
+        .then(() => {
+            res.send()
+        })
+}
+
+module.exports =  app => {
     const url = '/api/bookmark';
     app.post(url, createBookmark);
     app.get(url, getBookmarks);
+    app.put(`${url}/description`, updateBookmarkDescription);
+    app.put(`${url}/rating`, updateBookmarkRating);
+    app.put(`${url}/read`, markBookmarkAsRead)
 }
