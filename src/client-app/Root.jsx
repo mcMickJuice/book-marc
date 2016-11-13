@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react'
-import AddBookmark from './components/AddBookmark'
 import {Provider} from 'react-redux'
 import {browserHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
