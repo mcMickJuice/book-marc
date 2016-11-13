@@ -1,4 +1,5 @@
 import * as bookmarkClient from '../../common/bookmarkClient'
+import {push} from 'react-router-redux'
 
 export const BOOKMARK_LOADED = 'BOOKMARK_LOADED';
 export const BOOKMARK_UPDATED = 'BOOKMARK_UPDATED';
@@ -17,7 +18,8 @@ export const addBookmark = bookmark => {
     return dispatch => {
         return bookmarkClient.createBookmark(bookmark)
             .then(updatedBookmark => {
-                dispatch(loadBookmark(updatedBookmark))
+                 dispatch(loadBookmark(updatedBookmark))
+                 dispatch(push(`/bookmark/${updatedBookmark.id}`))
             })
     }
 }
