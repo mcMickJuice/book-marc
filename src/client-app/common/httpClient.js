@@ -6,17 +6,26 @@ import promisePlugin from 'superagent-promise-plugin'
 
 const request = promisePlugin.patch(superagent);
 
-export const get = url => {
-    return request.get(url);
+export const get = (url, headers) => {
+    headers = headers || {};
+    return request
+    .get(url)
+    .set(headers);
 }
 
-export const post = (url, body) => {
-    return request.post(url)
+export const post = (url, body, headers) => {
+    headers = headers || {};
+    return request
+    .post(url)
+    .set(headers)
         .send(body)
 }
 
-export const put = (url, body) => {
-    return request.put(url)
+export const put = (url, body, headers) => {
+    headers = headers || {};    
+    return request
+    .put(url)
+    .set(headers)
         .send(body)
 }
 

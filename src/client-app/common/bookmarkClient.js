@@ -1,9 +1,25 @@
-import { get, put, post } from './httpClient'
+import * as httpClient from './httpClient'
+import {getToken} from './authClient'
 import config from './config';
 
 const createUrl = route => {
     return `${config.apiUrl}/${route}`
 }
+
+//prolly should be in httpClient
+const authRequest = method => {
+    return (...args) => {
+        const token = getToken();
+        return method(...args, {
+            'authorization': `Bearer ${token}`
+        })
+    }
+}
+
+const get = authRequest(httpClient.get);
+const post = authRequest(httpClient.post);
+const put = authRequest(httpClient.put);
+
 
 const responseHandler = resp => {
     //what about errors?
