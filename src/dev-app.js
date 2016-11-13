@@ -1,5 +1,3 @@
-var path = require('path');
-var proxy = require('express-http-proxy')
 var webpackMiddleware = require('./webpack-middleware')
 var webServer = require('./webServer')
 

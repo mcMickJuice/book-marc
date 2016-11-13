@@ -1,6 +1,5 @@
 var nodemon = require('nodemon')
 var path = require('path')
-var jsonServer = require('json-server')
 
 //assets and app
 var clientApp =path.join(__dirname,'app/*'); 
