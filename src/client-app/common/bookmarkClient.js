@@ -1,6 +1,6 @@
 import * as httpClient from './httpClient'
 import {getToken} from './authClient'
-import config from './config';
+import * as config from './config';
 
 const createUrl = route => {
     return `${config.apiUrl}/${route}`

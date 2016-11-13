@@ -5,6 +5,8 @@ import Home from './components/Home'
 import AddBookmark from './components/AddBookmark'
 import ViewBookmark from './components/ViewBookmark'
 import EditBookmark from './components/EditBookmark'
+import Login from './components/Login'
+import {isAuthenticated} from './common/authClient'
 
 const NotFound = () => {
     return <div>
@@ -12,21 +14,28 @@ const NotFound = () => {
     </div>
 }
 
+const authHook = (nextState, replace) => {
+    if(!isAuthenticated()) {
+        replace('/login')
+        return false;
+    }
+    return true;
+}
+
 const Routes = ({history}) => {
     return <Router history={history}>
         <Route path="/" component={Main}>
-            <IndexRoute component={Home} />
-            <Route path="bookmark">
+            <IndexRoute component={Home} onEnter={authHook} />
+            <Route path="login" component={Login} />
+            <Route path="bookmark" onEnter={authHook}>
                 <IndexRoute component={AddBookmark} />
                 <Route path=":id">
                     <IndexRoute component={ViewBookmark} />
                     <Route path="edit" component={EditBookmark} /> 
                 </Route>
-                <Route path="*" component={NotFound} />
             </Route>
-
         </Route>
-
+        <Route path="*" component={NotFound} />
     </Router>
 }
 

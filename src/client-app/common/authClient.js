@@ -1,6 +1,7 @@
-import {post} from './httpClient'
+import { post } from './httpClient'
 import * as webStorage from './webStorage'
-import {apiUrl} from './config'
+import { apiUrl } from './config'
+import decode from 'jwt-decode'
 
 const TOKEN_KEY = 'bm_token';
 
@@ -10,13 +11,18 @@ export const login = (username, password) => {
         username,
         password
     })
-    .then(res => {
-        webStorage.setItem(TOKEN_KEY, res.token)
-    })
+        .then(({body}) => {
+            var token = body.token;
+            webStorage.setItem(TOKEN_KEY, token)
+            return decode(token)
+        })
 }
 
 export const logout = () => {
-    webStorage.removeItem(TOKEN_KEY)
+    return new Promise(resolve => {
+        webStorage.removeItem(TOKEN_KEY)
+        resolve();
+    })
 }
 
 export const isAuthenticated = () => {

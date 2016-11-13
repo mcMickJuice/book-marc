@@ -1,5 +1,1 @@
-const config = {
-    apiUrl: process.env.API_URL
-}
-
-export default config;
+export const apiUrl = process.env.API_URL;
