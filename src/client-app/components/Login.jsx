@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import {logIn} from '../redux/user/actions'
+import {login} from '../common/authClient'
 import {connect} from 'react-redux'
 
 class Login extends Component {
@@ -19,15 +20,20 @@ class Login extends Component {
     }
 
     static propTypes = {
-        dispatch: PropTypes.func.isRequired
+        onLogin: PropTypes.func.isRequired
     }
 
     onLogin() {
         const {username, password} = this.state;
-        const {dispatch} = this.props;
+        const {onLogin} = this.props;
 
         if (username.length > 0 && password.length > 0) {
-            dispatch(logIn(username, password))
+            login(username, password)
+                .then(onLogin, () => {
+                    this.setState({
+                        error: 'Invalid username or password'
+                    })
+                })
         } else {
             this.setState({
                 error: 'You must supply a username or password'
@@ -79,4 +85,10 @@ class Login extends Component {
     }
 }
 
-export default connect()(Login)
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: userInfo => dispatch(logIn(userInfo))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Login)

@@ -20,13 +20,10 @@ const resetUser = () => {
     }
 }
 
-export const logIn = (username, password) => {
+export const logIn = userInfo => {
     return dispatch => {
-        return authClient.login(username, password)
-            .then((user) => {
-                dispatch(loadUser(user))
-                dispatch(push('/'))
-            })
+        dispatch(loadUser(userInfo));
+        dispatch(push('/'))
     }
 }
 

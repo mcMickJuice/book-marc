@@ -1,12 +1,17 @@
-var {createTokenFromUser} = require('../auth/authHelper')
+var {createTokenFromUser, authenticateUser} = require('../auth/authHelper')
 
 const loginUser = (req, res) => {
     var user = req.body;
     //verify password for user
-
-    var token = createTokenFromUser(user);
-
-    res.send({token})
+    authenticateUser(user.username, user.password)
+        .then(userInfo => {
+            var token = createTokenFromUser(userInfo);
+            res.send({token});
+        })
+        .catch(msg => {
+            res.statusCode = 403;
+            res.send(msg)
+        })
 }
 
 module.exports = app => {
