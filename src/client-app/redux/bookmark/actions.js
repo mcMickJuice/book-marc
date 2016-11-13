@@ -45,14 +45,42 @@ export const getRecentBookmarks = () => {
     }
 }
 
-export const updateBookmark = bookmark => {
+export const updateBookmarkDescription = bookmark => {
     return dispatch => {
-        return bookmarkClient.updateBookmark(bookmark)
-            .then(updatedBookmark => {
+        return bookmarkClient.updateBookmarkDescription(bookmark)
+            .then(() => {
                 dispatch({
                     type: BOOKMARK_UPDATED,
                     payload: {
-                        bookmark: updatedBookmark
+                        bookmark: bookmark
+                    }
+                })
+            })
+    }
+}
+
+export const updateBookmarkRating = bookmark => {
+    return dispatch => {
+        return bookmarkClient.updateBookmarkRating(bookmark)
+            .then(() => {
+                dispatch({
+                    type: BOOKMARK_UPDATED,
+                    payload: {
+                        bookmark: bookmark
+                    }
+                })
+            })
+    }
+}
+
+export const updateBookmarkAsRead = bookmark => {
+    return dispatch => {
+        return bookmarkClient.markBookmarkAsRead(bookmark)
+            .then(() => {
+                dispatch({
+                    type: BOOKMARK_UPDATED,
+                    payload: {
+                        bookmark: bookmark
                     }
                 })
             })

@@ -3,8 +3,8 @@ const bookmarcClient = require('../data/bookmarcClient');
 
 const createBookmark = (req, res) => {
     bookmarcClient.createBookmark(req.body)
-        .then(bookmarkId => {
-            res.send({id: bookmarkId})
+        .then(bookmark => {
+            res.send(bookmark)
         })
 }
 
@@ -12,6 +12,14 @@ const getBookmarks = (req, res) => {
     bookmarcClient.getBookmarks()
         .then(bookmarks => {
             res.send(bookmarks)
+        })
+}
+
+const getBookmarkById = (req, res) => {
+    console.log(req.params);
+    bookmarcClient.getBookmarkById(req.params.bookmarkId)
+        .then(bookmark => {
+            res.send(bookmark);
         })
 }
 
@@ -40,6 +48,7 @@ module.exports =  app => {
     const url = '/api/bookmark';
     app.post(url, createBookmark);
     app.get(url, getBookmarks);
+    app.get(`${url}/:bookmarkId`, getBookmarkById)
     app.put(`${url}/description`, updateBookmarkDescription);
     app.put(`${url}/rating`, updateBookmarkRating);
     app.put(`${url}/read`, markBookmarkAsRead)

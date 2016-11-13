@@ -1,4 +1,4 @@
-import {get, put, post} from './httpClient'
+import { get, put, post } from './httpClient'
 import config from './config';
 
 const createUrl = route => {
@@ -27,6 +27,26 @@ export const createBookmark = newBookmark => {
     return post(url, newBookmark)
         .then(responseHandler)
 
+}
+
+export const updateBookmarkDescription = bookmark => {
+    const url = createUrl('bookmark/description');
+    return put(url, bookmark)
+        .then(responseHandler)
+}
+
+export const updateBookmarkRating = bookmark => {
+    const url = createUrl('bookmark/rating')
+
+    return put(url, bookmark)
+        .then(responseHandler);
+}
+
+export const markBookmarkAsRead = bookmark => {
+    const url = createUrl('bookmark/read')
+
+    return put(url, bookmark)
+        .then(responseHandler);
 }
 
 export const updateBookmark = bookmark => {

@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import RecentlyAddedBookmark from './RecentlyAddedBookmark';
 import {addBookmark} from '../redux/bookmark/actions'
 import {getBookmarks} from '../redux/bookmark/selectors'
 import {connect} from 'react-redux'
@@ -8,58 +7,58 @@ class AddBookmark extends Component {
     constructor() {
         super();
 
-        this.onTitleUpdate = this.onTitleUpdate.bind(this);
-        this.onUrlUpdate = this.onUrlUpdate.bind(this);
+        this.onTitleBlur = this.onTitleBlur.bind(this);
+        this.onUrlBlur = this.onUrlBlur.bind(this);
+        this.onDescriptionBlur = this.onDescriptionBlur.bind(this);
         this.addBookmark = this.addBookmark.bind(this);
 
         this.state = {
             title: '',
-            url: ''
+            url: '',
+            description: ''
         }
     }
 
     static propTypes = {
-        addBookmark: PropTypes.func.isRequired,
-        recentlyAdded: PropTypes.array.isRequired
+        addBookmark: PropTypes.func.isRequired
     }
     
-    onTitleUpdate(evt) {
+    onTitleBlur(evt) {
         const title = evt.target.value;
         this.setState({
             title
         })
     }
 
-    onUrlUpdate(evt) {
+    onUrlBlur(evt) {
         const url = evt.target.value;
         this.setState({
             url
         })
     }
 
+    onDescriptionBlur(evt) {
+        const description = evt.target.value;
+        this.setState({
+            description
+        })
+    }
+
     addBookmark() {
-        const {title, url} = this.state;
+        const {title, url, description} = this.state;
         const {addBookmark} = this.props;
-        const bookmark = {title, url};
 
         this.setState({
             title: '',
-            url: ''
+            url: '',
+            description: ''
         })
 
-        addBookmark(bookmark)
+        addBookmark({title, url,description})
     }
 
     render() {
-        const {title, url} = this.state;
-        const {recentlyAdded} = this.props;
-
-        const recentBookmarkElements = recentlyAdded.map(bm => {
-            return <RecentlyAddedBookmark key={bm.id} 
-            title={bm.title}
-            url={bm.url}
-            id={bm.id} />
-        })
+        const {title, url, description} = this.state;
 
         return (
             <div>
@@ -70,40 +69,33 @@ class AddBookmark extends Component {
                     <div className="row">
                         <label htmlFor="title">Title</label>
                         <input type="text" name="title" 
-                        value={title}
-                        onChange={this.onTitleUpdate}/>
+                        defaultValue={title}
+                        onBlur={this.onTitleBlur}/>
                     </div>
                     <div className="row">
                         <label htmlFor="url">
                             Bookmark Url
                         </label>
                         <input type="text"
-                        value={url}
-                         name="url" onChange={this.onUrlUpdate}/>
+                        defaultValue={url}
+                         name="url" onChange={this.onUrlBlur}/>
+                    </div>
+                    <div className="row">
+                        <label htmlFor="Description">
+                            Description
+                        </label>
+                        <textarea type="text"
+                        defaultValue={description}
+                        cols="30" rows="10"
+                         name="url" onChange={this.onDescriptionBlur}/>
                     </div>
 
                     <div className="button" onClick={this.addBookmark}>
                         Add Bookmark
                     </div>
                 </div>
-                <div className="recently-added">
-                    <h3>Recently Added</h3>
-                    
-                    {
-                        recentBookmarkElements.length > 0 
-                        ? recentBookmarkElements 
-                        : <div>No Recently Added Elements</div>}
-                </div>
             </div>
         );
-    }
-}
-
-const mapStateToProps = state => {
-    const recentlyAdded = getBookmarks(state);
-
-    return {
-        recentlyAdded
     }
 }
 
@@ -115,4 +107,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddBookmark)
+export default connect(null, mapDispatchToProps)(AddBookmark)

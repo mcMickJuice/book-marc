@@ -1,21 +1,21 @@
 import React, {Component, PropTypes} from 'react';
 import requireBookmark from './requireBookmark'
 import {connect} from 'react-redux'
-import {updateBookmark} from '../redux/bookmark/actions'
+import {updateBookmarkDescription, updateBookmarkRating, updateBookmarkAsRead} from '../redux/bookmark/actions'
 
 class EditBookmark extends Component {
     constructor(props) {
         super(props);
 
-        this.onRankingChange = this.onRankingChange.bind(this)
-        this.onOverviewChange = this.onOverviewChange.bind(this)
-        this.submit = this.submit.bind(this)
+        this.onRatingChange = this.onRatingChange.bind(this)
+        this.onDescriptionBlur = this.onDescriptionBlur.bind(this)
+        // this.submit = this.submit.bind(this)
 
-        const {overview, ranking} = props.bookmark;
+        const {description, rating} = props.bookmark;
 
         this.state = {
-            ranking,
-            overview,
+            rating,
+            description,
             canSubmit: false
         }
     }
@@ -26,68 +26,47 @@ class EditBookmark extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const {ranking, overview} = nextProps;
+        const {rating, description} = nextProps;
         
         this.setState({
-            ranking,
-            overview
+            rating,
+            description
         })
     }
 
-    validate() {
-        const {overview} = this.state;
-
-        const hasOverview = overview !== '';
-
-        this.setState({
-            canSubmit: hasOverview
-        })
-    }
-
-    onRankingChange(evt) {
-        const ranking = evt.target.value
-        this.validate();
-        this.setState({
-            ranking
-        })
-    }
-
-    onOverviewChange(evt) {
-        const overview = evt.target.value
-        this.validate();
-
-        this.setState({
-            overview
-        })
-    }
-
-    submit() {
-        const {canSubmit, overview, ranking} = this.state;
-        if (!canSubmit) return false;
-        const {dispatch, bookmark} = this.props;
-
-        console.log(overview,ranking)
-        dispatch(updateBookmark({
-            ...bookmark,            
-            overview,
-            ranking,
+    onRatingChange(evt) {
+        const {dispatch, bookmark} = this.props
+        const rating = evt.target.value
+        
+        dispatch(updateBookmarkRating({
+            ...bookmark,
+            rating
         }))
+    }
 
-        this.setState({
-            canSubmit: false
-        })
+    onDescriptionBlur(evt) {
+        const nextDescription = evt.target.value
+        const {dispatch, bookmark} = this.props;
+        const {description} = this.state;
+
+        if(nextDescription === description) return;
+
+        dispatch(updateBookmarkDescription({
+            ...bookmark,
+            description: nextDescription
+        }))
     }
 
     render() {
         const {bookmark} = this.props;
-        const {ranking, overview, canSubmit} = this.state;
+        const {rating, description} = this.state;
 
         return (
             <div>
                 This is edit for {bookmark.title}
                 <div className="row">
-                    <label htmlFor="ranking">Ranking</label>
-                    <select value={ranking} name="ranking" id="" onChange={this.onRankingChange}>
+                    <label htmlFor="rating">Rating</label>
+                    <select defaultValue={rating} name="rating" id="" onChange={this.onRatingChange}>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -96,13 +75,13 @@ class EditBookmark extends Component {
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="overview">Overview</label>
-                    <textarea value={overview} name="overview" id="" cols="30" rows="10" onChange={this.onOverviewChange}>
+                    <label htmlFor="description">Description</label>
+                    <textarea defaultValue={description} 
+                    name="description" 
+                    id="descriptionArea" 
+                    cols="30" rows="10" 
+                    onBlur={this.onDescriptionBlur}>
                     </textarea>
-                </div>
-                <div className={`button ${canSubmit ? '' : 'disabled'}`}
-                    onClick={this.submit}>
-                    Submit Changes
                 </div>
             </div>
         );

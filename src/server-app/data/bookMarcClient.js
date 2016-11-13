@@ -1,5 +1,5 @@
 const {createConn, ObjectId} = require('./dbClient');
-const {toViewModel, fromViewModel} = require('./mongoHelper');
+const {toViewModel} = require('./mongoHelper');
 
 const BOOKMARC_DB = 'bookmarc'
 const BOOKMARC_COLLECTION = 'bookmarks';
@@ -13,7 +13,7 @@ module.exports.createBookmark = (bookmark) => {
                 .then(() => {
 
                     db.close(); //this feels wrong. shouldnt dbClient close db?
-                    return bookmark._id
+                    return toViewModel(bookmark);
                 })
         })
 }
@@ -34,6 +34,17 @@ module.exports.getBookmarks = () => {
         })
 }
 
+module.exports.getBookmarkById = id => {
+    return createConn(BOOKMARC_DB)
+        .then(db => {
+            const coll = db.collection(BOOKMARC_COLLECTION);
+
+            return coll.findOne({_id: new ObjectId(id)})
+                .then(bookmark => {
+                    return toViewModel(bookmark);
+                })
+        })
+}
 
 module.exports.updateBookmarkDescription = bookmark => {
     return updateBookmark(bookmark.id, {

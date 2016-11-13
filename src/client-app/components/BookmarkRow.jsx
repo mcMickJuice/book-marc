@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {bookmarkShapeWithReview} from '../common/bookmarkShape'
 import {Link} from 'react-router'
 
 const BookmarkRow = ({bookmark}) => {
-    const {title, id, url, ranking} = bookmark;
+    const {title, id, url, rating} = bookmark;
 
     return (
         <tr>
@@ -12,7 +12,7 @@ const BookmarkRow = ({bookmark}) => {
                 <a href={url} target="_blank">{url}</a>
             </td>
             <td>
-                {ranking ? ranking : 'No Ranking'}
+                {rating ? rating : 'No Rating'}
             </td>
         </tr>
     )
