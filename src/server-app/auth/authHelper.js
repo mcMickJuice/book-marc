@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const {createConn} = require('../data/dbClient')
 const bcrypt = require('bcrypt')
 
-const BOOKMARC_DB = 'bookmarc'
+const BOOKMARC_DB = process.env.BOOKMARC_DB;
 const USER_COLLECTION = 'users'
 const saltRound = 10;
 

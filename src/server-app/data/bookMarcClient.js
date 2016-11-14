@@ -1,7 +1,7 @@
 const {createConn, ObjectId} = require('./dbClient');
 const {toViewModel} = require('./mongoHelper');
 
-const BOOKMARC_DB = 'bookmarc'
+const BOOKMARC_DB = process.env.BOOKMARC_DB;
 const BOOKMARC_COLLECTION = 'bookmarks';
 
 module.exports.createBookmark = (bookmark) => {
