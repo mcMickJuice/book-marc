@@ -18,7 +18,6 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-tape-runner": "^2.0.1",
-    "concurrently": "^2.2.0",
     "css-loader": "^0.23.1",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^6.0.0-beta.3",
