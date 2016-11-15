@@ -2,7 +2,7 @@ var nodemon = require('nodemon')
 var path = require('path')
 
 //assets and app
-var clientApp =path.join(__dirname,'client-app/*'); 
+var clientApp =path.join(__dirname,'./src/client-app/*'); 
 
 nodemon({
     script: path.join(__dirname,'dev-app.js'),

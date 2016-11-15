@@ -3,4 +3,4 @@ var webServer = require('./webServer')
 
 webpackMiddleware(webServer.app);
 
-webServer.start(3000, () => console.log('dev-app server started'))
+webServer.start(process.env.PORT || 3000, () => console.log('dev-app server started'))

@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set LOCAL_PORT=3000&&node src/dev-server",
-    "test": "babel-tape-runner specs/**/*.spec.js"
+    "start": "set LOCAL_PORT=3000&&set API_URL=/api&&node dev-server",
+    "test": "babel-tape-runner specs/**/*.spec.js",
+    "prod-build": "set NODE_ENV=production&&set API_URL=/api&&webpack --config webpack.prod.config.js",
+    "run-prod-server": "npm run prod-build&&node prod-app"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,4 @@
-var config = require('../webpack.dev.config');
+var config = require('./webpack.dev.config');
 var webpack = require('webpack')
 var webpackDevMiddleware = require('webpack-dev-middleware')
 var webpackHotMiddleware = require('webpack-hot-middleware')

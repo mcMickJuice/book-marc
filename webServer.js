@@ -1,8 +1,8 @@
-require('dotenv').config();
+require('dotenv').config({silent: true});
 
 var express = require('express');
 var path = require('path');
-var routes = require('./server-app/routes')
+var routes = require('./src/server-app/routes')
 var bodyParser = require('body-parser')
 var jwt = require('express-jwt')
 
