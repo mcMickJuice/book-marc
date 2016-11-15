@@ -1,10 +1,12 @@
 var webpack = require('webpack');
 var baseConfig = require('./webpack.base.config')
+var path = require('path');
 
 var devEntry = [
         'webpack/hot/dev-server',
         'webpack-hot-middleware/client',
         'react-hot-loader/patch',
+        path.resolve(__dirname, './src/index.dev.jsx')
     ];
 var devPlugins = [
         new webpack.HotModuleReplacementPlugin()    
