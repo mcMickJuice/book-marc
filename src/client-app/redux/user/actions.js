@@ -5,7 +5,7 @@ import {push} from 'react-router-redux'
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'
 
-const loadUser = user => {
+const loadUserAction = user => {
     return {
         type: USER_LOGGED_IN,
         payload: {
@@ -22,7 +22,7 @@ const resetUser = () => {
 
 export const logIn = userInfo => {
     return dispatch => {
-        dispatch(loadUser(userInfo));
+        dispatch(loadUserAction(userInfo));
         dispatch(push('/'))
     }
 }

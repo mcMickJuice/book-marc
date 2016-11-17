@@ -1,17 +1,22 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router'
+import * as css from '../styles/main'
+import LogoutButton from './LogoutButton'
 
 const Main = ({children}) => {
     return (
         <div>
-            <div className="header">
-                <div className="title">
-                    Book Marc
+            <div className="bm-header">
+                <div className="bm-header__title">
+                    <Link to="/">Book Marc</Link>
                 </div>
-                <Link to="/">Home</Link>
-                <Link to="/bookmark">Bookmark</Link>
-            </div>
-            <div className="app-body">
+                <div className="bm-header__links">
+                    
+                    <Link to="/bookmark">Bookmark</Link>
+                    <LogoutButton />
+                </div>
+            </div>  
+            <div className="bm-app-body">
                 {children}
             </div>
         </div>

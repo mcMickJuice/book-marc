@@ -6,7 +6,7 @@ const user = (state = {}, action) => {
             return Object.assign({}, state, action.payload)
         case USER_LOGGED_OUT:
         //clear out user info
-            return Object.assign({}, state, {})
+            return {}
         default: 
             return state;
     }

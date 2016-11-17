@@ -4,9 +4,12 @@ import {AppContainer} from 'react-hot-loader';
 import configureStore from './client-app/redux/configureStore'
 import Root from './client-app/Root'
 import './site'
+import {getUser} from './client-app/common/authClient'
+
+const user = getUser();
 
 const mount = document.getElementById('mount');
-const store = configureStore();
+const store = configureStore({user});
 
 render(<AppContainer>
     <Root store={store}/>

@@ -31,6 +31,16 @@ export const isAuthenticated = () => {
     return token && token.length > 0;
 }
 
+export const getUser = () => {
+    const token = getToken();
+
+    if(token) {
+        return decode(token)
+    } 
+
+     return null
+}
+
 export const getToken = () => {
     return webStorage.getItem(TOKEN_KEY)
 }
