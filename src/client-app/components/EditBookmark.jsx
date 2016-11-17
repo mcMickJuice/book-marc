@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import requireBookmark from './requireBookmark'
 import {connect} from 'react-redux'
-import {updateBookmarkDescription, updateBookmarkRating, updateBookmarkAsRead} from '../redux/bookmark/actions'
+import {updateBookmarkDescription, updateBookmarkRating} from '../redux/bookmark/actions'
 
 class EditBookmark extends Component {
     constructor(props) {
@@ -88,6 +87,4 @@ class EditBookmark extends Component {
     }
 }
 
-const editBookmark = requireBookmark(EditBookmark);
-
-export default connect()(editBookmark)
+export default connect()(EditBookmark)

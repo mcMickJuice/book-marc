@@ -7,6 +7,7 @@ import ViewBookmark from './components/ViewBookmark'
 import EditBookmark from './components/EditBookmark'
 import Login from './components/Login'
 import {isAuthenticated} from './common/authClient'
+import requireBookmark from './hocs/requireBookmark'
 
 const NotFound = () => {
     return <div>
@@ -22,6 +23,9 @@ const authHook = (nextState, replace) => {
     return true;
 }
 
+const editBookmarkWrapped = requireBookmark(EditBookmark)
+const viewBookmarkWrapped = requireBookmark(ViewBookmark)
+
 const Routes = ({history}) => {
     return <Router history={history}>
         <Route path="/" component={Main}>
@@ -30,8 +34,8 @@ const Routes = ({history}) => {
             <Route path="bookmark" onEnter={authHook}>
                 <IndexRoute component={AddBookmark} />
                 <Route path=":id">
-                    <IndexRoute component={ViewBookmark} />
-                    <Route path="edit" component={EditBookmark} /> 
+                    <IndexRoute component={viewBookmarkWrapped} />
+                    <Route path="edit" component={editBookmarkWrapped} /> 
                 </Route>
             </Route>
         </Route>

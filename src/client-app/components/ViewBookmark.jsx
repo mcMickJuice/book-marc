@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router'
-import requireBookmark from './requireBookmark'
 
 const ViewBookmark = ({bookmark}) => {
     return (
@@ -23,4 +22,4 @@ ViewBookmark.propTypes = {
     })
 }
 
-export default requireBookmark(ViewBookmark)
+export default ViewBookmark
