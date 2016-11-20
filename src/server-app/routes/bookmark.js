@@ -39,8 +39,8 @@ const updateBookmarkRating = (req, res) => {
 
 const markBookmarkAsRead = (req, res) => {
     bookmarcClient.updateBookmarkAsRead(req.body)
-        .then(() => {
-            res.send()
+        .then((updateObj) => {
+            res.send(updateObj)
         })
 }
 

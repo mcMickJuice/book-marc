@@ -59,8 +59,18 @@ module.exports.updateBookmarkRating = bookmark => {
 }
 
 module.exports.updateBookmarkAsRead = bookmark => {
+    const readDate = Date.now();
+
     return updateBookmark(bookmark.id, {
-        isRead: true
+        isRead: true,
+        readDate: readDate
+    })
+    .then(() => {
+        return {
+            id: bookmark.id,
+            readDate: readDate,
+            isRead: true
+        }
     })
 }
 

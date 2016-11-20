@@ -78,11 +78,11 @@ export const updateBookmarkRating = bookmark => {
 export const updateBookmarkAsRead = bookmark => {
     return dispatch => {
         return bookmarkClient.markBookmarkAsRead(bookmark)
-            .then(() => {
+            .then(updatedBookmark => {
                 dispatch({
                     type: BOOKMARK_UPDATED,
                     payload: {
-                        bookmark: bookmark
+                        bookmark: updatedBookmark
                     }
                 })
             })
