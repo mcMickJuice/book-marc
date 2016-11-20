@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component, PropTypes as T} from 'react';
 import {connect} from 'react-redux'
 import {bookmarkShapeWithReview} from '../common/bookmarkShape'
 import {getRecentBookmarks} from '../redux/bookmark/actions'
@@ -11,8 +11,8 @@ class Home extends Component {
     }
 
     static propTypes = {
-        fetchBookmarks: PropTypes.func.isRequired,
-        bookmarks: PropTypes.arrayOf(bookmarkShapeWithReview)
+        fetchBookmarks: T.func.isRequired,
+        bookmarks: T.arrayOf(bookmarkShapeWithReview)
     }
 
     componentDidMount() {

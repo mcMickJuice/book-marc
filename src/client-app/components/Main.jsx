@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes as T} from 'react';
 import {Link} from 'react-router'
 import * as css from '../styles/main'
 import LogoutButton from './LogoutButton'
@@ -24,7 +24,7 @@ const Main = ({children}) => {
 };
 
 Main.propTypes = {
-    children: PropTypes.node.isRequired
+    children: T.node.isRequired
 }
 
 export default Main;

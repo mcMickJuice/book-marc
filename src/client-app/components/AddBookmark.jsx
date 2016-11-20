@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component, PropTypes as T} from 'react';
 import {addBookmark} from '../redux/bookmark/actions'
 import {getBookmarks} from '../redux/bookmark/selectors'
 import {connect} from 'react-redux'
@@ -20,7 +20,7 @@ class AddBookmark extends Component {
     }
 
     static propTypes = {
-        addBookmark: PropTypes.func.isRequired
+        addBookmark: T.func.isRequired
     }
     
     onTitleBlur(evt) {

@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes as T} from 'react';
 import {bookmarkShapeWithReview} from '../common/bookmarkShape'
 import BookmarkRow from './BookmarkRow'
 
@@ -26,7 +26,7 @@ const BookmarkListing = ({bookmarks}) => {
 };
 
 BookmarkListing.propTypes = {
-    bookmarks: PropTypes.arrayOf(bookmarkShapeWithReview).isRequired
+    bookmarks: T.arrayOf(bookmarkShapeWithReview).isRequired
 }
 
 export default BookmarkListing;

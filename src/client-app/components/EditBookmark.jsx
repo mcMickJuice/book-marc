@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component, PropTypes as T} from 'react';
 import {connect} from 'react-redux'
 import {updateBookmarkDescription, updateBookmarkRating} from '../redux/bookmark/actions'
 
@@ -8,7 +8,6 @@ class EditBookmark extends Component {
 
         this.onRatingChange = this.onRatingChange.bind(this)
         this.onDescriptionBlur = this.onDescriptionBlur.bind(this)
-        // this.submit = this.submit.bind(this)
 
         const {description, rating} = props.bookmark;
 
@@ -20,8 +19,8 @@ class EditBookmark extends Component {
     }
 
     static propTypes = {
-        bookmark: PropTypes.object.isRequired,
-        dispatch: PropTypes.func.isRequired
+        bookmark: T.object.isRequired,
+        dispatch: T.func.isRequired
     }
 
     componentWillReceiveProps(nextProps) {

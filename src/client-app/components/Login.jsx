@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes as T } from 'react'
 import {logIn} from '../redux/user/actions'
 import {login} from '../common/authClient'
 import {connect} from 'react-redux'
@@ -20,7 +20,7 @@ class Login extends Component {
     }
 
     static propTypes = {
-        onLogin: PropTypes.func.isRequired
+        onLogin: T.func.isRequired
     }
 
     onLogin() {
