@@ -2,6 +2,7 @@ import React, {PropTypes as T} from 'react';
 import {updateBookmarkAsRead, updateBookmarkDescription, updateBookmarkRating} from '../redux/bookmark/actions'
 import {connect} from 'react-redux'
 import BookmarkDescription from './BookmarkDescription'
+import BookmarkUrlLink from './BookmarkUrlLink'
 
 const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate}) => {
 
@@ -22,7 +23,7 @@ const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate
         <div>
         <div>
             <h3>{bookmark.title}</h3>
-           <a href={bookmark.url} target="_blank">(Open Article)</a> 
+            <BookmarkUrlLink url={bookmark.url} />
         </div>
            <div >
                 {markAsReadElement}
