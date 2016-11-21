@@ -24,7 +24,7 @@ class Home extends Component {
 
         const toRender = bookmarks.length > 0
             ? <BookmarkListing bookmarks={bookmarks} />
-            : <div>Bookmarks loading</div>
+            : <div>No Bookmarks Available</div>
         return (
             <div>
                 {toRender}
