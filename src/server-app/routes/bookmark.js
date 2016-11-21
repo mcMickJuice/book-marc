@@ -16,7 +16,6 @@ const getBookmarks = (req, res) => {
 }
 
 const getBookmarkById = (req, res) => {
-    console.log(req.params);
     bookmarcClient.getBookmarkById(req.params.bookmarkId)
         .then(bookmark => {
             res.send(bookmark);
