@@ -1,6 +1,5 @@
 import React, {Component, PropTypes as T} from 'react';
 import {addBookmark} from '../redux/bookmark/actions'
-import {getBookmarks} from '../redux/bookmark/selectors'
 import {connect} from 'react-redux'
 
 class AddBookmark extends Component {
@@ -9,13 +8,11 @@ class AddBookmark extends Component {
 
         this.onTitleBlur = this.onTitleBlur.bind(this);
         this.onUrlBlur = this.onUrlBlur.bind(this);
-        this.onDescriptionBlur = this.onDescriptionBlur.bind(this);
         this.addBookmark = this.addBookmark.bind(this);
 
         this.state = {
             title: '',
-            url: '',
-            description: ''
+            url: ''
         }
     }
 
@@ -37,28 +34,20 @@ class AddBookmark extends Component {
         })
     }
 
-    onDescriptionBlur(evt) {
-        const description = evt.target.value;
-        this.setState({
-            description
-        })
-    }
-
     addBookmark() {
-        const {title, url, description} = this.state;
+        const {title, url} = this.state;
         const {addBookmark} = this.props;
 
         this.setState({
             title: '',
-            url: '',
-            description: ''
+            url: ''
         })
 
-        addBookmark({title, url,description})
+        addBookmark({title, url})
     }
 
     render() {
-        const {title, url, description} = this.state;
+        const {title, url} = this.state;
 
         return (
             <div>
@@ -80,16 +69,6 @@ class AddBookmark extends Component {
                         defaultValue={url}
                          name="url" onChange={this.onUrlBlur}/>
                     </div>
-                    <div className="row">
-                        <label htmlFor="Description">
-                            Description
-                        </label>
-                        <textarea type="text"
-                        defaultValue={description}
-                        cols="30" rows="10"
-                         name="url" onChange={this.onDescriptionBlur}/>
-                    </div>
-
                     <div className="button" onClick={this.addBookmark}>
                         Add Bookmark
                     </div>

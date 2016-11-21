@@ -51,6 +51,10 @@ class BookmarkDescription extends Component {
         const {description, rating} = this.props;
         const {isEditingDescription} = this.state;
 
+        const displayDescription = (description != null && description.length > 0)
+            ? description
+            : <span>(Add a Description!)</span>
+
         return <div>
             <div>
                 <label htmlFor="description">Description</label>
@@ -63,7 +67,7 @@ class BookmarkDescription extends Component {
                     </textarea>
                 </div>
                 <div style={{display: !isEditingDescription ? 'initial' : 'none'}} 
-                onDoubleClick={this.onDescriptionEdit}>{description}</div>
+                onDoubleClick={this.onDescriptionEdit}>{displayDescription}</div>
             </div>
             <div className="row">
                     <label htmlFor="rating">Rating</label>
