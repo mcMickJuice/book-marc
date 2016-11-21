@@ -1,9 +1,9 @@
 import React, {PropTypes as T} from 'react';
-import {Link} from 'react-router'
-import {updateBookmarkAsRead} from '../redux/bookmark/actions'
+import {updateBookmarkAsRead, updateBookmarkDescription, updateBookmarkRating} from '../redux/bookmark/actions'
 import {connect} from 'react-redux'
+import BookmarkDescription from './BookmarkDescription'
 
-const ViewBookmark = ({bookmark, markAsRead}) => {
+const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate}) => {
 
     const markAsReadElement = bookmark.isRead 
         ? bookmark.readDate
@@ -12,7 +12,12 @@ const ViewBookmark = ({bookmark, markAsRead}) => {
                 Mark As Read
             </div>
 
-
+    const bookmarkEditSection = bookmark.isRead
+        ? <BookmarkDescription description={bookmark.description} 
+        rating={bookmark.rating}
+        onDescriptionUpdate={onDescriptionUpdate}
+        onRatingUpdate={onRatingUpdate} />
+        : '';
     return (
         <div>
         <div>
@@ -22,10 +27,7 @@ const ViewBookmark = ({bookmark, markAsRead}) => {
            <div >
                 {markAsReadElement}
            </div>
-
-           <div>
-            <Link to={`/bookmark/${bookmark.id}/edit`}>Edit this</Link>
-           </div>
+           {bookmarkEditSection}
         </div>
     );
 };
@@ -36,16 +38,24 @@ ViewBookmark.propTypes = {
         title: T.string.isRequired,
         url: T.string.isRequired
     }),
-    markAsRead: T.func.isRequired
+    markAsRead: T.func.isRequired,
+    onDescriptionUpdate: T.func.isRequired,
+    onRatingUpdate: T.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    console.log(ownProps);
+    const {id} = ownProps.bookmark;
     const {bookmark} = ownProps;
     
     return {
         markAsRead: () => {
             dispatch(updateBookmarkAsRead(bookmark))
+        },
+        onRatingUpdate: (rating) => {
+            dispatch(updateBookmarkRating({id, rating}))
+        },
+        onDescriptionUpdate: (description) => {
+            dispatch(updateBookmarkDescription({id, description}))
         }
     }
 }
