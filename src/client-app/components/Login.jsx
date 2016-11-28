@@ -63,22 +63,23 @@ class Login extends Component {
         const {username, password, error} = this.state;
 
         const errorSection = error != null
-            ? <div className="error">
+            ? <div className="bm-error">
                 {error}
             </div>
             : '';
 
         return <div>
-            <div className="row">
-                <label htmlFor="username">User Name:</label>
-                <input type="text" name="username" defaultValue={username} onBlur={this.onUsernameBlur} />
+        <h2>Login</h2>
+            <div className="bm-input__row">
+                <label htmlFor="username" className="bm-input__label">User Name</label>
+                <input type="text" className="bm-input bm-input__text" name="username" defaultValue={username} onBlur={this.onUsernameBlur} />
             </div>
-            <div className="row">
-                <label htmlFor="password">Password:</label>
-                <input type="password" name="password" defaultValue={password} onBlur={this.onPasswordBlur}/>
+            <div className="bm-input__row">
+                <label htmlFor="password" className="bm-input__label">Password</label>
+                <input type="password" className="bm-input bm-input__text" name="password" defaultValue={password} onBlur={this.onPasswordBlur}/>
             </div>
-            <div className="row">
-                <button type="button" onClick={this.onLogin}>Login</button>
+            <div className="bm-button" onClick={this.onLogin}>
+                Login
             </div>
             {errorSection}
         </div>

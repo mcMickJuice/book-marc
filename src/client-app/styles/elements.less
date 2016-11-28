@@ -1,11 +1,43 @@
 @import 'variables';
 //maybe break this out into files by element?
 
-
-
 .bm-button {
-    background-color: @base-color;
-    display: inline;
-    padding: 10px 5px;
+    background-color: @action-color;
+    display: inline-block;
+    padding: 8px 10px;
     color: white;
+    cursor: pointer;
+    box-shadow: 2px 2px 1px black;
+}
+
+.bm-error {
+    margin: 10px 0;
+    color: @error-text-color;
+    background-color: @error-background-color;
+    border: 1px solid @error-text-color;
+    padding: 10px;
+}
+
+
+.bm-input {
+    font-family: inherit;
+    font-size: inherit;
+
+    &__row {
+        margin-bottom: 10px;
+    }
+
+    &__text {
+        height: 25px;
+        padding-left: 3px;
+        
+    }
+
+    &__textarea {
+        padding: 5px;
+    }
+
+    &__label {
+        margin-right: 10px;
+    }
 }
