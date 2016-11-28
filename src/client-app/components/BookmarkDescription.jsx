@@ -1,4 +1,17 @@
 import React, {PropTypes as T, Component} from 'react'
+import Dropdown from '../elements/Dropdown'
+
+const ratingOptions = [
+    {value: 1, display: 'One'},
+    {value: 2, display: 'Two'},
+    {value: 3, display: 'Three'},
+    {value: 4, display: 'Four'},
+    {value: 5, display: 'Five'}
+]
+
+const getOption = rating => {
+    return ratingOptions.filter(o => o.value === rating)[0];
+}
 
 class BookmarkDescription extends Component {
     
@@ -16,7 +29,7 @@ class BookmarkDescription extends Component {
     
     static propTypes = {
         description: T.string,
-        rating: T.string,
+        rating: T.number,
         onDescriptionUpdate: T.func.isRequired,
         onRatingUpdate: T.func.isRequired
         }
@@ -40,26 +53,29 @@ class BookmarkDescription extends Component {
         onDescriptionUpdate(nextDescription);
     }
 
-    onRatingChange(evt) {
+    onRatingChange(newRating) {
         const {onRatingUpdate} = this.props
-        const rating = evt.target.value
 
-        onRatingUpdate(rating);
+        onRatingUpdate(newRating);
     }
 
     render() {
         const {description, rating} = this.props;
         const {isEditingDescription} = this.state;
 
+        var selectedOption = getOption(rating || 1);
+
         const displayDescription = (description != null && description.length > 0)
             ? description
-            : <span>(Add a Description!)</span>
+            : <span>Add a Description!</span>
 
         return <div>
             <div>
-                <label htmlFor="description">Description</label>
+                <label htmlFor="description" className="bm-input__label">Description</label>
                 <div style={{display: isEditingDescription ? 'initial' : 'none'}}>
-                    <textarea defaultValue={description} 
+                    <textarea className="bm-input bm-input__textarea"
+                        placeholder="Add a Description!"
+                        defaultValue={description} 
                         name="description" 
                         id="descriptionArea" 
                         cols="30" rows="10" 
@@ -70,16 +86,11 @@ class BookmarkDescription extends Component {
                 onDoubleClick={this.onDescriptionEdit}>{displayDescription}</div>
             </div>
             <div className="row">
-                    <label htmlFor="rating">Rating</label>
-                    <select defaultValue={rating} name="rating" 
-                    id="rating" 
-                    onChange={this.onRatingChange}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                    <label htmlFor="rating" className="bm-input__label">Rating</label>
+                    <Dropdown onSelect={this.onRatingChange}
+                    selected={selectedOption.display}
+                    options={ratingOptions}
+                     />
                 </div>
             
         </div>
