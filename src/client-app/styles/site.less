@@ -1,0 +1,41 @@
+@import 'reset';
+@import 'variables';
+@import 'elements';
+
+body {
+    font-family: 'Georgia', sans-serif;
+    font-size: 18px;
+}
+
+//main title
+h1 {
+    font-size: 1.4em;
+}
+
+//section title
+h2 {
+    font-size: 1.2em;
+}
+
+
+//sub titles
+h3, h4, h5 {
+    color: grey;
+    font-style: italic;
+}
+
+h1, h2, h3, h4, h5 {
+    margin-bottom: 5px; 
+}
+
+a {
+    color: @action-color;
+    text-decoration: none;
+    &:hover {
+        color: initial;
+    }
+
+    &:visited {
+        color: lighten(@action-color, 30%);
+    }
+}

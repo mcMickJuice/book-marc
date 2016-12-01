@@ -51,25 +51,26 @@ class AddBookmark extends Component {
 
         return (
             <div>
-                <div className="header">
-                    Add Bookmark
-                </div>
-                <div className="form">
-                    <div className="row">
-                        <label htmlFor="title">Title</label>
-                        <input type="text" name="title" 
-                        defaultValue={title}
-                        onBlur={this.onTitleBlur}/>
+                <h2>Add Bookmark</h2>
+                <div>
+                    <div className="bm-input__row">
+                        <label htmlFor="title" className="bm-input__label">Title</label>
+                        <input type="text" 
+                            className="bm-input bm-input__text" 
+                            name="title" 
+                            defaultValue={title}
+                            onBlur={this.onTitleBlur}/>
                     </div>
-                    <div className="row">
-                        <label htmlFor="url">
+                    <div className="bm-input__row">
+                        <label htmlFor="url" className="bm-input__label">
                             Bookmark Url
                         </label>
                         <input type="text"
-                        defaultValue={url}
-                         name="url" onChange={this.onUrlBlur}/>
+                            className="bm-input bm-input__text"
+                            defaultValue={url}
+                            name="url" onChange={this.onUrlBlur}/>
                     </div>
-                    <div className="button" onClick={this.addBookmark}>
+                    <div className="bm-button" onClick={this.addBookmark}>
                         Add Bookmark
                     </div>
                 </div>

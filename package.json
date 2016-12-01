@@ -8,7 +8,8 @@
     "test": "babel-tape-runner specs/**/*.spec.js",
     "prod-build": "set NODE_ENV=production&&set API_URL=/api&&webpack --config webpack.prod.config.js",
     "heroku-postbuild": "npm run prod-build",
-    "start-prod": "node prod-app"
+    "start-prod": "node prod-app",
+    "style-app": "node style-app"
   },
   "keywords": [],
   "author": "",
