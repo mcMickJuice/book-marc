@@ -58,9 +58,12 @@ class Dropdown extends Component {
                 onClick={this.toggleList}>
                 {selected}
             </div>
-            <div className={`bm-dropdown__list ${listClass}`}>
-                {optionElements}
+            <div>
+                <div className={`bm-dropdown__list ${listClass}`}>
+                    {optionElements}
+                </div>
             </div>
+
         </div>
     }
 }
