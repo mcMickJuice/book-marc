@@ -19,5 +19,3 @@ Root.propTypes = {
 }
 
 export default Root;
-
-// export default SiteStyles
