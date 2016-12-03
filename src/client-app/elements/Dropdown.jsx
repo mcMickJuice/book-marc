@@ -6,6 +6,8 @@ class Dropdown extends Component {
 
         this.toggleList = this.toggleList.bind(this);
         this.selectItem = this.selectItem.bind(this);
+        this.bodyWasClicked = this.bodyWasClicked.bind(this);
+        this.preventBubble = this.preventBubble.bind(this);
 
         this.state = {
             showList: false
@@ -21,6 +23,35 @@ class Dropdown extends Component {
         onSelect: T.func.isRequired
     }
 
+    componentDidMount() {
+        document.addEventListener('click', this.bodyWasClicked);
+        this.dropdownContainer.addEventListener('click', this.preventBubble)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.bodyWasClicked);
+        this.dropdownContainer.removeEventListener('click', this.preventBubble)
+    }
+
+    bodyWasClicked() {
+        const {showList} = this.state;
+
+        if(this.discardClick) {
+            this.discardClick = false;
+            return;
+        }
+
+        if(showList) {
+            this.setState({
+                showList: !showList
+            })
+        }
+    }
+
+    preventBubble() {
+        this.discardClick = true;
+    }
+
     toggleList() {
         const {showList} = this.state;
 
@@ -30,7 +61,6 @@ class Dropdown extends Component {
     }
 
     selectItem(selected) {
-        console.log('selected item', selected)
         const {onSelect} = this.props;
 
         this.setState({
@@ -53,7 +83,7 @@ class Dropdown extends Component {
         const buttonClass = showList ? 'bm-dropdown__button--active' : '';
         const listClass = showList ? 'bm-dropdown__list--active' : '';
 
-        return <div className="bm-dropdown__container">
+        return <div className="bm-dropdown__container" ref={elem => this.dropdownContainer = elem}>
             <div className={`bm-button bm-dropdown__button ${buttonClass}`}
                 onClick={this.toggleList}>
                 {selected}

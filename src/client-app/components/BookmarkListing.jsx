@@ -13,7 +13,6 @@ const BookmarkListing = ({bookmarks}) => {
                 <thead>
                     <tr>
                         <td>Title</td>
-                        <td>Url</td>
                         <td>Rating</td>
                     </tr>
                 </thead>

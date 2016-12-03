@@ -14,7 +14,7 @@ const normalizeUrl = url => {
 const BookmarkUrlLink = ({url}) => {
     const normalizedUrl = normalizeUrl(url);
 
-    return <a href={normalizedUrl} target="_blank">Open Bookmarked Page</a>
+    return <a href={normalizedUrl} target="_blank" rel="noopener noreferrer">Open Bookmarked Page</a>
 }
 
 BookmarkUrlLink.propTypes = {
