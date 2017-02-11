@@ -7,7 +7,8 @@ var srcFolder = path.join(__dirname, 'src')
 
 var babelSettings = {
     cacheDirectory: true,
-    presets: ['es2015', 'stage-0', 'react']
+    presets: ['es2015', 'react'],
+    plugins: ['transform-object-rest-spread', 'transform-class-properties']
 }
 
 var env = process.env.NODE_ENV || 'development';
@@ -22,12 +23,18 @@ module.exports = {
         publicPath: '/dist'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.less']
+        extensions: ['.js', '.jsx', '.less']
     },
     module: {
-        loaders: [
-            { test: /\.jsx?$/, include: srcFolder, loader: 'babel', query: babelSettings },
-            { test: /\.less/, include: srcFolder, loader: 'style!css!less' }
+        rules: [
+            { test: /\.jsx?$/, include: srcFolder, loader: 'babel-loader', options: babelSettings },
+            {
+                test: /\.less/, include: srcFolder, use: [
+                    'style-loader',
+                    'css-loader',
+                    'less-loader'
+                ]
+            }
         ]
     },
     plugins: [
