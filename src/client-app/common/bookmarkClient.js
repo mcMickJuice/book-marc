@@ -71,3 +71,17 @@ export const updateBookmark = bookmark => {
         .then(responseHandler)
 
 }
+
+export const createArea = area => {
+    const url = createUrl('area')
+    
+    return post(url, area)
+        .then(responseHandler);
+}
+
+export const fetchArea = areaId => {
+    const url = createUrl(`area/${areaId}`)
+
+    return get(url)
+        .then(responseHandler)
+}

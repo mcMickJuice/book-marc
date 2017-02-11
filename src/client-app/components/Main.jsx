@@ -11,8 +11,8 @@ const Main = ({children}) => {
                     <Link to="/">Book Marc</Link>
                 </div>
                 <div className="bm-header__links">
-                    
                     <Link to="/bookmark">Bookmark</Link>
+                    <Link to="/area">Area</Link>
                     <LogoutButton />
                 </div>
             </div>  

@@ -1,5 +1,5 @@
 import React, {PropTypes as T} from 'react';
-import {bookmarkShapeWithReview} from '../common/bookmarkShape'
+import {bookmarkShapeWithReview} from '../../common/bookmarkShape'
 import BookmarkRow from './BookmarkRow'
 
 const BookmarkListing = ({bookmarks}) => {

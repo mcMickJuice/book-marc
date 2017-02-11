@@ -1,5 +1,5 @@
 import React, {Component, PropTypes as T} from 'react';
-import {addBookmark} from '../redux/bookmark/actions'
+import {addBookmark} from '../../redux/bookmark/actions'
 import {connect} from 'react-redux'
 
 class AddBookmark extends Component {

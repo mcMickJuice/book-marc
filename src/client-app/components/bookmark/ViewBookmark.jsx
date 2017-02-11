@@ -1,5 +1,5 @@
 import React, {PropTypes as T} from 'react';
-import {updateBookmarkAsRead, updateBookmarkDescription, updateBookmarkRating} from '../redux/bookmark/actions'
+import {updateBookmarkAsRead, updateBookmarkDescription, updateBookmarkRating} from '../../redux/bookmark/actions'
 import {connect} from 'react-redux'
 import BookmarkDescription from './BookmarkDescription'
 import BookmarkUrlLink from './BookmarkUrlLink'

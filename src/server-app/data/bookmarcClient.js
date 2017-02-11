@@ -3,6 +3,7 @@ const {toViewModel} = require('./mongoHelper');
 
 const BOOKMARC_DB = process.env.BOOKMARC_DB;
 const BOOKMARC_COLLECTION = 'bookmarks';
+const AREA_COLLECTION = 'areas';
 
 module.exports.createBookmark = (bookmark) => {
     return createConn(BOOKMARC_DB)
@@ -11,7 +12,6 @@ module.exports.createBookmark = (bookmark) => {
 
             return coll.insertOne(bookmark)
                 .then(() => {
-
                     db.close(); //this feels wrong. shouldnt dbClient close db?
                     return toViewModel(bookmark);
                 })
@@ -72,6 +72,29 @@ module.exports.updateBookmarkAsRead = bookmark => {
             isRead: true
         }
     })
+}
+
+module.exports.createArea = area => {
+    return createConn(BOOKMARC_DB)
+        .then(db => {
+            const coll = db.collection(AREA_COLLECTION);
+
+            return coll.insertOne(area)
+                .then(() => {
+                    db.close();
+                    return toViewModel(area);
+                })
+        })
+}
+
+module.exports.getAreaById = id => {
+    return createConn(BOOKMARC_DB)
+        .then(db => {
+            const coll = db.collection(AREA_COLLECTION);
+
+            return coll.findOne({_id: new ObjectId(id)})
+                .then(area => toViewModel(area))
+        })
 }
 
 const updateBookmark = (id, updateObj) => {

@@ -2,8 +2,12 @@ import React, {PropTypes} from 'react'
 import {Router, Route, IndexRoute} from 'react-router'
 import Main from './components/Main'
 import Home from './components/Home'
-import AddBookmark from './components/AddBookmark'
-import ViewBookmark from './components/ViewBookmark'
+import AreaHome from './components/area/AreaHome'
+import AddArea from './components/area/AddArea'
+import Area from './components/area/Area'
+import Bookmark from './components/bookmark/Bookmark'
+import AddBookmark from './components/bookmark/AddBookmark'
+import ViewBookmark from './components/bookmark/ViewBookmark'
 import Login from './components/Login'
 import {isAuthenticated} from './common/authClient'
 import requireBookmark from './hocs/requireBookmark'
@@ -30,10 +34,16 @@ const Routes = ({history}) => {
             <IndexRoute component={Home} onEnter={authHook} />
             <Route path="login" component={Login} />
             <Route path="bookmark" onEnter={authHook}>
-                <IndexRoute component={AddBookmark} />
+                <IndexRoute component={Bookmark} />
+                <Route path="add" component={AddBookmark} />
                 <Route path=":id">
                     <IndexRoute component={viewBookmarkWrapped} />
                 </Route>
+            </Route>
+            <Route path="area" onEnter={authHook}>
+                <IndexRoute component={AreaHome} />
+                <Route path="add" component={AddArea}/>
+                <Route path=":id" component={Area}/>
             </Route>
         </Route>
         <Route path="*" component={NotFound} />

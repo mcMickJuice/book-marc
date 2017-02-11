@@ -1,5 +1,5 @@
 import React, {PropTypes as T, Component} from 'react'
-import Dropdown from '../elements/Dropdown'
+import Dropdown from '../../elements/Dropdown'
 
 const ratingOptions = [
     {value: 1, display: 'One'},
