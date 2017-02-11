@@ -14,8 +14,16 @@ const getAreaById = (req, res) => {
         })
 }
 
+const createNoteForArea = (req, res) => {
+    return bookmarcClient.createNoteForArea(req.body)
+        .then(areaNote => {
+            res.send(areaNote)
+        })
+}
+
 module.exports = app => {
     const url = '/api/area';
+    app.post(`${url}/note`, createNoteForArea)    
     app.post(url, createArea)
     app.get(`${url}/:id`, getAreaById)
 }

@@ -85,3 +85,10 @@ export const fetchArea = areaId => {
     return get(url)
         .then(responseHandler)
 }
+
+export const createAreaNote = note => {
+    const url = createUrl(`area/note`)
+
+    return post(url, note)
+        .then(responseHandler)
+}
