@@ -12,6 +12,7 @@ class AddAreaNote extends Component {
 
         this.onAddNote = this.onAddNote.bind(this);
         this.onBlurbBlur = this.onBlurbBlur.bind(this);
+        this.onTitleBlur = this.onTitleBlur.bind(this);
 
         this.state = {
             blurb: ''
@@ -20,15 +21,24 @@ class AddAreaNote extends Component {
 
     onAddNote() {
         const {onAddNote, areaId} = this.props;
-        const {blurb} = this.state;
+        const {blurb, title} = this.state;
 
         const note = {
+            title,
             blurb,
             createdDate: Date.now(),
             areaId
         }
 
         onAddNote(note);
+    }
+
+    onTitleBlur(evt) {
+        const title = evt.target.value;
+
+        this.setState({
+            title
+        })
     }
 
     onBlurbBlur(evt) {
@@ -45,6 +55,10 @@ class AddAreaNote extends Component {
         return (<div>
             <h3>Add Area Note</h3>
             <div className="bm-button" onClick={onCancel}>X</div>
+            <div className="bm-input__row">
+                <label htmlFor="title">Title</label>
+                <input type="text" className="bm-input bm-input__text" onBlur={this.onTitleBlur}/>
+            </div>
             <div className="bm-input__row">
                 <label htmlFor="blurb">Area Blur</label>
                 <div>

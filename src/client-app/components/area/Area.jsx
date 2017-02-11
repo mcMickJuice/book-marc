@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as T } from 'react'
 import { fetchArea, createAreaNote } from '../../common/bookmarkClient'
 import AddAreaNote from './AddAreaNote'
+import AreaNote from './AreaNote'
 
 class Area extends Component {
     static propTypes = {
@@ -25,9 +26,9 @@ class Area extends Component {
 
         fetchArea(id)
             .then(({area, notes}) => {
-                this.setState({ 
+                this.setState({
                     area,
-                    notes 
+                    notes
                 })
             })
     }
@@ -59,11 +60,15 @@ class Area extends Component {
                 {area.name}
             </div>
 
-        const notesToRender = notes.length 
-            ? notes.map(n => (<div key={n.id}>{n.blurb}</div>))
-            : <div>No Notes</div> 
+        const notesToRender = notes.length
+            ? notes.map(n => (<AreaNote key={n.id}
+                title={n.title}
+                className="bm-area__note"
+                blurb={n.blurb}
+                createdDate={n.createdDate} />))
+            : <div>No Notes</div>
 
-        return (<div>
+        return (<div className="bm-area">
             {toRender}
             {showNote
                 ? <AddAreaNote
