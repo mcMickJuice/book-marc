@@ -9,7 +9,7 @@ module.exports.createBookmark = (bookmark) => {
             const coll = db.collection(BOOKMARC_COLLECTION);
 
             return coll.insertOne(bookmark)
-                .then(toViewModel)
+                .then(() => toViewModel(bookmark))
         })
 }
 
@@ -34,9 +34,7 @@ module.exports.getBookmarkById = id => {
             const coll = db.collection(BOOKMARC_COLLECTION);
 
             return coll.findOne({ _id: new ObjectId(id) })
-                .then(bookmark => {
-                    return toViewModel(bookmark);
-                })
+                .then(toViewModel)
         })
 }
 

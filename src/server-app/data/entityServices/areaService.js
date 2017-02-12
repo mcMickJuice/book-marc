@@ -22,9 +22,7 @@ module.exports.getAreaById = id => {
             const areaColl = db.collection(AREA_COLLECTION);
 
             const areaTask = areaColl.findOne({ _id: new ObjectId(id) })
-                .then(area => {
-                    return toViewModel(area)
-                })
+                .then(toViewModel)
 
             const noteColl = db.collection(AREA_NOTE_COLLECTION);
 
