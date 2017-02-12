@@ -30,17 +30,17 @@ const viewBookmarkWrapped = requireBookmark(ViewBookmark)
 
 const Routes = ({history}) => {
     return <Router history={history}>
-        <Route path="/" component={Main}>
-            <IndexRoute component={Home} onEnter={authHook} />
-            <Route path="login" component={Login} />
-            <Route path="bookmark" onEnter={authHook}>
+        <Route path="/login" component={Login} />
+        <Route path="/" component={Main} onEnter={authHook}>
+            <IndexRoute component={Home} />
+            <Route path="bookmark">
                 <IndexRoute component={Bookmark} />
                 <Route path="add" component={AddBookmark} />
                 <Route path=":id">
                     <IndexRoute component={viewBookmarkWrapped} />
                 </Route>
             </Route>
-            <Route path="area" onEnter={authHook}>
+            <Route path="area">
                 <IndexRoute component={AreaHome} />
                 <Route path="add" component={AddArea}/>
                 <Route path=":id" component={Area}/>

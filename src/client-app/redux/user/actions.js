@@ -32,7 +32,7 @@ export const logOut = () => {
         return authClient.logout()
             .then(() => {
                 dispatch(resetUser())
-                dispatch(push('/'))
+                dispatch(push('/login'))
             })
     }
 }
