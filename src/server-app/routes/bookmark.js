@@ -1,43 +1,43 @@
-const bookmarcClient = require('../data/bookmarcClient');
+const bookmarkService = require('../data/entityServices/bookmarkService');
 
 
 const createBookmark = (req, res) => {
-    bookmarcClient.createBookmark(req.body)
+    bookmarkService.createBookmark(req.body)
         .then(bookmark => {
             res.send(bookmark)
         })
 }
 
 const getBookmarks = (req, res) => {
-    bookmarcClient.getBookmarks()
+    bookmarkService.getBookmarks()
         .then(bookmarks => {
             res.send(bookmarks)
         })
 }
 
 const getBookmarkById = (req, res) => {
-    bookmarcClient.getBookmarkById(req.params.bookmarkId)
+    bookmarkService.getBookmarkById(req.params.bookmarkId)
         .then(bookmark => {
             res.send(bookmark);
         })
 }
 
 const updateBookmarkDescription = (req, res) => {
-    bookmarcClient.updateBookmarkDescription(req.body)
+    bookmarkService.updateBookmarkDescription(req.body)
         .then(() => {
             res.send(/*http 200?*/);
         })
 }
 
 const updateBookmarkRating = (req, res) => {
-    bookmarcClient.updateBookmarkRating(req.body)
+    bookmarkService.updateBookmarkRating(req.body)
         .then(() => {
             res.send(/*http 200?*/);
         })
 }
 
 const markBookmarkAsRead = (req, res) => {
-    bookmarcClient.updateBookmarkAsRead(req.body)
+    bookmarkService.updateBookmarkAsRead(req.body)
         .then((updateObj) => {
             res.send(updateObj)
         })

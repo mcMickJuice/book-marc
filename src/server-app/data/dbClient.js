@@ -4,10 +4,10 @@ const {dbUrl} = require('../config');
 //dbCallback err, db
 const createConn = (databaseName) => {
     const url = `${dbUrl}/${databaseName}`;
-    let dbInstance;
     return MongoClient.connect(url)
-    .then(db => {
-        return dbInstance = db;
+    .catch(err => {
+        console.log(err);
+        throw new Error(`Error connecting to mongo db ${url}. \r\n${JSON.stringify(err)}`);
     })
 }
 

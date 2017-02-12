@@ -1,4 +1,6 @@
+const {ObjectId} = require('mongodb');
 //helper functions to convert to and from mongo models
+
 
 module.exports.toViewModel = function toViewModel (object)  {
     const id = object._id;
@@ -15,3 +17,5 @@ module.exports.fromViewModel = function fromViewModel(object) {
 
     return newObject;
 }
+
+module.exports.ObjectId = ObjectId

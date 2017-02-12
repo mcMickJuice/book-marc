@@ -1,21 +1,21 @@
-const bookmarcClient = require('../data/bookmarcClient')
+const areaService = require('../data/entityServices/areaService')
 
 const createArea = (req, res) => {
-    return bookmarcClient.createArea(req.body)
+    return areaService.createArea(req.body)
         .then(area => {
             res.send(area)
         })
 }
 
 const getAreaById = (req, res) => {
-    return bookmarcClient.getAreaById(req.params.id)
+    return areaService.getAreaById(req.params.id)
         .then(area => {
             res.send(area);
         })
 }
 
 const createNoteForArea = (req, res) => {
-    return bookmarcClient.createNoteForArea(req.body)
+    return areaService.createNoteForArea(req.body)
         .then(areaNote => {
             res.send(areaNote)
         })
