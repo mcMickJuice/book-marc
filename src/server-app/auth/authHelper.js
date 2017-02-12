@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken')
-const {createConn} = require('../data/dbClient')
+const {connect} = require('../data/bookmarcDbClient')
 const bcrypt = require('bcrypt')
 
-const BOOKMARC_DB = process.env.BOOKMARC_DB;
 const USER_COLLECTION = 'users'
 const saltRound = 10;
 
@@ -13,7 +12,7 @@ module.exports.createTokenFromUser = function createToken(user) {
 
 module.exports.authenticateUser = function(username, password) {
     //query db for user
-    return createConn(BOOKMARC_DB)
+    return connect()
         .then(db => {
             const coll = db.collection(USER_COLLECTION)
 
@@ -38,7 +37,7 @@ module.exports.authenticateUser = function(username, password) {
 }
 
 module.exports.insertUser = function(username, password) {
-    return createConn(BOOKMARC_DB)
+    return connect()
         .then(db => {
             const coll = db.collection(USER_COLLECTION)
 
