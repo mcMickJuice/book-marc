@@ -6,6 +6,7 @@
   "scripts": {
     "start": "set LOCAL_PORT=3000&&set API_URL=/api&&node dev-server",
     "test": "babel-tape-runner specs/**/*.spec.js",
+    "test-watch": "tape-watch -r babel-register specs/**/*.spec.js | tap-spec",
     "prod-build": "set NODE_ENV=production&&set API_URL=/api&&webpack --config webpack.prod.config.js",
     "dev-build": "webpack --config webpack.dev.config.js",
     "heroku-postbuild": "npm run prod-build",
@@ -24,6 +25,7 @@
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.22.0",
     "babel-tape-runner": "^2.0.1",
     "css-loader": "^0.23.1",
     "eslint": "^3.3.1",
@@ -37,7 +39,9 @@
     "open": "0.0.5",
     "react-hot-loader": "^3.0.0-beta.1",
     "style-loader": "^0.13.1",
+    "tap-spec": "^4.1.1",
     "tape": "^4.6.0",
+    "tape-watch": "^2.2.4",
     "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.16.1"

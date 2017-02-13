@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {createArea} from '../../common/bookmarkClient'
+import TagCreator from '../tag/TagCreator'
 
 class AddArea extends Component {
     constructor() {
@@ -11,10 +12,6 @@ class AddArea extends Component {
         this.state = {
             name: ''
         }
-    }
-
-    componentDidMount() {
-        console.log(this.props)
     }
 
     onNameBlur(evt) {
@@ -54,6 +51,7 @@ class AddArea extends Component {
                         onBlur={this.onNameBlur}
                     />
                 </div>
+                <TagCreator selectTag={tag => console.log(tag)}></TagCreator>
                 <div className="bm-button" onClick={this.addArea}>
                     Add Area
                 </div>

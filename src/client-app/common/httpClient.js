@@ -1,10 +1,17 @@
 import superagent from 'superagent'
 import promisePlugin from 'superagent-promise-plugin'
-// import es6Promise from 'es6-promise'
-
-// promisePlugin.Promise = es6Promise;
+import {getToken} from './authClient'
 
 const request = promisePlugin.patch(superagent);
+
+const authRequest = method => {
+    return (...args) => {
+        const token = getToken();
+        return method(...args, {
+            'authorization': `Bearer ${token}`
+        })
+    }
+}
 
 export const get = (url, headers) => {
     headers = headers || {};
@@ -27,5 +34,11 @@ export const put = (url, body, headers) => {
     .put(url)
     .set(headers)
         .send(body)
+}
+
+export const auth = {
+    get: authRequest(get),
+    put: authRequest(put),
+    post: authRequest(post),
 }
 

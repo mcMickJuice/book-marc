@@ -1,6 +1,6 @@
 var test = require('tape');
-var reducer = require('../../../src/app/redux/bookmark/reducer').default
-var {BOOKMARK_LOADED, BOOKMARK_UPDATED, RECENT_BOOKMARKS_LOADED} = require('../../../src/app/redux/bookmark/actions')
+var reducer = require('../../../src/client-app/redux/bookmark/reducer').default
+var {BOOKMARK_LOADED, BOOKMARK_UPDATED, RECENT_BOOKMARKS_LOADED} = require('../../../src/client-app/redux/bookmark/actions')
 
 
 test('BOOKMARK_ADDED adds bookmark to state', t => {
@@ -52,8 +52,8 @@ test('BOOKMARK_UPDATED updates existing bookmark', t => {
 
     const foundBookmark = result.bookmarks.filter(b => b.id === id)[0];
 
-    t.true(foundBookmark.title === updatedBookmark.title)
-    t.true(foundBookmark.url === updatedBookmark.url);
+    t.equal(foundBookmark.title, updatedBookmark.title)
+    t.equal(foundBookmark.url, updatedBookmark.url);
 })
 
 test('RECENT_BOOKMARKS_LOADED loads bookmarks', t => {
@@ -79,7 +79,7 @@ test('RECENT_BOOKMARKS_LOADED loads bookmarks', t => {
     t.deepEqual(result.bookmarks, newBookmarks)
 })
 
-test('UNKNOWN event retuns state', t => {
+test('Unknown action type doesn\'t alter state', t => {
     t.plan(1)
 
     const initialState = {
@@ -92,5 +92,5 @@ test('UNKNOWN event retuns state', t => {
 
     const result = reducer(initialState, action);
 
-    t.true(result == initialState)
+    t.equal(result, initialState)
 })

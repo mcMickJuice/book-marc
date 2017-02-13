@@ -1,0 +1,4 @@
+export const AREA_LOADED = 'AREA_LOADED'
+export const ALL_AREAS_LOADED = 'ALL_AREAS_LOADED'
+export const AREA_TAG_ADDED = 'AREA_TAG_ADDED'
+export const AREA_NOTE_ADDED = 'AREA_NOTE_ADDED'
