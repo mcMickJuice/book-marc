@@ -1,10 +1,8 @@
 import {auth} from './httpClient'
-import {apiUrl} from './config'
+import {createUrl, responseHandler} from './requestHelpers'
 
 const {get, post} = auth;
 
-const responseHandler = resp => resp.body;
-const createUrl = route => `${apiUrl}/${route}`;
 
 export const createTag = tag => {
     const url = createUrl('tag')

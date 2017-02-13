@@ -4,6 +4,17 @@ const {toViewModel, ObjectId} = require('../mongoHelper')
 const AREA_COLLECTION = 'areas'
 const AREA_NOTE_COLLECTION = 'areaNotes'
 
+module.exports.getAllAreas = () => {
+    return connect()
+        .then(db => {
+            const coll = db.collection(AREA_COLLECTION);
+
+            return coll.find()
+                .toArray()
+                .then(areas => areas.map(toViewModel))
+        })
+}
+
 module.exports.createArea = area => {
     return connect()
         .then(db => {
@@ -51,5 +62,15 @@ module.exports.createNoteForArea = note => {
                 .then(() => {
                     return toViewModel(note)
                 })
+        })
+}
+
+//after area is created, this is for adding additional tags
+module.exports.addTagToArea = (areaId, tagId) => {
+    return connect()
+        .then(db => {
+            const coll = db.collection(AREA_COLLECTION);
+
+            return coll.updateOne({_id: new ObjectId(areaId)}, {$push: {tags: tagId}})
         })
 }
