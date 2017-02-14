@@ -29,26 +29,14 @@ Vagrant.configure("2") do |config|
 
  config.vm.provision "docker" do |d|
     d.run "mongo", args: "-p 27017:27017", name: "mongodb"
-    # d.run "davidkelley/riemann", args: "-p 5555:5555 -p 5555:5555/udp -p 5556:5556", name: "riemann"
-    # d.run "davidkelley/riemann-dash", args: "-p 4567:4567", name: "riemann-dash"
   end
 
   config.vm.network "private_network", ip: "192.168.33.40"
   config.vm.network :forwarded_port, guest:27017, host: 27017
 
-  # config.vm.network :forwarded_port, guest: 5432, host: 5432
-
-  # config.vm.define "postgres" do |v|
-  #   v.vm.provider "docker" do |d|
-  #     d.image = "paintedfox/postgresql"
-  #     d.ports = ["5432:5432"]
-  #     d.env = {
-  #       USER: "root",
-  #       PASS: "123Fake",
-  #       DB: "root"
-  #     }
-  #   end
-  # end
+  config.vm.provider "virtualbox" do |v|
+    v.name = 'bookmarc'
+  end
 
 # sudo docker run -d --name="postgresql" -p 127.0.0.1:5432:5432 -v /tmp/postgresql:/data -e USER="super" -e DB="database_name" -e PASS="123Fake" paintedfox/postgresql
 
