@@ -46,7 +46,9 @@ module.exports.getAreaById = id => {
                     const area = tasks[0];
                     const notes = tasks[1];
 
-                    return {area, notes}
+                    area.notes = notes;
+
+                    return area
                 })
         })
 }

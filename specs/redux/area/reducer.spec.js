@@ -35,14 +35,14 @@ test('AREA_NOTE_ADDED should add note to specified areaId', t => {
 
     const note = {
         id: 67,
-        blurb: 'imma note!'
+        blurb: 'imma note!',
+        areaId: 2        
     }
 
     const action = {
         type: AREA_NOTE_ADDED,
         payload: {
-            note,
-            areaId: 2
+            note
         }
     }
 

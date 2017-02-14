@@ -12,9 +12,9 @@ const mapTagAdded = (state, {areaId,tag}) => {
     })
 }
 
-const mapNoteAdded = (state, {areaId, note}) => {
+const mapNoteAdded = (state, {note}) => {
     return state.map(area => {
-        if(area.id !== areaId) {
+        if(area.id !== note.areaId) {
             return area
         }
 
@@ -24,7 +24,7 @@ const mapNoteAdded = (state, {areaId, note}) => {
     })
 }
 
-const areas = (state = [], action) => {
+const area = (state = [], action) => {
     switch (action.type) {
         case AREA_LOADED:
             return [...state, action.payload.area]
@@ -39,4 +39,4 @@ const areas = (state = [], action) => {
     }
 }
 
-export default areas;
+export default area;

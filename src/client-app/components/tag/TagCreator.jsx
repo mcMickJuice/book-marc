@@ -1,6 +1,9 @@
 import React, {Component, PropTypes as T} from 'react'
 import {connect} from 'react-redux'
 import {createTag} from '../../redux/tag/actions'
+import {searchTags} from '../../redux/tag/selectors'
+import Tag from './Tag'
+import * as css from '../../styles/tag-creator'
 
 class TagCreator extends Component {
     static propTypes = {
@@ -54,15 +57,15 @@ class TagCreator extends Component {
         const {selectTag} = this.props;
 
         const tagResult = tags.length > 0
-            ? tags.map(t => (<div key={t.id}
-            onClick={() => selectTag(t)}>
-                {t.name}
-            </div>))
+            ? tags.map(t => (<Tag key={t.id}
+            onClick={() => selectTag(t)}
+            name={t.name}>
+            </Tag>))
             : <div>No tags match you search</div>
 
         return (<div className="bm-tag-creator">
             <h3>
-                Tag Creator
+                Add Tag
             </h3>
             <div className="bm-input__row">
                 <label htmlFor="tagSearch">Search Tags</label>
@@ -83,15 +86,9 @@ class TagCreator extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    const tags = state.tags;
+const mapStateToProps = (state) => {
     return {
-        searchTags: tagName => {
-            const lowerCase = tagName.toLowerCase();
-            return tags.filter(t => {
-                return t.name.toLowerCase().indexOf(lowerCase) > -1
-            })
-        }
+        searchTags: searchTags(state)
     }
 }
 

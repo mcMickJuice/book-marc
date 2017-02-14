@@ -1,16 +1,27 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component, PropTypes as T} from 'react'
 import {createArea} from '../../common/bookmarkClient'
 import TagCreator from '../tag/TagCreator'
+import {connect} from 'react-redux'
+import {addArea} from '../../redux/area/actions'
+import {mapTag} from '../../redux/tag/selectors'
 
 class AddArea extends Component {
+    static propTypes = {
+        history: T.any.isRequired,
+        addArea: T.func.isRequired,
+        tagMapper: T.func.isRequired
+    }
+
     constructor() {
         super();
 
         this.onNameBlur = this.onNameBlur.bind(this);
         this.addArea = this.addArea.bind(this);
+        this.onTagSelect = this.onTagSelect.bind(this);
 
         this.state = {
-            name: ''
+            name: '',
+            tags: []
         }
     }
 
@@ -23,21 +34,43 @@ class AddArea extends Component {
     }
 
     addArea() {
-        const {name} = this.state
+        const {name, tags} = this.state
         const {push} = this.props.history
 
-        this.setState({
-            name: ''
-        })
-        createArea({name})
+        const newTag = {
+            name,
+            tags
+        }
+
+        createArea(newTag)
             .then(area => {
                 push(`/area/${area.id}`)
             })
     }
 
+    onTagSelect(tag) {
+        const {id} = tag;
+        const {tags} = this.state;
+        console.log(id)
+
+        if(tags.indexOf(id) === -1){
+            this.setState({
+                tags: [...tags, id]
+            })
+        }
+    }
+
     
     render() {
-        const {name} = this.state;
+        const {name, tags} = this.state;
+        const {tagMapper} = this.props;
+        console.log(tags)
+
+        const tagSection = tags.length > 0
+            ? (<div>
+                {tags.map(tagMapper).map(t => <div key={t.id}>{t.name}</div>)}
+            </div>)
+            : ''
 
         return (<div>
             <h3>Create Area</h3>
@@ -51,13 +84,28 @@ class AddArea extends Component {
                         onBlur={this.onNameBlur}
                     />
                 </div>
-                <TagCreator selectTag={tag => console.log(tag)}></TagCreator>
+                <TagCreator selectTag={this.onTagSelect}></TagCreator>
                 <div className="bm-button" onClick={this.addArea}>
                     Add Area
                 </div>
+                {tagSection}
             </div>
         </div>)
     }
 }
 
-export default AddArea
+const mapStateToProps = state => {
+    return {
+        tagMapper: mapTag(state)
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addArea: area => {
+            return dispatch(addArea(area))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddArea)

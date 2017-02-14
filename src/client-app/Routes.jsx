@@ -4,7 +4,7 @@ import Main from './components/Main'
 import Home from './components/Home'
 import AreaHome from './components/area/AreaHome'
 import AddArea from './components/area/AddArea'
-import Area from './components/area/Area'
+import AreaView from './components/area/AreaView'
 import Bookmark from './components/bookmark/Bookmark'
 import AddBookmark from './components/bookmark/AddBookmark'
 import ViewBookmark from './components/bookmark/ViewBookmark'
@@ -43,7 +43,7 @@ const Routes = ({history}) => {
             <Route path="area">
                 <IndexRoute component={AreaHome} />
                 <Route path="add" component={AddArea}/>
-                <Route path=":id" component={Area}/>
+                <Route path=":id" component={AreaView}/>
             </Route>
         </Route>
         <Route path="*" component={NotFound} />

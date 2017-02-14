@@ -19,3 +19,47 @@ export const loadAllAreas = () => {
     }
 }
 
+const loadAreaAction = area => {
+    return {
+        type: AREA_LOADED,
+        payload: {
+            area
+        }
+    }
+}
+
+export const addArea = newArea => {
+    return dispatch => {
+        return areaService.createArea(newArea)
+            .then(area => {
+                dispatch(loadAreaAction(area))
+            })
+    }
+}
+
+export const getAreaById = areaId => {
+    return dispatch => {
+        return areaService.getAreaById(areaId)
+            .then(area => {
+                dispatch(loadAreaAction(area))
+            })
+    }
+}
+
+const loadAreaNoteAction = note => {
+    return {
+        type: AREA_NOTE_ADDED,
+        payload: {
+            note
+        }
+    }
+}
+
+export const addAreaNote = (note) => {
+    return dispatch => {
+        return areaService.createAreaNote(note)
+            .then(createdNote => {
+                dispatch(loadAreaNoteAction(createdNote))
+            })
+    }
+}

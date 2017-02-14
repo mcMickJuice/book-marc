@@ -3,7 +3,6 @@ import React, {Component, PropTypes as T} from 'react'
 class AddAreaNote extends Component {
     static propTypes = {
         onAddNote: T.func.isRequired,
-        onCancel: T.func.isRequired,
         areaId: T.string.isRequired
     }
 
@@ -15,7 +14,9 @@ class AddAreaNote extends Component {
         this.onTitleBlur = this.onTitleBlur.bind(this);
 
         this.state = {
-            blurb: ''
+            title: '',
+            blurb: '',
+            showNote: false
         }
     }
 

@@ -17,7 +17,7 @@ export const createArea = area => {
         .then(responseHandler);
 }
 
-export const fetchArea = areaId => {
+export const getAreaById = areaId => {
     const url = createUrl(`area/${areaId}`)
 
     return get(url)
@@ -30,7 +30,7 @@ export const addTagToArea = (areaId, tagId) => {
     return put(url, { tagId })
 }
 
-export const createAreaNote = note => {
+export const createAreaNote = (note) => {
     const url = createUrl('area/note')
 
     return post(url, note)
