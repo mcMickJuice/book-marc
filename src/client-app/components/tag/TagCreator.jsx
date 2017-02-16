@@ -1,15 +1,29 @@
 import React, {Component, PropTypes as T} from 'react'
 import {connect} from 'react-redux'
 import {createTag} from '../../redux/tag/actions'
-import {searchTags} from '../../redux/tag/selectors'
-import Tag from './Tag'
+import {searchTags, isValidTag} from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-creator'
+
+const ARROW_UP = 38;
+const ARROW_DOWN = 40;
+const ENTER = 13;
+
+const applicableKeys = [ARROW_UP, ARROW_DOWN, ENTER];
+
+const calcIndex = (idx, keyCode, resultCount) => {
+    if(keyCode === ARROW_DOWN){
+        return Math.min(idx + 1, resultCount -1)
+    }
+
+    return Math.max(idx - 1, 0);
+}
 
 class TagCreator extends Component {
     static propTypes = {
         createTag: T.func.isRequired,
         searchTags: T.func.isRequired,
-        selectTag: T.func.isRequired
+        selectTag: T.func.isRequired,
+        isValidTag: T.func.isRequired
     }
     
     constructor() {
@@ -17,34 +31,88 @@ class TagCreator extends Component {
 
         this.onCreateTag = this.onCreateTag.bind(this);
         this.onTagSearchChange = this.onTagSearchChange.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+        this.onSelectTag = this.onSelectTag.bind(this);
+        this.setResultIndex = this.setResultIndex.bind(this);
 
         this.state = {
             tagSearch: '',
-            tags: []
+            tags: [],
+            currentIndex: 0
+        }
+    }
+
+    componentDidMount() {
+        this.container.addEventListener('keydown', this.onKeyDown)
+    }
+
+    componentWillUnmount() {
+        this.container.removeEventListener('keydown', this.onKeyDown)
+    }
+
+    setResultIndex(index) {
+        this.setState({
+            currentIndex: index
+        })
+    }
+
+    onKeyDown(evt) {
+        const {keyCode} = evt;
+        const {currentIndex, tags} = this.state;
+        
+        if(applicableKeys.indexOf(keyCode) === -1) {
+            return;
+        }
+
+        evt.preventDefault();
+        if(keyCode === ENTER) {
+            if(currentIndex == -1) return;
+
+            const tagToCreate = tags[currentIndex];
+
+            this.onSelectTag(tagToCreate)
+        } else {
+            const index = calcIndex(currentIndex, keyCode, tags.length)
+            this.setResultIndex(index)
         }
     }
 
     onTagSearchChange(evt) {
-        const tagSearch = evt.target.value;
+        let tagSearch = evt.target.value;
         const {searchTags} = this.props;
 
-        //search existing tags
-        const tags = tagSearch === '' ? [] : searchTags(tagSearch)
+        const tags = tagSearch === '' ? [] : searchTags(tagSearch.trim())
 
         this.setState({
             tagSearch,
-            tags
+            tags,
+            currentIndex: 0
+        })
+    }
+
+    onSelectTag(tag) {
+        const {selectTag} = this.props;
+
+        selectTag(tag);
+
+        this.setState({
+            tagSearch: '',
+            tags: []
         })
     }
 
     onCreateTag() {
-        const {createTag} = this.props;
+        const {createTag, isValidTag} = this.props;
         const {tagSearch} = this.state;
-        const tag = {
-            name: tagSearch
+
+        if(!isValidTag(tagSearch)){
+            return;
         }
 
-        //TODO guard against duplicate tags, empty strings
+        const tag = {
+            name: tagSearch.trim()
+        }
+
         this.setState({
             tagSearch: '',
             tags: []
@@ -53,41 +121,39 @@ class TagCreator extends Component {
     }
 
     render() {
-        const {tags, tagSearch} = this.state
-        const {selectTag} = this.props;
+        const {tags, tagSearch, currentIndex} = this.state
+        const {isValidTag} = this.props;
 
-        const tagResult = tags.length > 0
-            ? tags.map(t => (<div key={t.id}
-            onClick={() => selectTag(t)}>{t.name}
+        const isInvalidTag = !isValidTag(tagSearch)
+
+        const tagResult = tags.map((t, idx) => (<div className={`bm-tag-creator__dropdown__item ${idx === currentIndex ? 'bm-tag-creator__dropdown__item--highlighted' : ''}`}
+            key={t.id}
+            onMouseEnter={() => this.setResultIndex(idx)}
+            onClick={() => this.onSelectTag(t)}>{t.name}
             </div>))
-            : <div>No tags match you search</div>
 
-        return (<div className="bm-tag-creator">
-            <h3>
-                Add Tag
-            </h3>
-            <div className="bm-input__row">
-                <label htmlFor="tagSearch">Search Tags</label>
+        return (<div ref={(container) => {this.container = container}} className="bm-tag-creator">            
+            <div className="bm-tag-creator__search-row">
                 <input type="text" name="tagSearch" 
-                className="bm-input bm-input__text" 
+                placeholder="Search Tags"
+                className="bm-input bm-input__text bm-tag-creator__search-row__input" 
                 value={tagSearch}
                 onChange={this.onTagSearchChange}
                 onBlur={this.onTagSearchBlur}/>
-                <div className="bm-button" onClick={this.onCreateTag}>Add Tag</div>
+                <div className={`bm-button ${isInvalidTag ? 'bm-button--disabled': ''} bm-tag-creator__search-row__button`}
+                onClick={this.onCreateTag}>Add Tag</div>
             </div>
-            <div className="bm-input__row">
-                <label htmlFor="">Available Tags</label>
-                <div className="bm-tag-creator__available-tags">
+                <div className="bm-tag-creator__dropdown">
                     {tagResult}
                 </div>
-            </div>
         </div>)
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        searchTags: searchTags(state)
+        searchTags: searchTags(state),
+        isValidTag: isValidTag(state)
     }
 }
 

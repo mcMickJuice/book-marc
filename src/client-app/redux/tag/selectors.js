@@ -19,3 +19,18 @@ export const searchTags = state => {
         })
     }
 }
+
+export const isValidTag = state => {
+    return tagName => {
+        const lowerCase = tagName.toLowerCase().trim();
+
+        //tag must not exist
+        const doesNotExist = state.tag.filter(t => {
+            return t.name.toLowerCase() === lowerCase
+        }).length === 0;
+
+        const hasValidLength = lowerCase.length >= 3
+        
+        return doesNotExist && hasValidLength;
+    }
+}

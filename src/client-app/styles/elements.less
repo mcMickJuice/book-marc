@@ -8,6 +8,11 @@
     color: white;
     cursor: pointer;
     box-shadow: 2px 2px 1px black;
+
+    &--disabled {
+        background-color: @gray-color;
+        cursor: default;
+    }
 }
 
 .bm-error {
@@ -22,15 +27,15 @@
 .bm-input {
     font-family: inherit;
     font-size: inherit;
+    //why can't these be global rules????
 
     &__row {
         margin-bottom: 10px;
     }
 
     &__text {
-        height: 25px;
-        padding-left: 3px;
-        
+        height: 37px;
+        padding-left: 10px;
     }
 
     &__textarea {
