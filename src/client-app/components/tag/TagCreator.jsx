@@ -1,8 +1,9 @@
-import React, {Component, PropTypes as T} from 'react'
-import {connect} from 'react-redux'
-import {createTag} from '../../redux/tag/actions'
-import {searchTags, isValidTag} from '../../redux/tag/selectors'
+import React, { Component, PropTypes as T } from 'react'
+import { connect } from 'react-redux'
+import { createTag } from '../../redux/tag/actions'
+import { searchTags, isValidTag } from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-creator'
+import ToggleView from '../../elements/ToggleView'
 
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
@@ -11,11 +12,19 @@ const ENTER = 13;
 const applicableKeys = [ARROW_UP, ARROW_DOWN, ENTER];
 
 const calcIndex = (idx, keyCode, resultCount) => {
-    if(keyCode === ARROW_DOWN){
-        return Math.min(idx + 1, resultCount -1)
+    if (keyCode === ARROW_DOWN) {
+        return Math.min(idx + 1, resultCount - 1)
     }
 
     return Math.max(idx - 1, 0);
+}
+
+const toggleTagButtonFunc = (isOpen, onClick) => {
+    const toggleClass = isOpen ? 'bm-tag-creator__toggle-button--open' : ''
+
+    return <div className={`bm-tag-creator__toggle-button ${toggleClass}`} onClick={onClick}>
+        {isOpen ? 'Close' : 'Add Tag'}
+    </div>
 }
 
 class TagCreator extends Component {
@@ -25,7 +34,7 @@ class TagCreator extends Component {
         selectTag: T.func.isRequired,
         isValidTag: T.func.isRequired
     }
-    
+
     constructor() {
         super();
 
@@ -59,14 +68,14 @@ class TagCreator extends Component {
     onKeyDown(evt) {
         const {keyCode} = evt;
         const {currentIndex, tags} = this.state;
-        
-        if(applicableKeys.indexOf(keyCode) === -1) {
+
+        if (applicableKeys.indexOf(keyCode) === -1) {
             return;
         }
 
         evt.preventDefault();
-        if(keyCode === ENTER) {
-            if(currentIndex == -1) return;
+        if (keyCode === ENTER) {
+            if (currentIndex == -1) return;
 
             const tagToCreate = tags[currentIndex];
 
@@ -105,7 +114,7 @@ class TagCreator extends Component {
         const {createTag, isValidTag} = this.props;
         const {tagSearch} = this.state;
 
-        if(!isValidTag(tagSearch)){
+        if (!isValidTag(tagSearch)) {
             return;
         }
 
@@ -130,23 +139,26 @@ class TagCreator extends Component {
             key={t.id}
             onMouseEnter={() => this.setResultIndex(idx)}
             onClick={() => this.onSelectTag(t)}>{t.name}
-            </div>))
+        </div>))
 
-        return (<div ref={(container) => {this.container = container}} className="bm-tag-creator">            
-            <div className="bm-tag-creator__search-row">
-                <input type="text" name="tagSearch" 
-                placeholder="Search Tags"
-                className="bm-input bm-input__text bm-tag-creator__search-row__input" 
-                value={tagSearch}
-                onChange={this.onTagSearchChange}
-                onBlur={this.onTagSearchBlur}/>
-                <div className={`bm-button ${isInvalidTag ? 'bm-button--disabled': ''} bm-tag-creator__search-row__button`}
-                onClick={this.onCreateTag}>Add Tag</div>
-            </div>
-                <div className="bm-tag-creator__dropdown">
-                    {tagResult}
+        return (
+            <ToggleView toggleButtonFunc={toggleTagButtonFunc}>
+                <div ref={(container) => { this.container = container }} className="bm-tag-creator">
+                    <div className="bm-tag-creator__search-row">
+                        <input type="text" name="tagSearch"
+                            placeholder="Search Tags"
+                            className="bm-input bm-input__text bm-tag-creator__search-row__input"
+                            value={tagSearch}
+                            onChange={this.onTagSearchChange}
+                            onBlur={this.onTagSearchBlur} />
+                        <div className={`bm-button ${isInvalidTag ? 'bm-button--disabled' : ''} bm-tag-creator__search-row__button`}
+                            onClick={this.onCreateTag}>Add Tag</div>
+                    </div>
+                    <div className="bm-tag-creator__dropdown">
+                        {tagResult}
+                    </div>
                 </div>
-        </div>)
+            </ToggleView>)
     }
 }
 
