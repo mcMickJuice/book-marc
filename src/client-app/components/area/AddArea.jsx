@@ -64,7 +64,6 @@ class AddArea extends Component {
     render() {
         const {name, tags} = this.state;
         const {tagMapper} = this.props;
-        console.log(tags)
 
         const tagSection = tags.length > 0
             ? (<div>

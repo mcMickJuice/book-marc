@@ -4,7 +4,9 @@ import AddAreaNote from './AddAreaNote'
 import AreaNote from './AreaNote'
 
 
-const Area = ({area, onAddNote}) => {
+const Area = ({area, onAddNote, tags}) => {
+    const tagsToRender = tags.map(t => <div key={t.id}>{t.name}</div>)
+
     const notesToRender = area.notes.length
         ? area.notes.map(n => (<AreaNote key={n.id}
             title={n.title}
@@ -20,6 +22,7 @@ const Area = ({area, onAddNote}) => {
             areaId={area.id}
         />
         {notesToRender}
+        {tagsToRender}
     </div>)
 }
 
@@ -31,6 +34,10 @@ Area.propTypes = {
             blurb: T.string.isRequired
         }))
     }),
+    tags: T.arrayOf(T.shape({
+        id: T.string.isRequired,
+        name: T.string.isRequired
+    })),
     onAddNote: T.func.isRequired
 }
 

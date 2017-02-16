@@ -57,10 +57,9 @@ class TagCreator extends Component {
         const {selectTag} = this.props;
 
         const tagResult = tags.length > 0
-            ? tags.map(t => (<Tag key={t.id}
-            onClick={() => selectTag(t)}
-            name={t.name}>
-            </Tag>))
+            ? tags.map(t => (<div key={t.id}
+            onClick={() => selectTag(t)}>{t.name}
+            </div>))
             : <div>No tags match you search</div>
 
         return (<div className="bm-tag-creator">
