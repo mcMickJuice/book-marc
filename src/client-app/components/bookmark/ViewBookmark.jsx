@@ -3,11 +3,12 @@ import {updateBookmarkAsRead, updateBookmarkDescription, updateBookmarkRating} f
 import {connect} from 'react-redux'
 import BookmarkDescription from './BookmarkDescription'
 import BookmarkUrlLink from './BookmarkUrlLink'
+import Date from'../../elements/Date'
 
 const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate}) => {
 
     const markAsReadElement = bookmark.isRead 
-        ? bookmark.readDate
+        ? <Date date={bookmark.readDate} />
         : 
             <div className="bm-button" onClick={markAsRead}>
                 Mark As Read

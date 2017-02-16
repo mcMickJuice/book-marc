@@ -1,11 +1,15 @@
 import React, { PropTypes as T } from 'react'
 import Card from '../../elements/Card'
+import Date from '../../elements/Date'
 
 const AreaNote = ({title, blurb, createdDate, className}) => {
     return (<Card className={className}>
         <h3>{title}</h3>
         <div>
-            {blurb} -- {createdDate}
+            {blurb}
+        </div>
+        <div>
+            <Date date={createdDate} />
         </div>
     </Card>)
 }
