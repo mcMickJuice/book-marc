@@ -1,6 +1,6 @@
 import React, {Component, PropTypes as T} from 'react'
 import {createArea} from '../../common/bookmarkClient'
-import TagCreator from '../tag/TagCreator'
+import TagForm from '../tag/TagForm'
 import {connect} from 'react-redux'
 import {addArea} from '../../redux/area/actions'
 import {mapTag} from '../../redux/tag/selectors'
@@ -83,7 +83,7 @@ class AddArea extends Component {
                         onBlur={this.onNameBlur}
                     />
                 </div>
-                <TagCreator selectTag={this.onTagSelect}></TagCreator>
+                <TagForm selectTag={this.onTagSelect}></TagForm>
                 <div className="bm-button" onClick={this.addArea}>
                     Add Area
                 </div>

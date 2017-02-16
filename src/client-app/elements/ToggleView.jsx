@@ -1,7 +1,7 @@
 import React, {Component, PropTypes as T} from 'react'
 
 const defaultButtonFunc = (isOpen, onClick) => {
-    return <div onClick={onClick}>
+    return <div onClick={onClick} style={{cursor: 'pointer'}}>
         Click to {isOpen ? 'Close' : 'Open'}
     </div>
 }

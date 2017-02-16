@@ -1,8 +1,13 @@
 import React, { PropTypes as T } from 'react'
-// import { fetchArea, createAreaNote } from '../../common/bookmarkClient'
-import AddAreaNote from './AddAreaNote'
+import AreaNoteForm from './AreaNoteForm'
 import AreaNote from './AreaNote'
+import ToggleView from '../../elements/ToggleView'
 
+const toggleAddNoteFunc = (isOpen, onClick) => {
+    return <div onClick={onClick}>
+        {isOpen ? 'Close' : 'Add Note'}
+    </div>
+}
 
 const Area = ({area, onAddNote, tags}) => {
     const tagsToRender = tags.map(t => <div key={t.id}>{t.name}</div>)
@@ -17,10 +22,12 @@ const Area = ({area, onAddNote, tags}) => {
 
     return (<div className="bm-area">
         <h3>{area.name}</h3>
-        <AddAreaNote
+        <ToggleView toggleButtonFunc={toggleAddNoteFunc}>
+            <AreaNoteForm
             onAddNote={onAddNote}
             areaId={area.id}
         />
+        </ToggleView>
         {notesToRender}
         {tagsToRender}
     </div>)

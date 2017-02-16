@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { createTag } from '../../redux/tag/actions'
 import { searchTags, isValidTag } from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-creator'
-import ToggleView from '../../elements/ToggleView'
 
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
@@ -17,14 +16,6 @@ const calcIndex = (idx, keyCode, resultCount) => {
     }
 
     return Math.max(idx - 1, 0);
-}
-
-const toggleTagButtonFunc = (isOpen, onClick) => {
-    const toggleClass = isOpen ? 'bm-tag-creator__toggle-button--open' : ''
-
-    return <div className={`bm-tag-creator__toggle-button ${toggleClass}`} onClick={onClick}>
-        {isOpen ? 'Close' : 'Add Tag'}
-    </div>
 }
 
 class TagCreator extends Component {
@@ -141,9 +132,7 @@ class TagCreator extends Component {
             onClick={() => this.onSelectTag(t)}>{t.name}
         </div>))
 
-        return (
-            <ToggleView toggleButtonFunc={toggleTagButtonFunc}>
-                <div ref={(container) => { this.container = container }} className="bm-tag-creator">
+        return (<div ref={(container) => { this.container = container }} className="bm-tag-creator">
                     <div className="bm-tag-creator__search-row">
                         <input type="text" name="tagSearch"
                             placeholder="Search Tags"
@@ -157,8 +146,7 @@ class TagCreator extends Component {
                     <div className="bm-tag-creator__dropdown">
                         {tagResult}
                     </div>
-                </div>
-            </ToggleView>)
+                </div>)
     }
 }
 
