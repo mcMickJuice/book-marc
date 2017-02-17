@@ -1,6 +1,5 @@
 var webpackMiddleware = require('./webpack-middleware')
 var webServer = require('./webServer')
-var open = require('open')
 
 webpackMiddleware(webServer.app);
 
@@ -14,5 +13,4 @@ webServer.start(port, (err) => {
     }
 
     console.log('dev-app server started!!')
-    // open(`http://localhost:${port}`)
 })
