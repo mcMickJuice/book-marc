@@ -2,6 +2,7 @@ import React, { PropTypes as T } from 'react'
 import AreaNoteForm from './AreaNoteForm'
 import AreaNote from './AreaNote'
 import ToggleView from '../../elements/ToggleView'
+import TagList from '../tag/TagList'
 
 const toggleAddNoteFunc = (isOpen, onClick) => {
     return <div onClick={onClick}>
@@ -9,9 +10,7 @@ const toggleAddNoteFunc = (isOpen, onClick) => {
     </div>
 }
 
-const Area = ({area, onAddNote, tags}) => {
-    const tagsToRender = tags.map(t => <div key={t.id}>{t.name}</div>)
-
+const Area = ({area, onAddNote}) => {
     const notesToRender = area.notes.length
         ? area.notes.map(n => (<AreaNote key={n.id}
             title={n.title}
@@ -22,6 +21,8 @@ const Area = ({area, onAddNote, tags}) => {
 
     return (<div className="bm-area">
         <h3>{area.name}</h3>
+        <TagList tags={area.tags} />
+        
         <ToggleView toggleButtonFunc={toggleAddNoteFunc}>
             <AreaNoteForm
             onAddNote={onAddNote}
@@ -29,7 +30,6 @@ const Area = ({area, onAddNote, tags}) => {
         />
         </ToggleView>
         {notesToRender}
-        {tagsToRender}
     </div>)
 }
 
@@ -39,12 +39,9 @@ Area.propTypes = {
         name: T.string.isRequired,
         notes: T.arrayOf(T.shape({
             blurb: T.string.isRequired
-        }))
+        })),
+        tags: T.arrayOf(T.string)
     }),
-    tags: T.arrayOf(T.shape({
-        id: T.string.isRequired,
-        name: T.string.isRequired
-    })),
     onAddNote: T.func.isRequired
 }
 

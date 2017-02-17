@@ -32,8 +32,7 @@ class Area extends Component {
         })
 
         return (<div>
-            <h3>Areas</h3>
-            <Link to="/area/add">Create Area</Link>
+            <h3>Areas (<Link to="/area/add">Add</Link>)</h3>
             <div>
                 {/*oh yay nested ternaries*/}
                 {isLoading 

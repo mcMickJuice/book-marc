@@ -4,9 +4,10 @@ import {connect} from 'react-redux'
 import BookmarkDescription from './BookmarkDescription'
 import BookmarkUrlLink from './BookmarkUrlLink'
 import Date from'../../elements/Date'
-import {mapTag} from '../../redux/tag/selectors'
+import TagForm from '../tag/TagForm'
+import TagList from '../tag/TagList'
 
-const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate, mapTag}) => {
+const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate}) => {
 
     const markAsReadElement = bookmark.isRead 
         ? <Date date={bookmark.readDate} />
@@ -22,18 +23,14 @@ const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate
         onRatingUpdate={onRatingUpdate} />
         : '';
 
-    const tags = (bookmark.tags || []).map(mapTag).map(t => {
-        return <div key={t.id}>
-            {t.name}
-        </div>
-    })
-
     return (
         <div>
         <div>
-            <h3>{bookmark.title}</h3>
-            <BookmarkUrlLink url={bookmark.url} />
-            {tags}
+            <h3>{bookmark.title} (<BookmarkUrlLink url={bookmark.url}>
+                Open Link
+            </BookmarkUrlLink>)
+            </h3>
+            <TagList tags={bookmark.tags}></TagList>
         </div>
            <div >
                 {markAsReadElement}
@@ -52,14 +49,7 @@ ViewBookmark.propTypes = {
     markAsRead: T.func.isRequired,
     onDescriptionUpdate: T.func.isRequired,
     onRatingUpdate: T.func.isRequired,
-    mapTag: T.func.isRequired,
     onTagAdd: T.func.isRequired
-}
-
-const mapStateToProps = state => {
-    return {
-        mapTag: mapTag(state)
-    }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -77,9 +67,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(updateBookmarkDescription({id, description}))
         },
         onTagAdd: (tagId) => {
-
+            //action to add tag
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewBookmark)
+export default connect(null, mapDispatchToProps)(ViewBookmark)

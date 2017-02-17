@@ -1,15 +1,14 @@
-import React, {Component, PropTypes as T} from 'react'
-import {createArea} from '../../common/bookmarkClient'
+import React, { Component, PropTypes as T } from 'react'
+import { createArea } from '../../common/bookmarkClient'
 import TagForm from '../tag/TagForm'
-import {connect} from 'react-redux'
-import {addArea} from '../../redux/area/actions'
-import {mapTag} from '../../redux/tag/selectors'
+import { connect } from 'react-redux'
+import { addArea } from '../../redux/area/actions'
+import TagList from '../tag/TagList'
 
 class AddArea extends Component {
     static propTypes = {
         history: T.any.isRequired,
-        addArea: T.func.isRequired,
-        tagMapper: T.func.isRequired
+        addArea: T.func.isRequired
     }
 
     constructor() {
@@ -53,23 +52,16 @@ class AddArea extends Component {
         const {tags} = this.state;
         console.log(id)
 
-        if(tags.indexOf(id) === -1){
+        if (tags.indexOf(id) === -1) {
             this.setState({
                 tags: [...tags, id]
             })
         }
     }
 
-    
+
     render() {
         const {name, tags} = this.state;
-        const {tagMapper} = this.props;
-
-        const tagSection = tags.length > 0
-            ? (<div>
-                {tags.map(tagMapper).map(t => <div key={t.id}>{t.name}</div>)}
-            </div>)
-            : ''
 
         return (<div>
             <h3>Create Area</h3>
@@ -84,18 +76,12 @@ class AddArea extends Component {
                     />
                 </div>
                 <TagForm selectTag={this.onTagSelect}></TagForm>
-                <div className="bm-button" onClick={this.addArea}>
-                    Add Area
-                </div>
-                {tagSection}
+                <TagList tags={tags} />
+            </div>
+            <div className="bm-button" onClick={this.addArea}>
+                Add Area
             </div>
         </div>)
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        tagMapper: mapTag(state)
     }
 }
 
@@ -107,4 +93,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddArea)
+export default connect(null, mapDispatchToProps)(AddArea)
