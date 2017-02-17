@@ -4,8 +4,9 @@ import {connect} from 'react-redux'
 import BookmarkDescription from './BookmarkDescription'
 import BookmarkUrlLink from './BookmarkUrlLink'
 import Date from'../../elements/Date'
+import {mapTag} from '../../redux/tag/selectors'
 
-const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate}) => {
+const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate, mapTag}) => {
 
     const markAsReadElement = bookmark.isRead 
         ? <Date date={bookmark.readDate} />
@@ -20,11 +21,19 @@ const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate
         onDescriptionUpdate={onDescriptionUpdate}
         onRatingUpdate={onRatingUpdate} />
         : '';
+
+    const tags = (bookmark.tags || []).map(mapTag).map(t => {
+        return <div key={t.id}>
+            {t.name}
+        </div>
+    })
+
     return (
         <div>
         <div>
             <h3>{bookmark.title}</h3>
             <BookmarkUrlLink url={bookmark.url} />
+            {tags}
         </div>
            <div >
                 {markAsReadElement}
@@ -43,6 +52,14 @@ ViewBookmark.propTypes = {
     markAsRead: T.func.isRequired,
     onDescriptionUpdate: T.func.isRequired,
     onRatingUpdate: T.func.isRequired,
+    mapTag: T.func.isRequired,
+    onTagAdd: T.func.isRequired
+}
+
+const mapStateToProps = state => {
+    return {
+        mapTag: mapTag(state)
+    }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -58,8 +75,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onDescriptionUpdate: (description) => {
             dispatch(updateBookmarkDescription({id, description}))
+        },
+        onTagAdd: (tagId) => {
+
         }
     }
 }
 
-export default connect(null, mapDispatchToProps)(ViewBookmark)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewBookmark)

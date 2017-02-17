@@ -4,6 +4,7 @@ import {bookmarkShapeWithReview} from '../../common/bookmarkShape'
 import {getRecentBookmarks} from '../../redux/bookmark/actions'
 import {getBookmarks} from '../../redux/bookmark/selectors'
 import BookmarkListing from './BookmarkListing'
+import {Link} from 'react-router'
 
 class Bookmark extends Component {
     static propTypes = {
@@ -23,7 +24,7 @@ class Bookmark extends Component {
             : <div>No Bookmarks Available</div>
 
         return (<div>
-            <h3>Bookmarks</h3>
+            <h3>Bookmarks (<Link to="/bookmark/add">Add</Link>)</h3>
             {toRender}
         </div>)
     }
