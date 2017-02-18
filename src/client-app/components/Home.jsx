@@ -9,7 +9,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                Home Component update again
+                Home Component
             </div>
         );
     }
