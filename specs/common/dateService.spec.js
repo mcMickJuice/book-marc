@@ -26,3 +26,9 @@ test('DateService gets year from ms', t => {
 
     t.assert(result.endsWith('2017'), 'Datestring ends with year 2017')
 })
+
+test('DataService test should fail', t => {
+    t.plan(1)
+
+    t.equal(false, true, 'this should fail')
+})
