@@ -43,12 +43,64 @@ const markBookmarkAsRead = (req, res) => {
         })
 }
 
-module.exports =  app => {
+//search
+const searchHandler = (req, res) => {
+    const {createdDate, title, tagId} = req.query;
+
+    if(createdDate != null) {
+        searchBookmarksByDate(req, res)
+    } else if(title != null) {
+        searchBookmarksByTitle(req, res)
+    } else if(tagId != null) {
+        searchBookmarksByTag(req, res)
+    } else {
+        //no valid search terms provided
+        res.status(400).send('No valid search query provided. Available query values: createdDate, title, tagId')
+    }
+}
+
+const searchBookmarksByDate = (req, res) => {
+    const {createdDate} = req.query;
+    const dateNumber = Number(createdDate);
+
+    if(isNaN(dateNumber)){
+        res.status(400).send('Created Date value must be a number')
+        return
+    }
+
+    bookmarkService.searchBookmarksByDate(dateNumber)
+        .then(bookmarks => {
+            res.send(bookmarks)
+        })
+}
+
+const searchBookmarksByTitle = (req, res) => {
+    const {title} = req.query
+
+    bookmarkService.searchBookmarksByTitle(title)
+        .then(bookmarks => {
+            res.send(bookmarks)
+        })
+}
+
+const searchBookmarksByTag = (req, res) => {
+    const {tagId} = req.query
+
+    bookmarkService.searchBookmarksByTag(tagId)
+        .then(bookmarks => {
+            res.send(bookmarks)
+        })
+}
+
+module.exports = app => {
     const url = '/api/bookmark';
-    app.post(url, createBookmark);
-    app.get(url, getBookmarks);
-    app.get(`${url}/:bookmarkId`, getBookmarkById)
+    app.get(`${url}/search`, searchHandler)
     app.put(`${url}/description`, updateBookmarkDescription);
     app.put(`${url}/rating`, updateBookmarkRating);
     app.put(`${url}/read`, markBookmarkAsRead)
+    app.get(`${url}/:bookmarkId`, getBookmarkById)
+    app.post(url, createBookmark);
+    app.get(url, getBookmarks);
+
+
 }
