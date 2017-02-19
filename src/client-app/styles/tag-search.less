@@ -1,21 +1,21 @@
 @import 'variables';
 
-.bm-tag-creator {
+.bm-tag-search {
     position: relative;
-    margin-bottom: 15px;
-    width: 400px;
+    width: 100%;
 
     &__search-row {
-        width: 100%;
-        display: flex;
+        position: relative;
     }
 
     &__search-row__input {
-        width: 73%;
+       
     }
 
     &__search-row__button {
-        width: 17%;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 
     &__dropdown {
@@ -24,10 +24,8 @@
     }
 
     &__dropdown__item {
-        box-sizing: border-box;
         border: 1px solid @gray-color;
         border-top: none;
-        width: 99%;
         padding: 10px 15px;
         cursor: pointer;
         background-color: white;

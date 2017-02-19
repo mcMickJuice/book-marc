@@ -72,11 +72,11 @@ class Login extends Component {
         <h2>Login</h2>
             <div className="bm-input__row">
                 <label htmlFor="username" className="bm-input__label">User Name</label>
-                <input type="text" className="bm-input bm-input__text" name="username" defaultValue={username} onBlur={this.onUsernameBlur} />
+                <input type="text" name="username" defaultValue={username} onBlur={this.onUsernameBlur} />
             </div>
             <div className="bm-input__row">
                 <label htmlFor="password" className="bm-input__label">Password</label>
-                <input type="password" className="bm-input bm-input__text" name="password" defaultValue={password} onBlur={this.onPasswordBlur}/>
+                <input type="password" name="password" defaultValue={password} onBlur={this.onPasswordBlur}/>
             </div>
             <div className="bm-button" onClick={this.onLogin}>
                 Login

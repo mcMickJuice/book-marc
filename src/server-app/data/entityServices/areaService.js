@@ -19,6 +19,7 @@ module.exports.createArea = area => {
     return connect()
         .then(db => {
             const coll = db.collection(AREA_COLLECTION);
+            area.createdDate = Date.now();
 
             return coll.insertOne(area)
                 .then(() => {

@@ -94,15 +94,14 @@ const SiteStyles = () => {
                 <h3>Form elements</h3>
                 <div >
                     <label className="bm-input__label" htmlFor="">Label</label>
-                    <input type="text" className="bm-input bm-input__text" value="Heres some text here" />
+                    <input type="text" value="Heres some text here" />
                 </div>
                 <div>
-                    <input type="text" placeholder="Placeholder text" className="bm-input bm-input__text" />
+                    <input type="text" placeholder="Placeholder text" />
                 </div>
                 <div>
                     <textarea name="" id="" cols="30" rows="10"
-                        placeholder="heres some text"
-                        className="bm-input bm-input__textarea">
+                        placeholder="heres some text">
                         There is text here
                 </textarea>
                 </div>

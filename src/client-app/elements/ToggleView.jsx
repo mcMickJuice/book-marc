@@ -28,7 +28,6 @@ class ToggleView extends Component {
 
     toggleShow() {
         const {isOpen} = this.state;
-        console.log('is open', isOpen)
         this.setState({
             isOpen: !isOpen
         })
