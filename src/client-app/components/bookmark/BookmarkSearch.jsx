@@ -20,12 +20,18 @@ class BookmarkSearch extends Component {
         this.performSearch = debounce(this.performSearch.bind(this), 500)
 
         this.state = {
-            selectedTag: null
+            selectedTag: null,
+            searchTerm: ''
         }
     }
 
     onSearchChange(evt) {
         const {value} = evt.target;
+
+        this.setState({
+            searchTerm: value,
+            selectedTag: null
+        })
 
         this.performSearch(value)
     }
@@ -34,7 +40,8 @@ class BookmarkSearch extends Component {
         const {onSearchResults} = this.props;
 
         this.setState({
-            selectedTag: tag
+            selectedTag: tag,
+            searchTerm: ''
         })
 
         searchBookmarksByTag(tag.id)
@@ -72,11 +79,12 @@ class BookmarkSearch extends Component {
     }
 
     render() {
-        const {selectedTag} = this.state;
+        const {selectedTag, searchTerm} = this.state;
 
         return <div className="bm-bookmark-search">
             <div className="bm-bookmark-search__title">
                 <input type="text"
+                    value={searchTerm}
                     placeholder="Search by Title"
                     onChange={this.onSearchChange} />
             </div>
