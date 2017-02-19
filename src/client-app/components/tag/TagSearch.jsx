@@ -102,8 +102,6 @@ class TagSearch extends Component {
     }
 
     onCreateTag(tag) {
-        console.log('created tag', tag)
-        //if create button passed in, button will call this method to reset state
         this.onSelectTag(tag)
     }
 
@@ -126,9 +124,6 @@ class TagSearch extends Component {
                             value={tagSearch}
                             onChange={this.onTagSearchChange}
                             onBlur={this.onTagSearchBlur} />
-                            {
-                                
-                            }
                         <TagCreateButton tagSearch={tagSearch} 
                             onCreateTag={this.onCreateTag}
                         ></TagCreateButton>

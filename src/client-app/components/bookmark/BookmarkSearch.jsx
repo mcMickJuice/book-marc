@@ -3,6 +3,7 @@ import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookm
 import debounce from 'lodash.debounce'
 import TagSearch from '../tag/TagSearch'
 import Tag from '../tag/Tag'
+import * as css from '../../styles/bookmark-search'
 
 class BookmarkSearch extends Component {
     static propTypes = {
@@ -41,7 +42,7 @@ class BookmarkSearch extends Component {
                 onSearchResults(bookmarks)
             })
     }
-    
+
     onRemoveTag() {
         const {onSearchReset} = this.props;
 
@@ -56,8 +57,7 @@ class BookmarkSearch extends Component {
         const {onSearchResults, onSearchReset} = this.props;
 
         const trimmedSearch = text.trim();
-        if(trimmedSearch.length == 0)
-        {
+        if (trimmedSearch.length == 0) {
             onSearchReset()
         }
 
@@ -74,15 +74,22 @@ class BookmarkSearch extends Component {
     render() {
         const {selectedTag} = this.state;
 
-        return <div>
-            <div>
-                <input type="text" 
-                placeholder="Search by title" 
-                onChange={this.onSearchChange} />
+        return <div className="bm-bookmark-search">
+            <div className="bm-bookmark-search__title">
+                <input type="text"
+                    placeholder="Search by Title"
+                    onChange={this.onSearchChange} />
             </div>
-            <div>
+            <div className="bm-bookmark-search__divider">
+                <div>OR</div>
+            </div>
+            <div className="bm-bookmark-search__tag">
                 <TagSearch selectTag={this.onTagSelect}></TagSearch>
-                {selectedTag && <Tag name={selectedTag.name} onRemoveTag={this.onRemoveTag}></Tag>}
+                {selectedTag &&
+                    <div className="bm-bookmark-search__tag__selected">
+                        <Tag name={selectedTag.name} onRemoveTag={this.onRemoveTag}></Tag>
+                    </div>}
+
             </div>
         </div>
     }
