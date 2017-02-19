@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as T } from 'react'
 import { connect } from 'react-redux'
-import { searchTags, isValidTag } from '../../redux/tag/selectors'
+import { searchTags } from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-search'
 
 const ARROW_UP = 38;

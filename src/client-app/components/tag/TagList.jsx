@@ -2,6 +2,7 @@ import React, {PropTypes as T} from 'react'
 import {connect} from 'react-redux'
 import {mapTag} from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-list'
+import Tag from './Tag'
 
 const TagView = ({tags}) => {
 
@@ -9,9 +10,8 @@ const TagView = ({tags}) => {
         return false
     }
     const tagList = tags.map(t => {
-        return <div className="bm-tag-list__tag" key={t.id}>
-            {t.name}
-        </div>
+        return <Tag className="bm-tag-list__tag" key={t.id} name={t.name}>
+        </Tag>
     })
 
     return <div className="bm-tag-list">

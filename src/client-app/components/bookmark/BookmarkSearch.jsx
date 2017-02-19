@@ -2,6 +2,7 @@ import React, { Component, PropTypes as T } from 'react'
 import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookmarkClient'
 import debounce from 'lodash.debounce'
 import TagSearch from '../tag/TagSearch'
+import Tag from '../tag/Tag'
 
 class BookmarkSearch extends Component {
     static propTypes = {
@@ -13,8 +14,13 @@ class BookmarkSearch extends Component {
         super()
 
         this.onTagSelect = this.onTagSelect.bind(this);
+        this.onRemoveTag = this.onRemoveTag.bind(this);
         this.onSearchChange = this.onSearchChange.bind(this);
         this.performSearch = debounce(this.performSearch.bind(this), 500)
+
+        this.state = {
+            selectedTag: null
+        }
     }
 
     onSearchChange(evt) {
@@ -26,10 +32,24 @@ class BookmarkSearch extends Component {
     onTagSelect(tag) {
         const {onSearchResults} = this.props;
 
+        this.setState({
+            selectedTag: tag
+        })
+
         searchBookmarksByTag(tag.id)
             .then(bookmarks => {
                 onSearchResults(bookmarks)
             })
+    }
+    
+    onRemoveTag() {
+        const {onSearchReset} = this.props;
+
+        this.setState({
+            selectedTag: null
+        })
+
+        onSearchReset();
     }
 
     performSearch(text) {
@@ -52,13 +72,17 @@ class BookmarkSearch extends Component {
     }
 
     render() {
+        const {selectedTag} = this.state;
+
         return <div>
             <div>
-            <input type="text" placeholder="Search by title" onChange={this.onSearchChange} />
-
+                <input type="text" 
+                placeholder="Search by title" 
+                onChange={this.onSearchChange} />
             </div>
             <div>
                 <TagSearch selectTag={this.onTagSelect}></TagSearch>
+                {selectedTag && <Tag name={selectedTag.name} onRemoveTag={this.onRemoveTag}></Tag>}
             </div>
         </div>
     }
