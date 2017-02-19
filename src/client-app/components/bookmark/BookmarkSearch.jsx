@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as T } from 'react'
 import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookmarkClient'
 import debounce from 'lodash.debounce'
-import TagCreator from '../tag/TagCreator'
+import TagSearch from '../tag/TagSearch'
 
 class BookmarkSearch extends Component {
     static propTypes = {
@@ -58,7 +58,7 @@ class BookmarkSearch extends Component {
 
             </div>
             <div>
-                <TagCreator selectTag={this.onTagSelect}></TagCreator>
+                <TagSearch selectTag={this.onTagSelect}></TagSearch>
             </div>
         </div>
     }

@@ -1,8 +1,7 @@
 import React, { Component, PropTypes as T } from 'react'
 import { connect } from 'react-redux'
-import { createTag } from '../../redux/tag/actions'
 import { searchTags, isValidTag } from '../../redux/tag/selectors'
-import * as css from '../../styles/tag-creator'
+import * as css from '../../styles/tag-search'
 
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
@@ -18,12 +17,13 @@ const calcIndex = (idx, keyCode, resultCount) => {
     return Math.max(idx - 1, 0);
 }
 
-class TagCreator extends Component {
+const Noop = () => false
+
+class TagSearch extends Component {
     static propTypes = {
-        createTag: T.func.isRequired,
         searchTags: T.func.isRequired,
         selectTag: T.func.isRequired,
-        isValidTag: T.func.isRequired
+        tagCreateButton: T.func
     }
 
     constructor() {
@@ -101,49 +101,39 @@ class TagCreator extends Component {
         })
     }
 
-    onCreateTag() {
-        const {createTag, isValidTag} = this.props;
-        const {tagSearch} = this.state;
-
-        if (!isValidTag(tagSearch)) {
-            return;
-        }
-
-        const tag = {
-            name: tagSearch.trim()
-        }
-
-        this.setState({
-            tagSearch: '',
-            tags: []
-        })
-        createTag(tag)
+    onCreateTag(tag) {
+        console.log('created tag', tag)
+        //if create button passed in, button will call this method to reset state
+        this.onSelectTag(tag)
     }
 
     render() {
         const {tags, tagSearch, currentIndex} = this.state
-        const {isValidTag} = this.props;
+        const {tagCreateButton} = this.props;
+        const TagCreateButton = tagCreateButton || Noop;
 
-        const isInvalidTag = !isValidTag(tagSearch)
-
-        const tagResult = tags.map((t, idx) => (<div className={`bm-tag-creator__dropdown__item ${idx === currentIndex ? 'bm-tag-creator__dropdown__item--highlighted' : ''}`}
+        const tagResult = tags.map((t, idx) => (<div className={`bm-tag-search__dropdown__item ${idx === currentIndex ? 'bm-tag-search__dropdown__item--highlighted' : ''}`}
             key={t.id}
             onMouseEnter={() => this.setResultIndex(idx)}
             onClick={() => this.onSelectTag(t)}>{t.name}
         </div>))
 
-        return (<div ref={(container) => { this.container = container }} className="bm-tag-creator">
-                    <div className="bm-tag-creator__search-row">
+        return (<div ref={(container) => { this.container = container }} className="bm-tag-search">
+                    <div className="bm-tag-search__search-row">
                         <input type="text" name="tagSearch"
                             placeholder="Search Tags"
-                            className="bm-tag-creator__search-row__input"
+                            className="bm-tag-search__search-row__input"
                             value={tagSearch}
                             onChange={this.onTagSearchChange}
                             onBlur={this.onTagSearchBlur} />
-                        <div className={`bm-button ${isInvalidTag ? 'bm-button--disabled' : ''} bm-tag-creator__search-row__button`}
-                            onClick={this.onCreateTag}>Add Tag</div>
+                            {
+                                
+                            }
+                        <TagCreateButton tagSearch={tagSearch} 
+                            onCreateTag={this.onCreateTag}
+                        ></TagCreateButton>
                     </div>
-                    <div className="bm-tag-creator__dropdown">
+                    <div className="bm-tag-search__dropdown">
                         {tagResult}
                     </div>
                 </div>)
@@ -152,22 +142,8 @@ class TagCreator extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        searchTags: searchTags(state),
-        isValidTag: isValidTag(state)
+        searchTags: searchTags(state)
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const {selectTag} = ownProps;
-
-    return {
-        createTag: tag => {
-            return dispatch(createTag(tag))
-                .then(createdTag => {
-                    selectTag(createdTag) //notify listener that tag is added
-                })
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TagCreator)
+export default connect(mapStateToProps)(TagSearch)
