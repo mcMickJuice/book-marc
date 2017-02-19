@@ -5,7 +5,7 @@ import Home from './components/Home'
 import AreaHome from './components/area/AreaHome'
 import AddArea from './components/area/AddArea'
 import AreaView from './components/area/AreaView'
-import Bookmark from './components/bookmark/Bookmark'
+import BookmarkHome from './components/bookmark/BookmarkHome'
 import AddBookmark from './components/bookmark/AddBookmark'
 import ViewBookmark from './components/bookmark/ViewBookmark'
 import Login from './components/Login'
@@ -34,7 +34,7 @@ const Routes = ({history}) => {
         <Route path="/" component={Main} onEnter={authHook}>
             <IndexRoute component={Home} />
             <Route path="bookmark">
-                <IndexRoute component={Bookmark} />
+                <IndexRoute component={BookmarkHome} />
                 <Route path="add" component={AddBookmark} />
                 <Route path=":id">
                     <IndexRoute component={viewBookmarkWrapped} />

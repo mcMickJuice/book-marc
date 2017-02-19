@@ -76,7 +76,6 @@ class AddBookmark extends Component {
                     <div className="bm-input__row">
                         <label htmlFor="title" className="bm-input__label">Title</label>
                         <input type="text"
-                            className="bm-input bm-input__text"
                             name="title"
                             defaultValue={title}
                             onBlur={this.onTitleBlur} />
@@ -86,7 +85,6 @@ class AddBookmark extends Component {
                             Bookmark Url
                         </label>
                         <input type="text"
-                            className="bm-input bm-input__text"
                             defaultValue={url}
                             name="url" onChange={this.onUrlBlur} />
                     </div>

@@ -1,6 +1,6 @@
 import {auth} from './httpClient'
-// import {getToken} from './authClient'
 import * as config from './config';
+import {getDateDiffByDays} from './dateService'
 
 const createUrl = route => {
     return `${config.apiUrl}/${route}`
@@ -15,7 +15,20 @@ const responseHandler = resp => {
 }
 
 export const getRecentBookmarks = () => {
-    const url = createUrl('bookmark')
+    const sevenDaysAgo = getDateDiffByDays(Date.now(), -7);
+    const url = createUrl(`bookmark/search?createdDate=${sevenDaysAgo}`)
+    return get(url)
+        .then(responseHandler)
+}
+
+export const searchBookmarksByTitle = searchTerm => {
+    const url = createUrl(`bookmark/search?title=${searchTerm}`)
+    return get(url)
+        .then(responseHandler)
+}
+
+export const searchBookmarksByTag = tagId => {
+    const url = createUrl(`bookmark/search?tagId=${tagId}`)
     return get(url)
         .then(responseHandler)
 }

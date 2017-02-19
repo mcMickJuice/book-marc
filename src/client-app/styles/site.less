@@ -4,9 +4,17 @@
 @import 'card';
 @import 'area';
 
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
     font-family: 'Georgia', sans-serif;
-    font-size: 18px;
+    font-size: @default-font-size;
 }
 
 //main title
@@ -36,4 +44,19 @@ a {
     &:hover {
         color: initial;
     }
+}
+
+input {
+    font-family: inherit;
+    font-size: inherit;
+
+    &[type=text]{
+        height: 44px;
+        width: 100%;
+        padding-left: 10px;
+    }
+}
+
+textarea {
+    padding: 10px;
 }

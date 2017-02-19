@@ -1,6 +1,7 @@
 import React, {PropTypes as T} from 'react'
-import TagCreator from './TagCreator'
+import TagSearch from './TagSearch'
 import ToggleView from '../../elements/ToggleView'
+import TagCreateButton from './TagCreateButton'
 
 const toggleTagButtonFunc = (isOpen, onClick) => {
     const toggleClass = isOpen ? 'bm-tag-creator__toggle-button--open' : ''
@@ -12,7 +13,7 @@ const toggleTagButtonFunc = (isOpen, onClick) => {
 
 const TagForm = (props) => {
     return <ToggleView toggleButtonFunc={toggleTagButtonFunc}>
-        <TagCreator {...props}></TagCreator>
+        <TagSearch {...props} tagCreateButton={TagCreateButton}></TagSearch>
     </ToggleView>
 }
 

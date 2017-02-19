@@ -73,8 +73,7 @@ class BookmarkDescription extends Component {
             <div>
                 <label htmlFor="description" className="bm-input__label">Description</label>
                 <div style={{display: isEditingDescription ? 'initial' : 'none'}}>
-                    <textarea className="bm-input bm-input__textarea"
-                        placeholder="Add a Description!"
+                    <textarea placeholder="Add a Description!"
                         defaultValue={description} 
                         name="description" 
                         id="descriptionArea" 
