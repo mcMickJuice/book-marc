@@ -47,11 +47,11 @@ const markBookmarkAsRead = (req, res) => {
 const searchHandler = (req, res) => {
     const {createdDate, title, tagId} = req.query;
 
-    if(createdDate != null) {
+    if (createdDate != null) {
         searchBookmarksByDate(req, res)
-    } else if(title != null) {
+    } else if (title != null) {
         searchBookmarksByTitle(req, res)
-    } else if(tagId != null) {
+    } else if (tagId != null) {
         searchBookmarksByTag(req, res)
     } else {
         //no valid search terms provided
@@ -63,7 +63,7 @@ const searchBookmarksByDate = (req, res) => {
     const {createdDate} = req.query;
     const dateNumber = Number(createdDate);
 
-    if(isNaN(dateNumber)){
+    if (isNaN(dateNumber)) {
         res.status(400).send('Created Date value must be a number')
         return
     }

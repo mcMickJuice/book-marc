@@ -1,5 +1,4 @@
 import {auth} from './httpClient'
-// import {getToken} from './authClient'
 import * as config from './config';
 import {getDateDiffByDays} from './dateService'
 

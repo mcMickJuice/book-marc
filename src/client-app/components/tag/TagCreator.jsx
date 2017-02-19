@@ -136,7 +136,7 @@ class TagCreator extends Component {
                     <div className="bm-tag-creator__search-row">
                         <input type="text" name="tagSearch"
                             placeholder="Search Tags"
-                            className="bm-input bm-input__text bm-tag-creator__search-row__input"
+                            className="bm-tag-creator__search-row__input"
                             value={tagSearch}
                             onChange={this.onTagSearchChange}
                             onBlur={this.onTagSearchBlur} />

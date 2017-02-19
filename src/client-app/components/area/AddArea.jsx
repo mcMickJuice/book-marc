@@ -69,7 +69,6 @@ class AddArea extends Component {
                 <div className="bm-input__row">
                     <label htmlFor="name" className="bm-input__label">Area Name</label>
                     <input type="text"
-                        className="bm-input bm-input__text"
                         name="name"
                         defaultValue={name}
                         onBlur={this.onNameBlur}

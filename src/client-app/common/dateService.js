@@ -1,4 +1,3 @@
-
 const monthMap = {
     0: 'January',
     1: 'February',

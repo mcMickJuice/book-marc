@@ -55,13 +55,12 @@ class AreaNoteForm extends Component {
     render() {
         return (<div>
                 <div className="bm-input__row">
-                    <input type="text" placeholder="Add a Title" className="bm-input bm-input__text" onBlur={this.onTitleBlur} />
+                    <input type="text" placeholder="Add a Title" onBlur={this.onTitleBlur} />
                 </div>
                 <div className="bm-input__row">
                     <div>
                         <textarea name="blurb"
                             id="blurb"
-                            className="bm-input bm-input__textarea"
                             placeholder="Add a Blurb!"
                             cols="30"
                             rows="10"
