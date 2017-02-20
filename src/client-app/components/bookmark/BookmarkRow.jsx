@@ -2,6 +2,7 @@ import React from 'react';
 import { bookmarkShapeWithReview } from '../../common/bookmarkShape'
 import { Link } from 'react-router'
 import BookmarkUrlLink from './BookmarkUrlLink'
+import Rating from './Rating'
 import Date from '../../elements/Date'
 import Card from '../../elements/Card'
 import * as css from '../../styles/bookmark-row'
@@ -16,7 +17,7 @@ const BookmarkRow = ({bookmark}) => {
                 <Date date={bookmark.createdDate} />
             </div>
             <div className="bm-bookmark-row__rating">
-                {rating ? rating : 'No Rating'}
+                <Rating score={rating} />
             </div>
         </Card>
     )
