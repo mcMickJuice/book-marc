@@ -22,7 +22,12 @@ module.exports.searchBookmarksByDate = dateInMs => {
         .then(db => {
             const coll = db.collection(BOOKMARK_COLLECTION);
 
-            return coll.find({createdDate: {$gt: dateInMs}})
+            return coll.find({
+                    $and: [
+                        {createdDate: {$gt: dateInMs}},
+                        {isRead: {$not: {$eq: true}}}
+                    ]
+                })
                 .sort({createdDate: -1})
                 .limit(SEARCH_LIMIT)
                 .toArray()

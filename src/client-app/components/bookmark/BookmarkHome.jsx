@@ -1,8 +1,9 @@
 import React, { Component, PropTypes as T} from 'react'
 import {getRecentBookmarks} from '../../common/bookmarkClient'
 import BookmarkSearch from './BookmarkSearch'
-import BookmarkListing from './BookmarkListing'
+import BookmarkRow from './BookmarkRow'
 import {Link} from 'react-router'
+import * as css from '../../styles/bookmark-home'
 
 class BookmarkHome extends Component {
     constructor(){
@@ -47,10 +48,10 @@ class BookmarkHome extends Component {
         const {bookmarks, isLoading} = this.state;
 
         const bookmarksToRender = bookmarks.length > 0
-            ? <BookmarkListing bookmarks={bookmarks}/>
-            : isLoading ? 'Loading' : 'No Bookmarks'
+            ? bookmarks.map(bm => <BookmarkRow key={bm.id} bookmark={bm}/>)
+            : <span className="bm-bookmark-home--pending">{isLoading ? 'Loading' : 'No Bookmarks Found'}</span>
 
-        return <div>
+        return <div className="bm-bookmark-home">
             <div>
                 <h3>Bookmarks (<Link to="/bookmark/add">Add</Link>)</h3>
             </div>
