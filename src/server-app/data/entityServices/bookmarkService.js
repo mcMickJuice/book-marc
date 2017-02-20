@@ -25,7 +25,7 @@ module.exports.searchBookmarksByDate = dateInMs => {
             return coll.find({
                     $and: [
                         {createdDate: {$gt: dateInMs}},
-                        // {isRead: {$not: {$eq: true}}}
+                        {isRead: {$not: {$eq: true}}}
                     ]
                 })
                 .sort({createdDate: -1})
