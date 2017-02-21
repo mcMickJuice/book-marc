@@ -1,14 +1,18 @@
 import React, {PropTypes as T} from 'react'
 
-const RatingBlock = ({activeColor, score, currentIdx}) => {
+const RatingBlock = ({activeColor, score, currentIdx, onHover, onRatingSelect}) => {
     const style = {
         'backgroundColor': activeColor,
         borderColor: activeColor
     }
 
-    const notRated = (currentIdx + 1) > (score || 0)
+    const thisScore = currentIdx + 1
+    const notRated = thisScore > (score || 0)
 
     return <div style={notRated ? {} : style}
+        onMouseEnter={evt => onHover(thisScore, evt)}
+        onMouseLeave={evt => onHover(thisScore, evt)}
+        onClick={() => onRatingSelect(thisScore)}
         className={`bm-rating__block ${notRated ? 'bm-rating__block--inactive': ''}`}>
 
     </div>
@@ -17,7 +21,9 @@ const RatingBlock = ({activeColor, score, currentIdx}) => {
 RatingBlock.propTypes = {
     activeColor: T.string.isRequired,
     score: T.number.isRequired,
-    currentIdx: T.number.isRequired
+    currentIdx: T.number.isRequired,
+    onHover: T.func.isRequired,
+    onRatingSelect: T.func.isRequired
 }
 
 export default RatingBlock

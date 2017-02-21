@@ -1,5 +1,5 @@
 import React, { PropTypes as T } from 'react'
-import { range } from '../../common/utility'
+import { range, noop } from '../../common/utility'
 import RatingBlock from './RatingBlock'
 import * as css from '../../styles/rating'
 
@@ -19,13 +19,15 @@ const getScoreDescription = score => {
     return scoreLabelMap[score] || notRankedDescription
 }
 
-const Rating = ({score}) => {
+const Rating = ({score, onHover = noop, onRatingSelect = noop}) => {
     const description = getScoreDescription(score)
 
     const ratingBars = range(MAX_SCORE).map(idx => <RatingBlock key={idx}
         activeColor={description.color}
         score={score}
-        currentIdx={idx} />)
+        currentIdx={idx}
+        onRatingSelect={onRatingSelect}
+        onHover={onHover} />)
 
     return <div className="bm-rating">
         <div className="bm-rating__label">{description.label}</div>
@@ -36,7 +38,9 @@ const Rating = ({score}) => {
 }
 
 Rating.propTypes = {
-    score: T.number
+    score: T.number,
+    onHover: T.func,
+    onRatingSelect: T.func
 }
 
 export default Rating

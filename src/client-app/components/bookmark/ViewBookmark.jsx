@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import BookmarkDescription from './BookmarkDescription'
 import BookmarkUrlLink from './BookmarkUrlLink'
 import Date from'../../elements/Date'
-import TagForm from '../tag/TagForm'
 import TagList from '../tag/TagList'
 
 const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate}) => {
