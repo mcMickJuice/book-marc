@@ -1,26 +1,10 @@
 import React, {PropTypes as T, Component} from 'react'
-import Dropdown from '../../elements/Dropdown'
-
-const ratingOptions = [
-    {value: 1, display: 'One'},
-    {value: 2, display: 'Two'},
-    {value: 3, display: 'Three'},
-    {value: 4, display: 'Four'},
-    {value: 5, display: 'Five'}
-]
-
-const getOption = rating => {
-    return ratingOptions.filter(o => o.value === rating)[0];
-}
+import RatingSelector from './RatingSelector'
 
 class BookmarkDescription extends Component {
     
     constructor() {
         super();
-
-        this.onDescriptionEdit = this.onDescriptionEdit.bind(this);
-        this.onDescriptionExit = this.onDescriptionExit.bind(this);
-        this.onRatingChange = this.onRatingChange.bind(this);
 
         this.state = {
             isEditingDescription: false
@@ -34,13 +18,13 @@ class BookmarkDescription extends Component {
         onRatingUpdate: T.func.isRequired
         }
 
-    onDescriptionEdit() {
+    onDescriptionEdit = () => {
         this.setState({
             isEditingDescription: true
         })
     }
 
-    onDescriptionExit(evt) {
+    onDescriptionExit = (evt) => {
         const {onDescriptionUpdate, description} = this.props;
         const nextDescription = evt.target.value;
 
@@ -53,7 +37,7 @@ class BookmarkDescription extends Component {
         onDescriptionUpdate(nextDescription);
     }
 
-    onRatingChange(newRating) {
+    onRatingSelect = (newRating) => {
         const {onRatingUpdate} = this.props
 
         onRatingUpdate(newRating);
@@ -63,7 +47,6 @@ class BookmarkDescription extends Component {
         const {description, rating} = this.props;
         const {isEditingDescription} = this.state;
 
-        var selectedOption = getOption(rating || 1);
 
         const displayDescription = (description != null && description.length > 0)
             ? description
@@ -86,10 +69,7 @@ class BookmarkDescription extends Component {
             </div>
             <div className="row">
                     <label htmlFor="rating" className="bm-input__label">Rating</label>
-                    <Dropdown onSelect={this.onRatingChange}
-                    selected={selectedOption.display}
-                    options={ratingOptions}
-                     />
+                    <RatingSelector initialRating={rating} onRatingSelect={this.onRatingSelect}/>
                 </div>
             
         </div>
