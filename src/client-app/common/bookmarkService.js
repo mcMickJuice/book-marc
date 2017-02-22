@@ -2,7 +2,7 @@ import {auth} from './httpClient'
 import {getDateDiffByDays} from './dateService'
 import { createUrl, responseHandler } from './requestHelpers'
 
-const {get, post, put} = auth;
+const {get, post, put, deleteReq} = auth;
 
 export const getRecentBookmarks = () => {
     const sevenDaysAgo = getDateDiffByDays(Date.now(), -7);
@@ -61,4 +61,16 @@ export const updateBookmark = bookmark => {
     return put(url, bookmark)
         .then(responseHandler)
 
+}
+
+export const addTagToBookmark = (bookmarkId, tagId) => {
+    const url = createUrl(`bookmark/${bookmarkId}/tag/${tagId}`)
+    return put(url)
+        .then(responseHandler)
+}
+
+export const removeTagFromBookmark = (bookmarkId, tagId) => {
+    const url = createUrl(`bookmark/${bookmarkId}/tag/${tagId}`)
+    return deleteReq(url)
+        .then(responseHandler)
 }
