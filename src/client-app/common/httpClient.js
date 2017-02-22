@@ -36,9 +36,17 @@ export const put = (url, body, headers) => {
         .send(body)
 }
 
+export const deleteReq = (url, headers) => {
+    headers = headers || {};
+    return request
+        .delete(url)
+        .set(headers)
+}
+
 export const auth = {
     get: authRequest(get),
     put: authRequest(put),
     post: authRequest(post),
+    deleteReq: authRequest(deleteReq) 
 }
 

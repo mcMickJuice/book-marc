@@ -1,16 +1,19 @@
-import React, {PropTypes as T} from 'react'
-import {connect} from 'react-redux'
-import {mapTag} from '../../redux/tag/selectors'
+import React, { PropTypes as T } from 'react'
+import { connect } from 'react-redux'
+import { mapTag } from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-list'
 import Tag from './Tag'
 
-const TagView = ({tags}) => {
-
-    if(tags.length === 0) {
+const TagView = ({tags, onRemoveTag}) => {
+    if (tags.length === 0) {
         return false
     }
     const tagList = tags.map(t => {
-        return <Tag className="bm-tag-list__tag" key={t.id} name={t.name}>
+        return <Tag className="bm-tag-list__tag"
+            key={t.id}
+            id={t.id}
+            onRemoveTag={onRemoveTag}
+            name={t.name}>
         </Tag>
     })
 
@@ -22,15 +25,17 @@ const TagView = ({tags}) => {
 TagView.propTypes = {
     tags: T.arrayOf(T.shape({
         id: T.string.isRequired,
-        name: T.string.isRequired
-    }))
+        name: T.string.isRequired,
+    })),
+    onRemoveTag: T.func
+
 }
 
 const mapStateToProps = (state, ownProps) => {
     const {tags} = ownProps;
     const mapper = mapTag(state)
     const tagList = (tags || []).map(mapper)
-    
+
     return {
         tags: tagList
     }

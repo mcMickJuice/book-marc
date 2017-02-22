@@ -2,45 +2,39 @@ import React, { Component, PropTypes as T } from 'react';
 import { addBookmark } from '../../redux/bookmark/actions'
 import { connect } from 'react-redux'
 import TagForm from '../tag/TagForm'
-import { mapTag } from '../../redux/tag/selectors'
+import TagList from '../tag/TagList'
 
 class AddBookmark extends Component {
     static propTypes = {
-        addBookmark: T.func.isRequired,
-        mapTag: T.func.isRequired
+        addBookmark: T.func.isRequired
     }
 
     constructor() {
         super();
 
-        this.onTitleBlur = this.onTitleBlur.bind(this);
-        this.onUrlBlur = this.onUrlBlur.bind(this);
-        this.addBookmark = this.addBookmark.bind(this);
-        this.onTagSelect = this.onTagSelect.bind(this);
-
         this.state = {
             title: '',
             url: '',
-            tags: []
+            tagIds: []
         }
     }
 
-    onTitleBlur(evt) {
+    onTitleBlur = (evt) => {
         const title = evt.target.value;
         this.setState({
             title
         })
     }
 
-    onUrlBlur(evt) {
+    onUrlBlur = (evt) => {
         const url = evt.target.value;
         this.setState({
             url
         })
     }
 
-    addBookmark() {
-        const {title, url, tags} = this.state;
+    addBookmark = () => {
+        const {title, url, tagIds} = this.state;
         const {addBookmark} = this.props;
 
         this.setState({
@@ -48,26 +42,29 @@ class AddBookmark extends Component {
             url: ''
         })
 
-        addBookmark({ title, url, tags })
+        addBookmark({ title, url, tags: tagIds })
     }
 
-    onTagSelect(tag) {
-        const {tags} = this.state;
+    onTagSelect = (tag) => {
+        const {tagIds} = this.state;
+
+        if(tagIds.indexOf(tag.id) > -1) return;
 
         this.setState({
-            tags: [...tags, tag.id]
+            tagIds: [...tagIds, tag.id]
+        })
+    }
+
+    onTagRemove = (tagId) => {
+        const {tagIds} = this.state;
+
+        this.setState({
+            tagIds: tagIds.filter(t => t !== tagId)
         })
     }
 
     render() {
-        const {title, url, tags} = this.state;
-        const {mapTag} = this.props;
-
-        const tagToRender = tags.map(mapTag).map(t => {
-            return <div key={t.id}>
-                {t.name}
-            </div>
-        })
+        const {title, url, tagIds} = this.state;
 
         return (
             <div>
@@ -89,19 +86,13 @@ class AddBookmark extends Component {
                             name="url" onChange={this.onUrlBlur} />
                     </div>
                     <TagForm selectTag={this.onTagSelect}></TagForm>
-                    {tagToRender}
+                    <TagList tags={tagIds} onRemoveTag={this.onTagRemove}/>
                     <div className="bm-button" onClick={this.addBookmark}>
                         Add Bookmark
                     </div>
                 </div>
             </div>
         );
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        mapTag: mapTag(state)
     }
 }
 
@@ -113,4 +104,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddBookmark)
+export default connect(null, mapDispatchToProps)(AddBookmark)

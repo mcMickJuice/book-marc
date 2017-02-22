@@ -20,7 +20,7 @@ const RatingBlock = ({activeColor, score, currentIdx, onHover, onRatingSelect}) 
 
 RatingBlock.propTypes = {
     activeColor: T.string.isRequired,
-    score: T.number.isRequired,
+    score: T.number,
     currentIdx: T.number.isRequired,
     onHover: T.func.isRequired,
     onRatingSelect: T.func.isRequired
