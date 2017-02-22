@@ -95,7 +95,7 @@ class BookmarkSearch extends Component {
                 <TagSearch selectTag={this.onTagSelect}></TagSearch>
                 {selectedTag &&
                     <div className="bm-bookmark-search__tag__selected">
-                        <Tag name={selectedTag.name} onRemoveTag={this.onRemoveTag}></Tag>
+                        <Tag name={selectedTag.name} id={selectedTag.id} onRemoveTag={this.onRemoveTag}></Tag>
                     </div>}
 
             </div>

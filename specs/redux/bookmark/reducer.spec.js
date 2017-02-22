@@ -131,6 +131,29 @@ test('TAG_ADDED will not add TagId to incorrect bookmarkId', t => {
     t.assert(incorrectBm.tags.indexOf(action.payload.tagId) === -1, 'Other bookmark does not added TagId')
 })
 
+test('TAG_ADDED will create tags array and add tagId to bookmark', t => {
+    t.plan(2)
+
+    const initialState = {
+        bookmarks: [
+            {id: 1}
+        ]
+    }
+
+    const action = {
+        type: TAG_ADDED,
+        payload: {
+            bookmarkId: 1,
+            tagId: 100
+        }
+    }
+
+    const result = reducer(initialState, action);
+
+    t.assert(result.bookmarks[0].tags != null, 'Tag array was created')
+    t.assert(result.bookmarks[0].tags.indexOf(100) > -1, 'tag id was added to bookmark')
+})
+
 test('TAG_REMOVED will remove tagId from specified bookmarkId', t => {
     t.plan(1)
 
@@ -150,7 +173,30 @@ test('TAG_REMOVED will remove tagId from specified bookmarkId', t => {
 
     const result = reducer(initialState, action);
 
-    t.equal(result.bookmarks[0].tags.length, 1, 'Bookmark had tag removed')
+    t.equal(result.bookmarks[0].tags.length, 0, 'Bookmark had tag removed')
+})
+
+test('TAG_REMOVED will still work for non-existent tag array', t => {
+    t.plan(2)
+
+    const initialState = {
+        bookmarks: [
+            {id: 1}
+        ]
+    }
+
+    const action = {
+        type:TAG_REMOVED,
+        payload: {
+            bookmarkId: 1,
+            tagId: 5
+        }
+    }
+
+    const result = reducer(initialState, action);
+
+    t.assert(result.bookmarks[0].tags != null, 'Tags array exists on bookmark')
+    t.equal(result.bookmarks[0].tags.length, 0, 'No tags exist in array')
 })
 
 test('Unknown action type doesn\'t alter state', t => {

@@ -65,7 +65,7 @@ export const updateBookmark = bookmark => {
 
 export const addTagToBookmark = (bookmarkId, tagId) => {
     const url = createUrl(`bookmark/${bookmarkId}/tag/${tagId}`)
-    return put(url)
+    return put(url, {}) //put requires body in second param
         .then(responseHandler)
 }
 

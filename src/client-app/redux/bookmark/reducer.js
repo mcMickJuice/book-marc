@@ -22,7 +22,7 @@ const addTag = (bookmarks, bookmarkId, tagId) => {
             return b;
         }
 
-        const tags = [...b.tags, tagId];
+        const tags = [...(b.tags || []), tagId];
 
         return {
             ...b,
@@ -36,8 +36,8 @@ const removeTag = (bookmarks, bookmarkId, tagId) => {
         if(b.id !== bookmarkId) {
             return b;
         }
-
-        const tags = b.tags.filter(t => t === tagId);
+        
+        const tags = (b.tags || []).filter(t => t !== tagId);
 
         return {
             ...b,
