@@ -3,6 +3,7 @@ import * as areaService from '../../common/areaService'
 export const AREA_LOADED = 'AREA_LOADED'
 export const ALL_AREAS_LOADED = 'ALL_AREAS_LOADED'
 export const AREA_TAG_ADDED = 'AREA_TAG_ADDED'
+export const AREA_TAG_REMOVED = 'AREA_TAG_REMOVED'
 export const AREA_NOTE_ADDED = 'AREA_NOTE_ADDED'
 
 export const loadAllAreas = () => {
@@ -60,6 +61,36 @@ export const addAreaNote = (note) => {
         return areaService.createAreaNote(note)
             .then(createdNote => {
                 dispatch(loadAreaNoteAction(createdNote))
+            })
+    }
+}
+
+export const addTagToArea = (areaId, tagId) => {
+    return dispatch => {
+        return areaService.addTagToArea(areaId, tagId)
+            .then(() => {
+                dispatch({
+                    type: AREA_TAG_ADDED,
+                    payload: {
+                        areaId,
+                        tagId
+                    }
+                })
+            })
+    }
+}
+
+export const removeTagFromArea = (areaId, tagId) => {
+    return dispatch => {
+        return areaService.removeTagFromArea(areaId, tagId)
+            .then(() => {
+                dispatch({
+                    type: AREA_TAG_REMOVED,
+                    payload: {
+                        areaId,
+                        tagId
+                    }
+                })
             })
     }
 }

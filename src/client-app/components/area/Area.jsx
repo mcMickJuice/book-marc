@@ -3,6 +3,7 @@ import AreaNoteForm from './AreaNoteForm'
 import AreaNote from './AreaNote'
 import ToggleView from '../../elements/ToggleView'
 import TagList from '../tag/TagList'
+import TagForm from '../tag/TagForm'
 
 const toggleAddNoteFunc = (isOpen, onClick) => {
     return <div onClick={onClick}>
@@ -10,7 +11,7 @@ const toggleAddNoteFunc = (isOpen, onClick) => {
     </div>
 }
 
-const Area = ({area, onAddNote}) => {
+const Area = ({area, onAddNote, onTagAdded, onTagRemoved}) => {
     const notesToRender = area.notes.length
         ? area.notes.map(n => (<AreaNote key={n.id}
             title={n.title}
@@ -21,7 +22,8 @@ const Area = ({area, onAddNote}) => {
 
     return (<div className="bm-area">
         <h3>{area.name}</h3>
-        <TagList tags={area.tags} />
+        <TagForm selectTag={onTagAdded} />
+        <TagList tags={area.tags} onRemoveTag={onTagRemoved}/>
         
         <ToggleView toggleButtonFunc={toggleAddNoteFunc}>
             <AreaNoteForm
@@ -42,7 +44,9 @@ Area.propTypes = {
         })),
         tags: T.arrayOf(T.string)
     }),
-    onAddNote: T.func.isRequired
+    onAddNote: T.func.isRequired,
+    onTagAdded: T.func.isRequired,
+    onTagRemoved: T.func.isRequired
 }
 
 export default Area

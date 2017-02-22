@@ -1,14 +1,16 @@
-import React, {Component, PropTypes as T} from 'react'
+import React, { Component, PropTypes as T } from 'react'
 import Area from './Area'
-import {connect} from 'react-redux'
-import {getAreaFromState} from '../../redux/area/selectors'
-import {getAreaById, addAreaNote} from '../../redux/area/actions'
+import { connect } from 'react-redux'
+import { getAreaFromState } from '../../redux/area/selectors'
+import { getAreaById, addAreaNote, addTagToArea, removeTagFromArea } from '../../redux/area/actions'
 
 class AreaView extends Component {
     static propTypes = {
         area: T.object,
         getAreaById: T.func.isRequired,
-        onAddNote: T.func.isRequired
+        onAddNote: T.func.isRequired,
+        onTagAdded: T.func.isRequired,
+        onTagRemoved: T.func.isRequired
     }
 
     constructor() {
@@ -22,7 +24,7 @@ class AreaView extends Component {
     componentDidMount() {
         const {area} = this.props;
 
-        if(area != null) {
+        if (area != null) {
             this.setState({
                 isLoading: false
             })
@@ -33,12 +35,14 @@ class AreaView extends Component {
 
     render() {
         const {isLoading} = this.state;
-        const {area, onAddNote} = this.props;
+        const {area, onAddNote, onTagAdded, onTagRemoved} = this.props;
 
         return (<div>
+            {/*we're passing dispatch props from AreaView to Area...could we not wrap Area in connect with 
+            these dispatch props?*/}
             {!area && isLoading
                 ? 'Is Loading'
-                : <Area area={area} onAddNote={onAddNote}/>
+                : <Area area={area} onAddNote={onAddNote} onTagAdded={onTagAdded} onTagRemoved={onTagRemoved}/>
             }
         </div>)
     }
@@ -62,8 +66,31 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onAddNote: note => {
             return dispatch(addAreaNote(note))
+        },
+        onTagAdded: tagId => {
+            return dispatch(addTagToArea(id, tagId))
+        },
+        onTagRemoved: tagId => {
+            return dispatch(removeTagFromArea(id, tagId))
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AreaView)
+const mergeProps = (stateProps, dispatchProps) => {
+    const {area, ...otherStateProps} = stateProps
+    const {onTagAdded, ...otherDispatchProps} = dispatchProps;
+
+    return {
+        ...otherStateProps,
+        ...otherDispatchProps,
+        area,
+        onTagAdded: tag => {
+            const {id} = tag;
+            if (area.tags.indexOf(id) > -1) return;
+
+            return onTagAdded(id);
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(AreaView)

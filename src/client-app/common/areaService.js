@@ -1,7 +1,7 @@
 import { auth } from './httpClient'
 import { createUrl, responseHandler } from './requestHelpers'
 
-const {get, post, put} = auth;
+const {get, post, put, deleteReq} = auth;
 
 export const getAllAreas = () => {
     const url = createUrl('area')
@@ -25,9 +25,17 @@ export const getAreaById = areaId => {
 }
 
 export const addTagToArea = (areaId, tagId) => {
-    const url = createUrl(`area/${areaId}/tag`)
+    const url = createUrl(`area/${areaId}/tag/${tagId}`)
 
-    return put(url, { tagId })
+    return put(url, {})
+        .then(responseHandler)
+}
+
+export const removeTagFromArea = (areaId, tagId) => {
+    const url = createUrl(`area/${areaId}/tag/${tagId}`)
+
+    return deleteReq(url)
+        .then(responseHandler)
 }
 
 export const createAreaNote = (note) => {
