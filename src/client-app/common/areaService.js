@@ -34,7 +34,7 @@ export const addTagToArea = (areaId, tagId) => {
 export const removeTagFromArea = (areaId, tagId) => {
     const url = createUrl(`area/${areaId}/tag/${tagId}`)
 
-    return deleteReq(url, {})
+    return deleteReq(url)
         .then(responseHandler)
 }
 
