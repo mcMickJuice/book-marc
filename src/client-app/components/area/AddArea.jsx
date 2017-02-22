@@ -17,10 +17,11 @@ class AddArea extends Component {
         this.onNameBlur = this.onNameBlur.bind(this);
         this.addArea = this.addArea.bind(this);
         this.onTagSelect = this.onTagSelect.bind(this);
+        this.onTagRemove = this.onTagRemove.bind(this)
 
         this.state = {
             name: '',
-            tags: []
+            tagIds: []
         }
     }
 
@@ -33,12 +34,12 @@ class AddArea extends Component {
     }
 
     addArea() {
-        const {name, tags} = this.state
+        const {name, tagIds} = this.state
         const {push} = this.props.history
 
         const newTag = {
             name,
-            tags
+            tags: tagIds
         }
 
         createArea(newTag)
@@ -49,19 +50,26 @@ class AddArea extends Component {
 
     onTagSelect(tag) {
         const {id} = tag;
-        const {tags} = this.state;
-        console.log(id)
+        const {tagIds} = this.state;
 
-        if (tags.indexOf(id) === -1) {
+        if (tagIds.indexOf(id) === -1) {
             this.setState({
-                tags: [...tags, id]
+                tagIds: [...tagIds, id]
             })
         }
     }
 
+    onTagRemove(tagId) {
+        const {tagIds} = this.state;
+
+        this.setState({
+            tagIds: tagIds.filter(t => t !== tagId)
+        })
+    }
+
 
     render() {
-        const {name, tags} = this.state;
+        const {name, tagIds} = this.state;
 
         return (<div>
             <h3>Create Area</h3>
@@ -75,7 +83,7 @@ class AddArea extends Component {
                     />
                 </div>
                 <TagForm selectTag={this.onTagSelect}></TagForm>
-                <TagList tags={tags} />
+                <TagList tags={tagIds} onRemoveTag={this.onTagRemove} />
             </div>
             <div className="bm-button" onClick={this.addArea}>
                 Add Area
