@@ -92,8 +92,29 @@ const searchBookmarksByTag = (req, res) => {
         })
 }
 
+const addTagToBookmark = (req, res) => {
+    const {bookmarkId, tagId} = req.params;
+
+    bookmarkService.addTagToBookmark(bookmarkId, tagId)
+        .then(() => {
+            res.send()
+        })
+}
+
+const removeTagFromBookmark = (req, res) => {
+    const {bookmarkId, tagId} = req.params;
+
+    bookmarkService.removeTagFromBookmark(bookmarkId, tagId)
+        .then(() => {
+            res.send();
+        })
+}
+
 module.exports = app => {
     const url = '/api/bookmark';
+    
+    app.put(`${url}/:bookmarkId/tag/:tagId`, addTagToBookmark)
+    app.delete(`${url}/:bookmarkId/tag/:tagId`, removeTagFromBookmark)
     app.get(`${url}/search`, searchHandler)
     app.put(`${url}/description`, updateBookmarkDescription);
     app.put(`${url}/rating`, updateBookmarkRating);

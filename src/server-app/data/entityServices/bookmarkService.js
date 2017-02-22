@@ -121,6 +121,24 @@ module.exports.updateBookmarkAsRead = bookmark => {
         })
 }
 
+module.exports.addTagToBookmark = (bookmarkId, tagId) => {
+    return connect()
+        .then(db => {
+            const coll = db.collection(BOOKMARK_COLLECTION);
+
+            return coll.updateOne({_id: new ObjectId(bookmarkId)}, {$push: {tags: tagId}})
+        })
+}
+
+module.exports.removeTagFromBookmark = (bookmarkId, tagId) => {
+    return connect()
+        .then(db => {
+            const coll = db.collection(BOOKMARK_COLLECTION);
+
+            return coll.updateOne({_id: new ObjectId(bookmarkId)}, {$pullAll: {tags: [tagId]}})
+        })
+}
+
 //private
 const updateBookmark = (id, updateObj) => {
     return connect()
