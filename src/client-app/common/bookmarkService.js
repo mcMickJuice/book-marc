@@ -1,18 +1,8 @@
 import {auth} from './httpClient'
-import * as config from './config';
 import {getDateDiffByDays} from './dateService'
-
-const createUrl = route => {
-    return `${config.apiUrl}/${route}`
-}
+import { createUrl, responseHandler } from './requestHelpers'
 
 const {get, post, put} = auth;
-
-
-const responseHandler = resp => {
-    //what about errors?
-    return resp.body;
-}
 
 export const getRecentBookmarks = () => {
     const sevenDaysAgo = getDateDiffByDays(Date.now(), -7);
@@ -71,25 +61,4 @@ export const updateBookmark = bookmark => {
     return put(url, bookmark)
         .then(responseHandler)
 
-}
-
-export const createArea = area => {
-    const url = createUrl('area')
-    
-    return post(url, area)
-        .then(responseHandler);
-}
-
-export const fetchArea = areaId => {
-    const url = createUrl(`area/${areaId}`)
-
-    return get(url)
-        .then(responseHandler)
-}
-
-export const createAreaNote = note => {
-    const url = createUrl(`area/note`)
-
-    return post(url, note)
-        .then(responseHandler)
 }

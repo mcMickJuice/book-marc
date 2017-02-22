@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as T } from 'react'
-import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookmarkClient'
+import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookmarkService'
 import debounce from 'lodash.debounce'
 import TagSearch from '../tag/TagSearch'
 import Tag from '../tag/Tag'

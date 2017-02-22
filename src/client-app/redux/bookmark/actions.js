@@ -1,4 +1,4 @@
-import * as bookmarkClient from '../../common/bookmarkClient'
+import * as bookmarkService from '../../common/bookmarkService'
 import {push} from 'react-router-redux'
 
 export const BOOKMARK_LOADED = 'BOOKMARK_LOADED';
@@ -16,7 +16,7 @@ const loadBookmark = bookmark => {
 
 export const addBookmark = bookmark => {
     return dispatch => {
-        return bookmarkClient.createBookmark(bookmark)
+        return bookmarkService.createBookmark(bookmark)
             .then(updatedBookmark => {
                  dispatch(loadBookmark(updatedBookmark))
                  dispatch(push(`/bookmark/${updatedBookmark.id}`))
@@ -26,7 +26,7 @@ export const addBookmark = bookmark => {
 
 export const getBookmark = id => {
     return dispatch => {
-        return bookmarkClient.getBookmark(id)
+        return bookmarkService.getBookmark(id)
             .then(bookmark => {
                 dispatch(loadBookmark(bookmark))
             })
@@ -35,7 +35,7 @@ export const getBookmark = id => {
 
 export const getRecentBookmarks = () => {
     return dispatch => {
-        return bookmarkClient.getRecentBookmarks()
+        return bookmarkService.getRecentBookmarks()
             .then(bookmarks => {
                 dispatch({
                     type: RECENT_BOOKMARKS_LOADED,
@@ -49,7 +49,7 @@ export const getRecentBookmarks = () => {
 
 export const updateBookmarkDescription = bookmark => {
     return dispatch => {
-        return bookmarkClient.updateBookmarkDescription(bookmark)
+        return bookmarkService.updateBookmarkDescription(bookmark)
             .then(() => {
                 dispatch({
                     type: BOOKMARK_UPDATED,
@@ -63,7 +63,7 @@ export const updateBookmarkDescription = bookmark => {
 
 export const updateBookmarkRating = bookmark => {
     return dispatch => {
-        return bookmarkClient.updateBookmarkRating(bookmark)
+        return bookmarkService.updateBookmarkRating(bookmark)
             .then(() => {
                 dispatch({
                     type: BOOKMARK_UPDATED,
@@ -77,7 +77,7 @@ export const updateBookmarkRating = bookmark => {
 
 export const updateBookmarkAsRead = bookmark => {
     return dispatch => {
-        return bookmarkClient.markBookmarkAsRead(bookmark)
+        return bookmarkService.markBookmarkAsRead(bookmark)
             .then(updatedBookmark => {
                 dispatch({
                     type: BOOKMARK_UPDATED,
