@@ -23,10 +23,18 @@ const createNoteForArea = (req, res) => {
 }
 
 const addTagToArea = (req, res) => {
-    const {id} = req.params;
-    const {tagId} = req.body
+    const {areaId, tagId} = req.params;
 
-    return areaService.addTagToArea(id, tagId)
+    return areaService.addTagToArea(areaId, tagId)
+        .then(() => {
+            res.send()
+        })
+}
+
+const removeTagFromArea = (req, res) => {
+    const {areaId, tagId} = req.params;
+
+    return areaService.removeTagFromArea(areaId, tagId)
         .then(() => {
             res.send()
         })
@@ -42,7 +50,8 @@ const getAllAreas = (req, res) => {
 module.exports = app => {
     const url = '/api/area';
     app.post(`${url}/note`, createNoteForArea)    
-    app.put(`${url}/:id/tag`, addTagToArea)
+    app.put(`${url}/:areaId/tag/:tagId`, addTagToArea)
+    app.delete(`${url}/:areaId/tag/:tagId`, removeTagFromArea)
     app.post(url, createArea)
     app.get(`${url}/:id`, getAreaById)
     app.get(url, getAllAreas)

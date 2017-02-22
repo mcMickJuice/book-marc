@@ -38,7 +38,7 @@ module.exports.getAreaById = id => {
 
             const noteColl = db.collection(AREA_NOTE_COLLECTION);
 
-            const noteTask = noteColl.find({areaId: id})
+            const noteTask = noteColl.find({ areaId: id })
                 .toArray()
                 .then(notes => notes.map(toViewModel))
 
@@ -74,6 +74,15 @@ module.exports.addTagToArea = (areaId, tagId) => {
         .then(db => {
             const coll = db.collection(AREA_COLLECTION);
 
-            return coll.updateOne({_id: new ObjectId(areaId)}, {$push: {tags: tagId}})
+            return coll.updateOne({ _id: new ObjectId(areaId) }, { $push: { tags: tagId } })
+        })
+}
+
+module.exports.removeTagFromArea = (areaId, tagId) => {
+    return connect()
+        .then(db => {
+            const coll = db.collection(AREA_COLLECTION)
+
+            return coll.updateOne({ _id: new ObjectId(areaId) }, { $pullAll: { tags: [tagId] } })
         })
 }
