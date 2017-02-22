@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as T } from 'react'
-import { createArea } from '../../common/bookmarkClient'
+import { createArea } from '../../common/areaService'
 import TagForm from '../tag/TagForm'
 import { connect } from 'react-redux'
 import { addArea } from '../../redux/area/actions'

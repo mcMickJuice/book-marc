@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as T } from 'react'
-import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookmarkClient'
+import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookmarkService'
 import debounce from 'lodash.debounce'
 import TagSearch from '../tag/TagSearch'
 import Tag from '../tag/Tag'
@@ -95,7 +95,7 @@ class BookmarkSearch extends Component {
                 <TagSearch selectTag={this.onTagSelect}></TagSearch>
                 {selectedTag &&
                     <div className="bm-bookmark-search__tag__selected">
-                        <Tag name={selectedTag.name} onRemoveTag={this.onRemoveTag}></Tag>
+                        <Tag name={selectedTag.name} id={selectedTag.id} onRemoveTag={this.onRemoveTag}></Tag>
                     </div>}
 
             </div>
