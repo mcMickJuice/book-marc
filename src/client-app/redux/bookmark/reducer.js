@@ -1,4 +1,10 @@
-import {BOOKMARK_LOADED, BOOKMARK_UPDATED, RECENT_BOOKMARKS_LOADED} from './actions'
+import {
+    BOOKMARK_LOADED,
+    BOOKMARK_UPDATED,
+    RECENT_BOOKMARKS_LOADED,
+    TAG_ADDED,
+    TAG_REMOVED
+} from './actions'
 
 const updateBookmark = (bookmarks, bookmark) => {
     return bookmarks.map(b => {
@@ -7,6 +13,36 @@ const updateBookmark = (bookmarks, bookmark) => {
         }
 
         return b
+    })
+}
+
+const addTag = (bookmarks, bookmarkId, tagId) => {
+    return bookmarks.map(b => {
+        if(b.id !== bookmarkId) {
+            return b;
+        }
+
+        const tags = [...b.tags, tagId];
+
+        return {
+            ...b,
+            tags
+        }
+    })
+}
+
+const removeTag = (bookmarks, bookmarkId, tagId) => {
+    return bookmarks.map(b => {
+        if(b.id !== bookmarkId) {
+            return b;
+        }
+
+        const tags = b.tags.filter(t => t === tagId);
+
+        return {
+            ...b,
+            tags
+        }
     })
 }
 
@@ -25,6 +61,14 @@ const bookmark = (state = { bookmarks: [] }, action) => {
             return Object.assign({}, state, {
                 bookmarks: action.payload.bookmarks
             })
+        case TAG_ADDED:
+            return Object.assign({}, state, {
+                bookmarks: addTag(state.bookmarks, action.payload.bookmarkId, action.payload.tagId)
+            })
+        case TAG_REMOVED:
+            return Object.assign({}, state, {
+                bookmarks: removeTag(state.bookmarks, action.payload.bookmarkId, action.payload.tagId)
+            } )
         default:
             return state;
     }
