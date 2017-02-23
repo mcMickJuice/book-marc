@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(updateBookmarkDescription({ id, description }))
         },
         onTagAdd: tag => {
-            if (bookmark.tags.indexOf(tag.id) > -1) return;
+            if ((bookmark.tags || []).indexOf(tag.id) > -1) return;
 
             dispatch(addTagToBookmark(bookmark.id, tag.id))
         },
