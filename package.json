@@ -64,6 +64,7 @@
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
+    "showdown": "^1.6.4",
     "style-loader": "^0.13.1",
     "superagent": "^2.2.0",
     "superagent-promise-plugin": "^3.2.0",

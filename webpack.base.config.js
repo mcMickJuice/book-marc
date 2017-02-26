@@ -32,6 +32,12 @@ module.exports = {
                     'css-loader',
                     'less-loader'
                 ]
+            },
+            {
+                test: /\.css$/, include: srcFolder, use: [
+                    'style-loader',
+                    'css-loader'
+                ]
             }
         ]
     },
