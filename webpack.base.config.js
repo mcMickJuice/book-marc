@@ -1,7 +1,5 @@
 var path = require('path');
 var webpack = require('webpack')
-var dotenv = require('dotenv');
-
 
 var srcFolder = path.join(__dirname, 'src')
 
