@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as T } from 'react'
 import showdown from 'showdown'
 import * as codeSyntaxCss from '../styles/markdown-themes/monokai-sublime.css'
-import highlightJs from '../common/markdown/highlight.pack'
+import highlightJs from 'highlight'
 import * as widgetCss from '../styles/markdown-viewer'
 import { queryAll } from '../common/domHelpers'
 
