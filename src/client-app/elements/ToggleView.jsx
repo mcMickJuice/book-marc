@@ -9,11 +9,15 @@ const defaultButtonFunc = (isOpen, onClick) => {
 class ToggleView extends Component {
     static propTypes = {
         openByDefault: T.bool,
-        destroyOnClose: T.bool,
+        destroyChildOnClose: T.bool,
         onClose: T.func, //in case we need to notify parent when closing
         children: T.node.isRequired,
         toggleButtonFunc: T.func
     }  
+
+    static defaultProps = {
+        toggleButtonFunc: defaultButtonFunc
+    }
 
     constructor(props) {
         super(props);
@@ -34,16 +38,20 @@ class ToggleView extends Component {
     }
 
     render() {
-        const {children, toggleButtonFunc = defaultButtonFunc} = this.props;
+        const {children, toggleButtonFunc, destroyChildOnClose} = this.props;
         const {isOpen} = this.state;
 
         const button = toggleButtonFunc(isOpen, this.toggleShow)
 
+        
+
         return (<div style={{position: 'relative'}}>
             {button}
-            <div style={{display: (isOpen ? 'block': 'none') }}>
+            {destroyChildOnClose && !isOpen
+            ? false
+            : <div style={{display: (isOpen ? 'block': 'none') }}>
                 {children}
-            </div>
+            </div>}
         </div>)
     }
 }

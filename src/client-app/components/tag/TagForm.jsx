@@ -1,4 +1,4 @@
-import React, {PropTypes as T} from 'react'
+import React, { PropTypes as T } from 'react'
 import TagSearch from './TagSearch'
 import ToggleView from '../../elements/ToggleView'
 import TagCreateButton from './TagCreateButton'
@@ -12,7 +12,8 @@ const toggleTagButtonFunc = (isOpen, onClick) => {
 }
 
 const TagForm = (props) => {
-    return <ToggleView toggleButtonFunc={toggleTagButtonFunc}>
+    return <ToggleView toggleButtonFunc={toggleTagButtonFunc}
+        destroyChildOnClose={true}>
         <TagSearch {...props} tagCreateButton={TagCreateButton}></TagSearch>
     </ToggleView>
 }

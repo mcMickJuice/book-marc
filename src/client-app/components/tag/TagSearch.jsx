@@ -17,13 +17,15 @@ const calcIndex = (idx, keyCode, resultCount) => {
     return Math.max(idx - 1, 0);
 }
 
-const Noop = () => false
-
 class TagSearch extends Component {
     static propTypes = {
         searchTags: T.func.isRequired,
         selectTag: T.func.isRequired,
-        tagCreateButton: T.func
+        TagCreateButton: T.func //factory function
+    }
+
+    static defaultProps = {
+        TagCreateButton: () => false
     }
 
     constructor() {
@@ -43,6 +45,7 @@ class TagSearch extends Component {
     }
 
     componentDidMount() {
+        this.input.focus();
         this.container.addEventListener('keydown', this.onKeyDown)
     }
 
@@ -107,8 +110,7 @@ class TagSearch extends Component {
 
     render() {
         const {tags, tagSearch, currentIndex} = this.state
-        const {tagCreateButton} = this.props;
-        const TagCreateButton = tagCreateButton || Noop;
+        const {TagCreateButton} = this.props;
 
         const tagResult = tags.map((t, idx) => (<div className={`bm-tag-search__dropdown__item ${idx === currentIndex ? 'bm-tag-search__dropdown__item--highlighted' : ''}`}
             key={t.id}
@@ -122,6 +124,7 @@ class TagSearch extends Component {
                             placeholder="Search Tags"
                             className="bm-tag-search__search-row__input"
                             value={tagSearch}
+                            ref={t=> this.input = t}
                             onChange={this.onTagSearchChange}
                             onBlur={this.onTagSearchBlur} />
                         <TagCreateButton tagSearch={tagSearch} 
