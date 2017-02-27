@@ -14,7 +14,7 @@ const toggleTagButtonFunc = (isOpen, onClick) => {
 const TagForm = (props) => {
     return <ToggleView toggleButtonFunc={toggleTagButtonFunc}
         destroyChildOnClose={true}>
-        <TagSearch {...props} tagCreateButton={TagCreateButton}></TagSearch>
+        <TagSearch {...props} TagCreateButton={TagCreateButton}></TagSearch>
     </ToggleView>
 }
 
