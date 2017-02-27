@@ -1,5 +1,6 @@
 import React, { Component, PropTypes as T } from 'react'
 import * as css from '../../styles/area-note-form'
+import MarkdownEditor from '../../elements/MarkdownEditor'
 
 class AreaNoteForm extends Component {
     static propTypes = {
@@ -44,9 +45,7 @@ class AreaNoteForm extends Component {
         })
     }
 
-    onBlurbBlur(evt) {
-        const blurb = evt.target.value;
-
+    onBlurbBlur(blurb) {
         this.setState({
             blurb
         })
@@ -58,7 +57,7 @@ class AreaNoteForm extends Component {
                     <input type="text" placeholder="Add a Title" onBlur={this.onTitleBlur} />
                 </div>
                 <div className="bm-input__row">
-                    <div>
+                    {/*<div>
                         <textarea name="blurb"
                             id="blurb"
                             placeholder="Add a Blurb!"
@@ -66,7 +65,8 @@ class AreaNoteForm extends Component {
                             rows="10"
                             onBlur={this.onBlurbBlur}
                         ></textarea>
-                    </div>
+                    </div>*/}
+                    <MarkdownEditor onBlur={this.onBlurbBlur}/>
                 </div>
                 <div className="bm-button" onClick={this.onAddNote}>Add Note</div>
             </div>)

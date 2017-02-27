@@ -1,6 +1,7 @@
 import React, { PropTypes as T, Component } from 'react'
 import RatingSelector from './RatingSelector'
 import MarkdownViewer from '../../elements/MarkdownViewer'
+import MarkdownEditor from '../../elements/MarkdownEditor'
 
 class BookmarkDescription extends Component {
 
@@ -20,23 +21,13 @@ class BookmarkDescription extends Component {
     }
 
     onDescriptionEdit = () => {
-        setTimeout(() => {
-            //for some reason doing this sync wasn't setting focus
-            this.textArea.focus();
-        }, 50)
-
         this.setState({
             isEditingDescription: true
         })
     }
 
-    onDescriptionExit = (evt) => {
+    onDescriptionExit = (nextDescription) => {
         const {onDescriptionUpdate, description} = this.props;
-        const nextDescription = evt.target.value;
-
-        this.setState({
-            isEditingDescription: false
-        })
 
         if (nextDescription === description) return;
 
@@ -51,28 +42,20 @@ class BookmarkDescription extends Component {
 
     render() {
         const {description, rating} = this.props;
-        const {isEditingDescription} = this.state;
-
-
-        const displayDescription = (description != null && description.length > 0)
-            ? <MarkdownViewer rawText={description} />
-            : <span>Add a Description!</span>
 
         return <div>
             <div>
-                <label htmlFor="description" className="bm-input__label">Description (double click to edit)</label>
-                <div style={{ display: isEditingDescription ? 'initial' : 'none' }}>
-                    <textarea placeholder="Add a Description!"
-                        ref={ta => this.textArea = ta}
-                        defaultValue={description}
-                        name="description"
-                        id="descriptionArea"
-                        cols="30" rows="10"
+                <div htmlFor="description" className="bm-input__label">Description (double click to edit)</div>
+                <div>
+                    <MarkdownEditor initialText={description}
+                        collapsible={true}
                         onBlur={this.onDescriptionExit}>
-                    </textarea>
+                        <span className="bm-description__no-text"
+                        style={{color: 'gray'}}>
+                            No Description Provided
+                            </span>
+                        </MarkdownEditor>
                 </div>
-                <div style={{ display: !isEditingDescription ? 'initial' : 'none' }}
-                    onDoubleClick={this.onDescriptionEdit}>{displayDescription}</div>
             </div>
             <div className="row">
                 <label htmlFor="rating" className="bm-input__label">Rating</label>
