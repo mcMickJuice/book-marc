@@ -11,6 +11,7 @@
     "dev-build": "webpack --config webpack.dev.config.js",
     "heroku-postbuild": "npm run prod-build",
     "start-prod": "node prod-app",
+    "analyze-bundle": "set NODE_ENV=production&&webpack --config webpack.analyze.config.js",
     "style-app": "node style-app"
   },
   "keywords": [],
@@ -30,6 +31,7 @@
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0",
     "tape-watch": "^2.2.4",
+    "webpack-bundle-analyzer": "^2.3.0",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.16.1"
   },
@@ -62,6 +64,7 @@
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
+    "showdown": "^1.6.4",
     "style-loader": "^0.13.1",
     "superagent": "^2.2.0",
     "superagent-promise-plugin": "^3.2.0",

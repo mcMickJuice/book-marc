@@ -1,8 +1,10 @@
-import React, {PropTypes as T, Component} from 'react'
+import React, { PropTypes as T, Component } from 'react'
 import RatingSelector from './RatingSelector'
+import MarkdownViewer from '../../elements/MarkdownViewer'
+import MarkdownEditor from '../../elements/MarkdownEditor'
 
 class BookmarkDescription extends Component {
-    
+
     constructor() {
         super();
 
@@ -10,13 +12,13 @@ class BookmarkDescription extends Component {
             isEditingDescription: false
         }
     }
-    
+
     static propTypes = {
         description: T.string,
         rating: T.number,
         onDescriptionUpdate: T.func.isRequired,
         onRatingUpdate: T.func.isRequired
-        }
+    }
 
     onDescriptionEdit = () => {
         this.setState({
@@ -24,15 +26,10 @@ class BookmarkDescription extends Component {
         })
     }
 
-    onDescriptionExit = (evt) => {
+    onDescriptionExit = (nextDescription) => {
         const {onDescriptionUpdate, description} = this.props;
-        const nextDescription = evt.target.value;
 
-        this.setState({
-            isEditingDescription: false
-        })
-
-        if(nextDescription === description) return;
+        if (nextDescription === description) return;
 
         onDescriptionUpdate(nextDescription);
     }
@@ -45,33 +42,26 @@ class BookmarkDescription extends Component {
 
     render() {
         const {description, rating} = this.props;
-        const {isEditingDescription} = this.state;
-
-
-        const displayDescription = (description != null && description.length > 0)
-            ? description
-            : <span>Add a Description!</span>
 
         return <div>
             <div>
-                <label htmlFor="description" className="bm-input__label">Description</label>
-                <div style={{display: isEditingDescription ? 'initial' : 'none'}}>
-                    <textarea placeholder="Add a Description!"
-                        defaultValue={description} 
-                        name="description" 
-                        id="descriptionArea" 
-                        cols="30" rows="10" 
+                <div htmlFor="description" className="bm-input__label">Description (double click to edit)</div>
+                <div>
+                    <MarkdownEditor initialText={description}
+                        collapsible={true}
                         onBlur={this.onDescriptionExit}>
-                    </textarea>
+                        <span className="bm-description__no-text"
+                        style={{color: 'gray'}}>
+                            No Description Provided
+                            </span>
+                        </MarkdownEditor>
                 </div>
-                <div style={{display: !isEditingDescription ? 'initial' : 'none'}} 
-                onDoubleClick={this.onDescriptionEdit}>{displayDescription}</div>
             </div>
             <div className="row">
-                    <label htmlFor="rating" className="bm-input__label">Rating</label>
-                    <RatingSelector initialRating={rating} onRatingSelect={this.onRatingSelect}/>
-                </div>
-            
+                <label htmlFor="rating" className="bm-input__label">Rating</label>
+                <RatingSelector initialRating={rating} onRatingSelect={this.onRatingSelect} />
+            </div>
+
         </div>
     }
 }

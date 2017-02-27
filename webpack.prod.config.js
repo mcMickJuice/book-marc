@@ -2,7 +2,7 @@ var baseConfig = require('./webpack.base.config')
 var webpack = require('webpack')
 var path = require('path')
 
-var entry = [
+var appEntry = [
     path.resolve(__dirname, './src/index.jsx')
 ]
 
@@ -13,8 +13,7 @@ var plugins = [
             }
     })
 ]
+baseConfig.entry.app = appEntry
+baseConfig.plugins = [...plugins, ...baseConfig.plugins]
 
-module.exports = Object.assign({}, baseConfig, {
-    entry: [...entry, ...(baseConfig.entry || [])],
-    plugins: [...plugins, ...baseConfig.plugins]
-})
+module.exports = baseConfig;
