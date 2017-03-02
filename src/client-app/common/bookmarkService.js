@@ -5,8 +5,9 @@ import { createUrl, responseHandler } from './requestHelpers'
 const {get, post, put, deleteReq} = auth;
 
 export const getRecentBookmarks = () => {
-    const sevenDaysAgo = getDateDiffByDays(Date.now(), -7);
-    const url = createUrl(`bookmark/search?createdDate=${sevenDaysAgo}`)
+    //was 7 days, now 200..just show a bunch of unread bookmarks
+    const twoHundredDaysAgo = getDateDiffByDays(Date.now(), -200);
+    const url = createUrl(`bookmark/search?createdDate=${twoHundredDaysAgo}`)
     return get(url)
         .then(responseHandler)
 }
