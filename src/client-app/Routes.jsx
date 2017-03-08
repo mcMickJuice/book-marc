@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Router, Route, IndexRoute} from 'react-router'
 import Main from './components/Main'
-import Home from './components/Home'
+import Home from './components/home/Home'
 import AreaHome from './components/area/AreaHome'
 import AddArea from './components/area/AddArea'
 import AreaView from './components/area/AreaView'

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes as T} from 'react';
-
+import BookmarkActivityChart from './BookmarkActivityChart'
 
 class Home extends Component {
     constructor() {
@@ -8,8 +8,8 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                Home Component
+            <div style={{width: '90%', height: '300px', margin: 'auto'}}>
+                <BookmarkActivityChart></BookmarkActivityChart>
             </div>
         );
     }
