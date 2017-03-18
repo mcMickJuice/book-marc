@@ -1,14 +1,6 @@
 import React, { PropTypes as T } from 'react'
 import { Area, AreaChart, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
-const data = [
-    { week: 'Feb 1', added: 10, read: 4 },
-    { week: 'Feb 8', added: 23, read: 23 },
-    { week: 'Feb 15', added: 31, read: 13 },
-    { week: 'Feb 22', added: 14, read: 21 },
-    { week: 'March 1', added: 27, read: 4 }
-]
-
 const NoZeroTick = ({ x, y, stroke, payload }) => {
 
     if (payload.value === 0) return null;
@@ -26,7 +18,6 @@ const calcY = (y, chartY) => {
 
 const calcX = (x, chartX) => {
     const edgeMin = 5;
-    console.log(x, chartX)
     if(x < edgeMin){
         return edgeMin
     } else if (chartX - x < edgeMin){
@@ -38,14 +29,13 @@ const calcX = (x, chartX) => {
 
 const CustomLabel = ({valueKey, x, y, height, width,...props}) => {
     const value = props.payload[valueKey]
-    console.log(props)
 
     const yPos = calcY(y, height)
 
-    return <text x={x} y={yPos} textAnchor="middle">{value}</text>
+    return <text x={x} y={yPos} textAnchor="middle" fill="#666">{value}</text>
 }
 
-const BookmarkActivityChart = () => {
+const BookmarkActivityChart = ({data}) => {
     return (<ResponsiveContainer>
         <AreaChart
             data={data}>
@@ -59,6 +49,12 @@ const BookmarkActivityChart = () => {
     </ResponsiveContainer>)
 }
 
-BookmarkActivityChart.propTypes = {}
+BookmarkActivityChart.propTypes = {
+    data: T.arrayOf(T.shape({
+        week: T.string.isRequired,
+        added: T.number.isRequired,
+        read: T.number.isRequired
+    })).isRequired
+}
 
 export default BookmarkActivityChart
