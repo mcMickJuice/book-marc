@@ -37,10 +37,14 @@ class Home extends Component {
                 ? <div>Loading</div>
                 :
                 <div>
-                    <div style={{ width: '90%', height: '300px', margin: 'auto' }}>
-                        <BookmarkActivityChart data={bookmarkData} />
+                    <div style={{ width: '90%', height: '300px', margin: '20px auto 10px auto' }}>
+                        <h3>Bookmark Activity (Last 45 days)</h3>
+                        <BookmarkActivityChart
+                            hideLabels
+                            data={bookmarkData} />
                     </div>
-                    <div style={{ width: '60%', height: '400px', margin: 'auto' }}>
+                    <div style={{ width: '90%', height: '400px', margin: '20px auto 10px auto' }}>
+                        <h3>Top 5 Tags</h3>
                         <TagOverviewChart data={tagData} />
                     </div>
                 </div>

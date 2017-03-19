@@ -7,7 +7,7 @@ const calcY = (y, chartY) => {
     return Math.min(y + (chartY * .1), chartY - 10)
 }
 
-export const CustomLabel = ({valueKey, x, y, height, payload,}) => {
+export const CustomLabel = ({ valueKey, x, y, height, payload}) => {
     const value = payload[valueKey]
 
     const yPos = calcY(y, height)
@@ -23,7 +23,7 @@ CustomLabel.propTypes = {
     payload: T.object
 }
 
-const BookmarkActivityChart = ({ data }) => {
+const BookmarkActivityChart = ({ data, hideLabels }) => {
     return (<ResponsiveContainer>
         <AreaChart
             data={data}>
@@ -38,8 +38,8 @@ const BookmarkActivityChart = ({ data }) => {
                     </g>
                 }} />
             <Tooltip />
-            <Area type="linear" dataKey="added" stackId="1" stroke="#8884d8" fill="#8884d8" label={<CustomLabel valueKey="added" />} />
-            <Area type="linear" dataKey="read" stackId="1" stroke="#ffc658" fill="#ffc658" label={<CustomLabel valueKey="read" />} />
+            <Area type="linear" dataKey="added" stackId="1" stroke="#8884d8" fill="#8884d8" label={!hideLabels && <CustomLabel valueKey="added" />} />
+            <Area type="linear" dataKey="read" stackId="1" stroke="#ffc658" fill="#ffc658" label={!hideLabels && <CustomLabel valueKey="read" />} />
             <Area />
         </AreaChart>
     </ResponsiveContainer>)
@@ -50,7 +50,8 @@ BookmarkActivityChart.propTypes = {
         week: T.string.isRequired,
         added: T.number.isRequired,
         read: T.number.isRequired
-    })).isRequired
+    })).isRequired,
+    hideLabels: T.bool
 }
 
 export default BookmarkActivityChart

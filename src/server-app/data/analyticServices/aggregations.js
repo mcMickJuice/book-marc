@@ -55,4 +55,6 @@ module.exports.joinCountWithTagDescription = (tagsWithCount, tagDetails) => {
             value: t.count
         }
     })
+    .sort((first, second) => second.value - first.value)
+    .slice(0,5)
 }
