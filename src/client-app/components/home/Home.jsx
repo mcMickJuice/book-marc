@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as T } from 'react';
 import BookmarkActivityChart from './BookmarkActivityChart'
 import TagOverviewChart from './TagOverviewChart'
+import { getDashboardData } from '../../common/dashboardService'
 
 
 class Home extends Component {
@@ -15,26 +16,21 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        setTimeout(() => {
-            this.setState(() => {
-                return {
-                    isLoading: false,
-                    tagData: [
-                        { name: 'javascript', value: 20 },
-                        { name: 'react', value: 10 },
-                        { name: 'c#', value: 3 },
-                        { name: 'videos', value: 1 }
-                    ],
-                    bookmarkData: [
-                        { week: 'Feb 1', added: 10, read: 4 },
-                        { week: 'Feb 8', added: 23, read: 23 },
-                        { week: 'Feb 15', added: 31, read: 13 },
-                        { week: 'Feb 22', added: 14, read: 21 },
-                        { week: 'March 1', added: 27, read: 4 }
-                    ]
-                }
+        getDashboardData()
+            .then(data => {
+                this.setState(() => {
+                    return {
+                        isLoading: false,
+                        tagData: [
+                            { name: 'javascript', value: 20 },
+                            { name: 'react', value: 10 },
+                            { name: 'c#', value: 3 },
+                            { name: 'videos', value: 1 }
+                        ],
+                        bookmarkData: data.bookmarkActivity
+                    }
+                })
             })
-        }, 2000)
     }
 
 
