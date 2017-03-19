@@ -3,8 +3,6 @@ const {toViewModel} = require('../mongoHelper')
 
 const TAG_COLLECTION = 'tags';
 
-
-//tag search occurs on client side...
 module.exports.createTag = tag => {
     return connect()
         .then(db => {

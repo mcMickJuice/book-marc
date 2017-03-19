@@ -18,4 +18,6 @@ module.exports.fromViewModel = function fromViewModel(object) {
     return newObject;
 }
 
+module.exports.toObjectId = id => new ObjectId(id);
+
 module.exports.ObjectId = ObjectId
