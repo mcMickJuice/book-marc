@@ -1,4 +1,4 @@
-const dashboardDataService = require('../data/analyticServices/dashboardDataService')
+const {getBookmarkActivity, getTagOverview} = require('../data/analyticServices/dashboardDataService')
 
 const getDashboardData = (req, res) => {
     const { sinceDate } = req.query;
@@ -11,15 +11,18 @@ const getDashboardData = (req, res) => {
         return
     }
 
-    const bookmarkActivityTask = dashboardDataService
-        .getBookmarkActivity(dateVal);
+    const bookmarkActivityTask = getBookmarkActivity(dateVal);
 
-    Promise.all([bookmarkActivityTask])
+    const tagOverview = getTagOverview();
+
+    Promise.all([bookmarkActivityTask, tagOverview])
         .then(results => {
             const bookmarkActivity = results[0];
+            const tagsOverview = results[1];
 
             res.send({
-                bookmarkActivity
+                bookmarkActivity,
+                tagsOverview
             })
         })
 }

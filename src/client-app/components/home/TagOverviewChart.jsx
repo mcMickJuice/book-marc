@@ -6,7 +6,7 @@ const colorFunc = pct => {
     const diff = Math.abs(pct - 1);
     const hue = diff * 120;
 
-    return `hsl(${hue}, 100%, 50%)`
+    return `hsl(${hue}, 80%, 50%)`
 }
 
 // or ordinal color scale

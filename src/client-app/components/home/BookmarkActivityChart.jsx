@@ -16,11 +16,11 @@ export const CustomLabel = ({valueKey, x, y, height, payload,}) => {
 }
 
 CustomLabel.propTypes = {
-    valueKey: T.number.isRequired,
-    x: T.number.isRequired,
-    y: T.number.isRequired,
-    height: T.number.isRequired,
-    payload: T.object.isRequired
+    valueKey: T.string,
+    x: T.number,
+    y: T.number,
+    height: T.number,
+    payload: T.object
 }
 
 const BookmarkActivityChart = ({ data }) => {

@@ -14,6 +14,10 @@ const groupBy = (coll, key) => {
     }, {})
 }
 
+const find = (coll, predicate) => {
+    return coll.filter(predicate)[0];
+}
+
 module.exports.aggregateBookmarkActivity = (bookmarks, dateInMs) => {
     const readBms = bookmarks
         .filter(b => b.isRead)
@@ -40,4 +44,15 @@ module.exports.aggregateBookmarkActivity = (bookmarks, dateInMs) => {
     })
 
     return results;
+}
+
+module.exports.joinCountWithTagDescription = (tagsWithCount, tagDetails) => {
+    return tagsWithCount.map(t => {
+        const tagDetail = find(tagDetails, tag => tag._id == t._id);
+
+        return {
+            name: tagDetail.name,
+            value: t.count
+        }
+    })
 }

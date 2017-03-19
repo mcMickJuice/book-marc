@@ -21,12 +21,7 @@ class Home extends Component {
                 this.setState(() => {
                     return {
                         isLoading: false,
-                        tagData: [
-                            { name: 'javascript', value: 20 },
-                            { name: 'react', value: 10 },
-                            { name: 'c#', value: 3 },
-                            { name: 'videos', value: 1 }
-                        ],
+                        tagData: data.tagsOverview,
                         bookmarkData: data.bookmarkActivity
                     }
                 })
