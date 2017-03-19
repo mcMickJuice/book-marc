@@ -1,7 +1,7 @@
 const moment = require('moment')
 
 
-const getWeek = dateInMs => moment(dateInMs).startOf('week').format('M/D/YY')
+const getWeek = (dateInMs, format) => moment(dateInMs).startOf('week').format(format || 'M/D/YY')
 const groupBy = (coll, key) => {
     return coll.reduce((acc, next) => {
         if (acc[next[key]] == null) {
@@ -19,16 +19,17 @@ const find = (coll, predicate) => {
 }
 
 module.exports.aggregateBookmarkActivity = (bookmarks, dateInMs) => {
+    const format = 'M/D';
     const readBms = bookmarks
         .filter(b => b.isRead)
         .map(b => ({
-            week: getWeek(b.readDate),
+            week: getWeek(b.readDate, format),
             isRead: true
         }));
     const createdBms = bookmarks
         .filter(b => b.createdDate > dateInMs)
         .map(b => ({
-            week: getWeek(b.createdDate),
+            week: getWeek(b.createdDate, format),
             isAdded: true
         }))
 

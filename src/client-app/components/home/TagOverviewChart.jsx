@@ -1,16 +1,9 @@
-import React, { Component, PropTypes as T } from 'react';
+import React, { PropTypes as T } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts'
 
-//either use color scale
-const colorFunc = pct => {
-    const diff = Math.abs(pct - 1);
-    const hue = diff * 120;
-
-    return `hsl(${hue}, 80%, 50%)`
-}
 
 // or ordinal color scale
-const COLORS = []
+const COLORS = ['#1E3888', '#47A8BD', '#F5E663', '#FFAD69', '#9C3848']
 
 const TagOverviewChart = ({data}) => {
         return (
@@ -22,7 +15,7 @@ const TagOverviewChart = ({data}) => {
                             const total = all.map(d => d.value).reduce((acc, next) => acc + next);
                             const pct = entry.value / total
                            
-                            return <Cell key={entry.name} fill={colorFunc(pct)} />
+                            return <Cell key={entry.name} fill={COLORS[index % 5]} />
                         })}
                     </Pie>
                 </PieChart>

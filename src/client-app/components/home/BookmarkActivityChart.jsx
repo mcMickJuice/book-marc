@@ -38,8 +38,8 @@ const BookmarkActivityChart = ({ data, hideLabels }) => {
                     </g>
                 }} />
             <Tooltip />
-            <Area type="linear" dataKey="added" stackId="1" stroke="#8884d8" fill="#8884d8" label={!hideLabels && <CustomLabel valueKey="added" />} />
-            <Area type="linear" dataKey="read" stackId="1" stroke="#ffc658" fill="#ffc658" label={!hideLabels && <CustomLabel valueKey="read" />} />
+            <Area type="linear" dataKey="added" stackId="1" stroke="#47A8BD" fill="#47A8BD" label={!hideLabels && <CustomLabel valueKey="added" />} />
+            <Area type="linear" dataKey="read" stackId="1" stroke="#F5E663" fill="#F5E663" label={!hideLabels && <CustomLabel valueKey="read" />} />
             <Area />
         </AreaChart>
     </ResponsiveContainer>)
