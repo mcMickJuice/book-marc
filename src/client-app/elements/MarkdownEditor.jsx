@@ -2,7 +2,7 @@ import React, { Component, PropTypes as T } from 'react'
 import MarkdownViewer from './MarkdownViewer'
 import { noop } from '../common/utility'
 import * as css from '../styles/markdown-editor'
-import throttle from 'lodash.throttle'
+import debounce from 'lodash.debounce'
 
 class MarkdownEditor extends Component {
     static propTypes = {
@@ -26,7 +26,8 @@ class MarkdownEditor extends Component {
 
         this.onEditorBlur = this.onEditorBlur.bind(this);
         this.onEditorChange = this.onEditorChange.bind(this);
-        this.onEditorChangeImpl = throttle(this.onEditorChangeImpl.bind(this), 500);
+        //fire change after .5s of inactivity
+        this.onEditorChangeImpl = debounce(this.onEditorChangeImpl.bind(this), 250);
         this.expandEditor = this.expandEditor.bind(this);
 
         this.state = {
