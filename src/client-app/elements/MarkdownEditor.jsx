@@ -2,6 +2,7 @@ import React, { Component, PropTypes as T } from 'react'
 import MarkdownViewer from './MarkdownViewer'
 import { noop } from '../common/utility'
 import * as css from '../styles/markdown-editor'
+import throttle from 'lodash.throttle'
 
 class MarkdownEditor extends Component {
     static propTypes = {
@@ -25,6 +26,7 @@ class MarkdownEditor extends Component {
 
         this.onEditorBlur = this.onEditorBlur.bind(this);
         this.onEditorChange = this.onEditorChange.bind(this);
+        this.onEditorChangeImpl = throttle(this.onEditorChangeImpl.bind(this), 500);
         this.expandEditor = this.expandEditor.bind(this);
 
         this.state = {
@@ -48,6 +50,11 @@ class MarkdownEditor extends Component {
 
     onEditorChange(evt) {
         const {value} = evt.target;
+
+        this.onEditorChangeImpl(value);
+    }
+
+    onEditorChangeImpl(value) {
         const {onChange} = this.props;
 
         onChange(value);
@@ -75,7 +82,6 @@ class MarkdownEditor extends Component {
             {collapsed ? false : <div className="bm-markdown-editor__input">
                 <textarea placeholder="Add a Description!"
                     ref={ta => this.textArea = ta}
-                    value={text}
                     name="description"
                     id="descriptionArea"
                     cols="30" rows="10"

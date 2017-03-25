@@ -57,15 +57,6 @@ class AreaNoteForm extends Component {
                     <input type="text" placeholder="Add a Title" onBlur={this.onTitleBlur} />
                 </div>
                 <div className="bm-input__row">
-                    {/*<div>
-                        <textarea name="blurb"
-                            id="blurb"
-                            placeholder="Add a Blurb!"
-                            cols="30"
-                            rows="10"
-                            onBlur={this.onBlurbBlur}
-                        ></textarea>
-                    </div>*/}
                     <MarkdownEditor onBlur={this.onBlurbBlur}/>
                 </div>
                 <div className="bm-button" onClick={this.onAddNote}>Add Note</div>
