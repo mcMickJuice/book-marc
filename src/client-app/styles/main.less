@@ -1,15 +1,24 @@
+@headerHeight: 50px;
+
 .bm-header {
-    border-bottom: 1px solid black;
+    height: @headerHeight;
     margin-bottom: 10px;
+    padding: 0 10px;
 
     display: flex;
     justify-content: space-between;
+
+    &  a {
+        display: inline-block;
+        padding: 0 10px;
+        line-height: @headerHeight;
+    }
     &__title {
         
     }
 
-    &&__links {
-
+    &__links {
+        
     }
 }
 

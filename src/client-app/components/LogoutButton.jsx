@@ -5,9 +5,9 @@ import {isUserLoggedIn} from '../redux/user/selectors'
 
 const LogoutButton = ({logout, isVisible}) => {
     var toRender = isVisible
-        ? <div className="bm-link" onClick={logout}>
+        ? <a className="bm-link" href="" onClick={logout}>
             Logout
-        </div>
+        </a>
         : <span></span>
 
     return toRender
@@ -26,7 +26,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        logout: () => {
+        logout: evt => {
+            evt.preventDefault();
             dispatch(logOut());
         }
     }

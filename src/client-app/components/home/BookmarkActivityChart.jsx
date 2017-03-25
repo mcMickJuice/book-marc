@@ -7,7 +7,7 @@ const calcY = (y, chartY) => {
     return Math.min(y + (chartY * .1), chartY - 10)
 }
 
-export const CustomLabel = ({ valueKey, x, y, height, payload}) => {
+export const CustomLabel = ({ valueKey, x, y, height, payload }) => {
     const value = payload[valueKey]
 
     const yPos = calcY(y, height)
@@ -36,7 +36,8 @@ const BookmarkActivityChart = ({ data, hideLabels }) => {
                     return <g>
                         <text x={x - 25} y={y + 5} fill="#666" >{payload.value}</text>
                     </g>
-                }} />
+                }}
+            />
             <Tooltip />
             <Area type="linear" dataKey="added" stackId="1" stroke="#47A8BD" fill="#47A8BD" label={!hideLabels && <CustomLabel valueKey="added" />} />
             <Area type="linear" dataKey="read" stackId="1" stroke="#F5E663" fill="#F5E663" label={!hideLabels && <CustomLabel valueKey="read" />} />
