@@ -56,7 +56,6 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "lodash.debounce": "^4.0.8",
-    "lodash.throttle": "^4.1.1",
     "moment": "^2.18.0",
     "mongodb": "^2.2.11",
     "react": "^15.3.1",
