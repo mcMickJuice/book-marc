@@ -83,6 +83,7 @@ class MarkdownEditor extends Component {
             {collapsed ? false : <div className="bm-markdown-editor__input">
                 <textarea placeholder="Add a Description!"
                     ref={ta => this.textArea = ta}
+                    defaultValue={text}
                     name="description"
                     id="descriptionArea"
                     cols="30" rows="10"
