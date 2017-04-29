@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "set LOCAL_PORT=3000&&set API_URL=/api&&node dev-server",
-    "test": "babel-tape-runner specs/**/*.spec.js",
-    "test-watch": "tape-watch -r babel-register specs/**/*.spec.js | tap-spec",
+    "test": "jest",
+    "test-watch": "jest --watch",
     "prod-build": "set NODE_ENV=production&&set API_URL=/api&&webpack --config webpack.prod.config.js",
     "dev-build": "webpack --config webpack.dev.config.js",
     "heroku-postbuild": "npm run prod-build",
@@ -14,8 +14,7 @@
     "analyze-bundle": "set NODE_ENV=production&&webpack --config webpack.analyze.config.js",
     "style-app": "node style-app",
     "run-docker": "docker run -p 127.0.0.1:27017:27017 --name bookmarc-mongo -d mongo",
-    "seed-user": "set USER=mike&&set PW=pw&&node ./seed-scripts/createUser.js",
-    "jest-codemods": "jest-codemods ./specs"
+    "seed-user": "set USER=mike&&set PW=pw&&node ./seed-scripts/createUser.js"
   },
   "keywords": [],
   "author": "",
@@ -32,10 +31,10 @@
     "eslint-plugin-react": "^6.1.2",
     "eslint-plugin-standard": "^2.0.0",
     "jest": "^19.0.2",
-    "jest-codemods": "^0.10.0",
     "nodemon": "^1.10.2",
     "open": "0.0.5",
     "react-hot-loader": "^3.0.0-beta.1",
+    "react-test-renderer": "^15.5.4",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0",
     "tape-watch": "^2.2.4",
