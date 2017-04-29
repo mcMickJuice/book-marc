@@ -1,6 +1,6 @@
 const test = require('tape')
-const reducer = require('../../../src/client-app/redux/tag/reducer').default
-const {TAG_CREATED, ALL_TAGS_LOADED} = require('../../../src/client-app/redux/tag/actions')
+const reducer = require('redux/tag/reducer').default
+const {TAG_CREATED, ALL_TAGS_LOADED} = require('redux/tag/actions')
 
 test('TAG_CREATED adds tag to state', t => {
     t.plan(1);

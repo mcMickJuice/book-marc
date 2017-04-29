@@ -1,10 +1,10 @@
 const test = require('tape')
-const reducer = require('../../../src/client-app/redux/area/reducer').default
+const reducer = require('redux/area/reducer').default
 const {AREA_LOADED,
     AREA_NOTE_ADDED,
     ALL_AREAS_LOADED,
     AREA_TAG_ADDED,
-    AREA_TAG_REMOVED} = require('../../../src/client-app/redux/area/actions')
+    AREA_TAG_REMOVED} = require('redux/area/actions')
 
 test('AREA_LOADED should add area to state', t => {
     t.plan(2)

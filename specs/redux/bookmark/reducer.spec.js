@@ -1,10 +1,10 @@
 var test = require('tape');
-var reducer = require('../../../src/client-app/redux/bookmark/reducer').default
+var reducer = require('redux/bookmark/reducer').default
 var {BOOKMARK_LOADED,
     BOOKMARK_UPDATED,
     RECENT_BOOKMARKS_LOADED,
     TAG_ADDED,
-    TAG_REMOVED} = require('../../../src/client-app/redux/bookmark/actions')
+    TAG_REMOVED} = require('redux/bookmark/actions')
 
 
 test('BOOKMARK_ADDED adds bookmark to state', t => {

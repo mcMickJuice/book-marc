@@ -1,5 +1,5 @@
 const test = require('tape')
-const {getDateString, getDateDiffByDays} = require('../../src/client-app/common/dateService')
+const {getDateString, getDateDiffByDays} = require('common/dateService')
 
 const feb182017InMs = 1487437395222
 
