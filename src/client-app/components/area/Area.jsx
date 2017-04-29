@@ -1,38 +1,73 @@
-import React, { PropTypes as T } from 'react'
+import React, { PropTypes as T, Component } from 'react'
 import AreaNoteForm from './AreaNoteForm'
 import AreaNote from './AreaNote'
-import ToggleView from '../../elements/ToggleView'
 import TagList from '../tag/TagList'
 import TagForm from '../tag/TagForm'
 
-const toggleAddNoteFunc = (isOpen, onClick) => {
-    return <div onClick={onClick}>
-        {isOpen ? 'Close' : 'Add Note'}
-    </div>
+const sortByLatestDate = (first, second) => {
+    return second.createdDate - first.createdDate
 }
 
-const Area = ({area, onAddNote, onTagAdded, onTagRemoved}) => {
-    const notesToRender = area.notes.length
-        ? area.notes.map(n => (<AreaNote key={n.id}
-            title={n.title}
-            className="bm-area__note"
-            blurb={n.blurb}
-            createdDate={n.createdDate} />))
-        : <div>No Notes</div>
+class Area extends Component {
+    constructor() {
+        super();
 
-    return (<div className="bm-area">
-        <h3>{area.name}</h3>
-        <TagForm selectTag={onTagAdded} />
-        <TagList tags={area.tags} onRemoveTag={onTagRemoved}/>
-        
-        <ToggleView toggleButtonFunc={toggleAddNoteFunc}>
-            <AreaNoteForm
-            onAddNote={onAddNote}
-            areaId={area.id}
-        />
-        </ToggleView>
-        {notesToRender}
-    </div>)
+        this.toggleNoteForm = this.toggleNoteForm.bind(this);
+        this.onAddNote = this.onAddNote.bind(this);
+
+        this.state = {
+            isAddingNote: false
+        }
+    }
+
+    toggleNoteForm() {
+        this.setState(state => ({
+            isAddingNote: !state.isAddingNote
+        }))
+    }
+
+    onAddNote(note) {
+        const { onAddNote } = this.props;
+
+        this.setState({
+            isAddingNote: false
+        })
+
+        onAddNote(note);
+    }
+
+    render() {
+
+        const { area, onTagAdded, onTagRemoved } = this.props;
+        const { isAddingNote } = this.state;
+        const notesToRender = area.notes.length
+            ? area.notes
+                .sort(sortByLatestDate)
+                .map(n => (<AreaNote key={n.id}
+                    title={n.title}
+                    className="bm-area__note"
+                    blurb={n.blurb}
+                    createdDate={n.createdDate} />))
+            : <div>No Notes</div>
+
+        return (<div className="bm-area">
+            <h3>{area.name}</h3>
+            <TagForm selectTag={onTagAdded} />
+            <TagList tags={area.tags} onRemoveTag={onTagRemoved} />
+            <div onClick={this.toggleNoteForm}>
+                {isAddingNote ? 'Close' : 'Add Note'}
+            </div>
+            {
+                isAddingNote
+                    ? <AreaNoteForm onAddNote={this.onAddNote}
+                        areaId={area.id} />
+                    : null
+            }
+            {notesToRender}
+        </div>)
+
+    }
+
 }
 
 Area.propTypes = {
