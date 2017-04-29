@@ -1,3 +1,5 @@
+//@flow
+
 import React, {PropTypes} from 'react'
 import {Router, Route, IndexRoute} from 'react-router'
 import Main from './components/Main'
@@ -18,7 +20,7 @@ const NotFound = () => {
     </div>
 }
 
-const authHook = (nextState, replace) => {
+const authHook = (_, replace: () => void): boolean => {
     if(!isAuthenticated()) {
         replace('/login')
         return false;
@@ -28,7 +30,7 @@ const authHook = (nextState, replace) => {
 
 const viewBookmarkWrapped = requireBookmark(ViewBookmark)
 
-const Routes = ({history}) => {
+const Routes = ({history}: {history: any}) => {
     return <Router history={history}>
         <Route path="/login" component={Login} />
         <Route path="/" component={Main} onEnter={authHook}>
