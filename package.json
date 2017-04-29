@@ -14,7 +14,8 @@
     "analyze-bundle": "set NODE_ENV=production&&webpack --config webpack.analyze.config.js",
     "style-app": "node style-app",
     "run-docker": "docker run -p 127.0.0.1:27017:27017 --name bookmarc-mongo -d mongo",
-    "seed-user": "set USER=mike&&set PW=pw&&node ./seed-scripts/createUser.js"
+    "seed-user": "set USER=mike&&set PW=pw&&node ./seed-scripts/createUser.js",
+    "jest-codemods": "jest-codemods ./specs"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +32,7 @@
     "eslint-plugin-react": "^6.1.2",
     "eslint-plugin-standard": "^2.0.0",
     "jest": "^19.0.2",
+    "jest-codemods": "^0.10.0",
     "nodemon": "^1.10.2",
     "open": "0.0.5",
     "react-hot-loader": "^3.0.0-beta.1",
