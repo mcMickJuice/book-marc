@@ -23,7 +23,10 @@ const buildSectionParams = (id, collapsed, callback) => {
 
 export type Props = {};
 
+type State = { collapsed: Array<any> };
+
 class StyleContainer extends Component {
+    state: State;
     collapseSection: Function;
     constructor() {
         super();

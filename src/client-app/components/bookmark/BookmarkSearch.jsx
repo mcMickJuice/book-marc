@@ -11,7 +11,13 @@ export type Props = {
     onSearchReset: Function,
 };
 
+type State = {
+    selectedTag: any,
+    searchTerm: string,
+};
+
 class BookmarkSearch extends Component {
+    state: State;
     performSearch: Function;
     onRemoveTag: Function;
     onTagSelect: Function;

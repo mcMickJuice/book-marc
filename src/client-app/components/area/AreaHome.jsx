@@ -6,11 +6,11 @@ import { getAllAreas } from '../../common/areaService'
 export type Props = {};
 
 type State = {
-    areas: Array<AreaType>,
-    isLoading: boolean
-}
+    areas: Array<any>,
+    isLoading: boolean,
+};
 class Area extends Component {
-    state: State
+    state: State;
 
     constructor() {
         super();

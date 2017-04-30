@@ -9,7 +9,14 @@ export type Props = {
     onCancel?: Function,
 };
 
+type State = {
+    title: string,
+    blurb: string,
+    showNote: boolean,
+};
+
 class AreaNoteForm extends Component {
+    state: State;
     onBlurbBlur: Function;
     onTitleBlur: Function;
     onAddNote: Function;

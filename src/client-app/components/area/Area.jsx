@@ -21,13 +21,13 @@ export type Props = {
     onTagRemoved: Function,
 };
 
-class Area extends Component {
-    onAddNote: Function;
-    toggleNoteForm: Function;
+type State = { isAddingNote: boolean };
 
-    state: {
-        isAddingNote: boolean
-    }
+class Area extends Component {
+    state: State;
+    onAddNote: Function;
+
+    toggleNoteForm: Function;
     constructor() {
         super();
 

@@ -25,7 +25,14 @@ export type Props = {
     Function,
 };
 
+type State = {
+    tagSearch: string,
+    tags: Array<any>,
+    currentIndex: number,
+};
+
 class TagSearch extends Component {
+    state: State;
     onCreateTag: Function;
     onSelectTag: Function;
     onTagSearchChange: Function;

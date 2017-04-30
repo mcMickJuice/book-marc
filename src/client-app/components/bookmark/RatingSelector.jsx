@@ -8,7 +8,13 @@ export type Props = {
     onRatingSelect: Function,
 };
 
+type State = {
+    defaultScore: any,
+    activeScore: any,
+};
+
 class RatingSelector extends Component {
+    state: State;
     constructor(props: Props) {
         super(props);
 

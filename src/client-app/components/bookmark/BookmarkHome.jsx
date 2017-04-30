@@ -8,7 +8,14 @@ import * as css from '../../styles/bookmark-home'
 
 export type Props = {};
 
+type State = {
+    recentBookmarks: Array<any>,
+    bookmarks: Array<any>,
+    isLoading: boolean,
+};
+
 class BookmarkHome extends Component {
+    state: State;
     onSearchReset: Function;
     onSearchResults: Function;
     constructor(){

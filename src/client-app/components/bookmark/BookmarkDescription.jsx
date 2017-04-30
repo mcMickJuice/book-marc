@@ -11,7 +11,10 @@ export type Props = {
     onRatingUpdate: Function,
 };
 
+type State = { isEditingDescription: boolean };
+
 class BookmarkDescription extends Component {
+    state: State;
 
     constructor() {
         super();

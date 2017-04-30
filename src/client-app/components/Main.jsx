@@ -11,7 +11,10 @@ export type Props = {
     dispatch: Function,
 };
 
+type State = { isLoading: boolean };
+
 class Main extends Component {
+    state: State;
     constructor() {
         super();
 

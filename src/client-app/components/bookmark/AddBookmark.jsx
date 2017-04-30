@@ -7,7 +7,14 @@ import TagList from '../tag/TagList'
 
 export type Props = { addBookmark: Function };
 
+type State = {
+    title: string,
+    url: string,
+    tagIds: Array<any>,
+};
+
 class AddBookmark extends Component {
+    state: State;
     constructor() {
         super();
 

@@ -13,7 +13,13 @@ export type Props = {
     children?: number | string | React.Element | Array<any>,
 };
 
+type State = {
+    text: any,
+    collapsed: any,
+};
+
 class MarkdownEditor extends Component {
+    state: State;
     expandEditor: Function;
     onEditorChangeImpl: Function;
     onEditorChange: Function;

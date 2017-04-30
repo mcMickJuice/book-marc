@@ -10,7 +10,10 @@ export type Props = {
     onSelect: Function,
 };
 
+type State = { showList: boolean };
+
 class Dropdown extends Component {
+    state: State;
     selectItem: Function;
     toggleList: Function;
     preventBubble: Function;

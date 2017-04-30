@@ -8,7 +8,15 @@ import { getDashboardData } from '../../common/dashboardService'
 export type Props = {};
 
 
+type State = {
+    tagData: Array<any>,
+    bookmarkData: Array<any>,
+    isLoading: boolean,
+};
+
+
 class Home extends Component {
+    state: State;
     constructor() {
         super()
 

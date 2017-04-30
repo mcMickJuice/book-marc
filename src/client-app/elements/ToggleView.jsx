@@ -15,7 +15,10 @@ export type Props = {
     toggleButtonFunc?: Function,
 };
 
+type State = { isOpen: any };
+
 class ToggleView extends Component {
+    state: State;
     toggleShow: Function;
     static defaultProps = {
         toggleButtonFunc: defaultButtonFunc

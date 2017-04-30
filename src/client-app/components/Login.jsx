@@ -6,7 +6,14 @@ import {connect} from 'react-redux'
 
 export type Props = { onLogin: Function };
 
+type State = {
+    username: string,
+    password: string,
+    error: any,
+};
+
 class Login extends Component {
+    state: State;
     onPasswordBlur: Function;
     onUsernameBlur: Function;
     onLogin: Function;

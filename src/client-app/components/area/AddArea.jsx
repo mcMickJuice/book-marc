@@ -11,7 +11,13 @@ export type Props = {
     addArea: Function,
 };
 
+type State = {
+    name: string,
+    tagIds: Array<any>,
+};
+
 class AddArea extends Component {
+    state: State;
     onTagRemove: Function;
     onTagSelect: Function;
     addArea: Function;
@@ -32,10 +38,6 @@ class AddArea extends Component {
     }
 
     props: Props;
-    state: {
-        name: string,
-        tagIds: Array<number>
-    };
 
     onNameBlur(evt) {
         const name = evt.target.value

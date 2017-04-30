@@ -13,7 +13,10 @@ export type Props = {
     onTagRemoved: Function,
 };
 
+type State = { isLoading: boolean };
+
 class AreaView extends Component {
+    state: State;
     constructor() {
         super();
 
