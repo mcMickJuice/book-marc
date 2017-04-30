@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes as T } from 'react';
+import React from 'react';
 import { range, noop } from '../../common/utility'
 import RatingBlock from './RatingBlock'
 import * as css from '../../styles/rating'

@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes as T } from 'react';
+import React from 'react';
 import TagSearch from './TagSearch'
 import ToggleView from '../../elements/ToggleView'
 import TagCreateButton from './TagCreateButton'

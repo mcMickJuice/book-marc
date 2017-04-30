@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import { createArea } from '../../common/areaService'
 import TagForm from '../tag/TagForm'
 import { connect } from 'react-redux'

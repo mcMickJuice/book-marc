@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import * as css from '../../styles/area-note-form'
 import MarkdownEditor from '../../elements/MarkdownEditor'
 

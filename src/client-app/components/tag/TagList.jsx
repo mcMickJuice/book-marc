@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes as T } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import { mapTag } from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-list'

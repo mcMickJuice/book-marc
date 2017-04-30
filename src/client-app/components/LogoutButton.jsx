@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes as T } from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
 import {logOut} from '../redux/user/actions'
 import {isUserLoggedIn} from '../redux/user/selectors'

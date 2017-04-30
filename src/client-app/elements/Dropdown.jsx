@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 
 export type Props = {
     selected: string,

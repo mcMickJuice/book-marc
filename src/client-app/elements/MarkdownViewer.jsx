@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import showdown from 'showdown'
 import * as codeSyntaxCss from '../styles/markdown-themes/monokai-sublime.css'
 import highlightJs from 'highlight'

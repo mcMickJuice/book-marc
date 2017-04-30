@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import MarkdownViewer from './MarkdownViewer'
 import { noop } from '../common/utility'
 import * as css from '../styles/markdown-editor'

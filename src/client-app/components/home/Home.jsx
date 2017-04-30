@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import BookmarkActivityChart from './BookmarkActivityChart'
 import TagOverviewChart from './TagOverviewChart'
 import { getDashboardData } from '../../common/dashboardService'

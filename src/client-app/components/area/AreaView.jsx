@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import Area from './Area'
 import { connect } from 'react-redux'
 import { getAreaFromState } from '../../redux/area/selectors'

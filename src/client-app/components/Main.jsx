@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes as T, Component } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router'
 import * as css from '../styles/main'
 import LogoutButton from './LogoutButton'

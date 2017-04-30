@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import {getRecentBookmarks} from '../../common/bookmarkService'
 import BookmarkSearch from './BookmarkSearch'
 import BookmarkRow from './BookmarkRow'

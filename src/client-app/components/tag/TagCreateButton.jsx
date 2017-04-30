@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes as T } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import { createTag } from '../../redux/tag/actions'
 import { isValidTag } from '../../redux/tag/selectors'

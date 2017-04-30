@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookmarkService'
 import debounce from 'lodash.debounce'
 import TagSearch from '../tag/TagSearch'

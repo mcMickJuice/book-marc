@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { searchTags } from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-search'

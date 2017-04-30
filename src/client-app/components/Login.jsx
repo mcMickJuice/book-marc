@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import {logIn} from '../redux/user/actions'
 import {login} from '../common/authClient'
 import {connect} from 'react-redux'

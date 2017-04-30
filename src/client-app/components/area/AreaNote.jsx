@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes as T } from 'react';
+import React from 'react';
 import Card from '../../elements/Card'
 import Date from '../../elements/Date'
 import MarkdownViewer from '../../elements/MarkdownViewer'

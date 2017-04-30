@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import Rating from './Rating'
 import debounce from 'lodash.debounce'
 

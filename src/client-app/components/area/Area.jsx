@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes as T, Component } from 'react';
+import React, { Component } from 'react';
 import AreaNoteForm from './AreaNoteForm'
 import AreaNote from './AreaNote'
 import TagList from '../tag/TagList'

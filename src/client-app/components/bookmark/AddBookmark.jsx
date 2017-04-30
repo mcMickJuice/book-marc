@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import { addBookmark } from '../../redux/bookmark/actions'
 import { connect } from 'react-redux'
 import TagForm from '../tag/TagForm'

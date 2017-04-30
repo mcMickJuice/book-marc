@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 
 const defaultButtonFunc = (isOpen, onClick) => {
     return <div onClick={onClick} style={{ cursor: 'pointer' }}>

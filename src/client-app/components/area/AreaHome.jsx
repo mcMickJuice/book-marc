@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
 import {Link} from 'react-router'
 import {getAllAreas} from '../../common/areaService'
 
