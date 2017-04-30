@@ -1,11 +1,17 @@
 /* @flow */
 import React, { Component } from 'react';
-import {Link} from 'react-router'
-import {getAllAreas} from '../../common/areaService'
+import { Link } from 'react-router'
+import { getAllAreas } from '../../common/areaService'
 
 export type Props = {};
 
+type State = {
+    areas: Array<AreaType>,
+    isLoading: boolean
+}
 class Area extends Component {
+    state: State
+
     constructor() {
         super();
 
@@ -28,7 +34,7 @@ class Area extends Component {
     }
 
     render() {
-        const {areas, isLoading} = this.state; 
+        const { areas, isLoading } = this.state;
 
         const areaToRender = areas.map(a => {
             return <div key={a.id}>
@@ -40,7 +46,7 @@ class Area extends Component {
             <h3>Areas (<Link to="/area/add">Add</Link>)</h3>
             <div>
                 {/*oh yay nested ternaries*/}
-                {isLoading 
+                {isLoading
                     ? 'Is Loading'
                     : areas.length
                         ? areaToRender

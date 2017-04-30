@@ -5,16 +5,16 @@ import AreaNote from './AreaNote'
 import TagList from '../tag/TagList'
 import TagForm from '../tag/TagForm'
 
-const sortByLatestDate = (first, second) => {
+const sortByLatestDate = (first: AreaNoteType, second: AreaNoteType) => {
     return second.createdDate - first.createdDate
 }
 
 export type Props = {
-    area?: {
+    area: {
         id: string,
         name: string,
-        notes?: Array<{ blurb: string }>,
-        tags?: Array<string>,
+        notes: Array<AreaNoteType>,
+        tags: Array<string>,
     },
     onAddNote: Function,
     onTagAdded: Function,
@@ -24,6 +24,10 @@ export type Props = {
 class Area extends Component {
     onAddNote: Function;
     toggleNoteForm: Function;
+
+    state: {
+        isAddingNote: boolean
+    }
     constructor() {
         super();
 
@@ -43,7 +47,7 @@ class Area extends Component {
         }))
     }
 
-    onAddNote(note) {
+    onAddNote(note: string) {
         const { onAddNote } = this.props;
 
         this.setState({
