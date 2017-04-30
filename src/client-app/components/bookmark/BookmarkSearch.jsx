@@ -1,16 +1,17 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookmarkService'
 import debounce from 'lodash.debounce'
 import TagSearch from '../tag/TagSearch'
 import Tag from '../tag/Tag'
 import * as css from '../../styles/bookmark-search'
 
-class BookmarkSearch extends Component {
-    static propTypes = {
-        onSearchResults: T.func.isRequired,
-        onSearchReset: T.func.isRequired
-    }
+export type Props = {
+    onSearchResults: Function,
+    onSearchReset: Function,
+};
 
+class BookmarkSearch extends Component {
     constructor() {
         super()
 
@@ -24,6 +25,8 @@ class BookmarkSearch extends Component {
             searchTerm: ''
         }
     }
+
+    props: Props;
 
     onSearchChange(evt) {
         const {value} = evt.target;

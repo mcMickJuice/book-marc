@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import * as css from '../styles/site'
 
 const StyleSection = ({isVisible, toggleClick, children}) => {
@@ -20,6 +21,8 @@ const buildSectionParams = (id, collapsed, callback) => {
     }
 }
 
+export type Props = {};
+
 class StyleContainer extends Component {
     constructor() {
         super();
@@ -30,6 +33,8 @@ class StyleContainer extends Component {
             collapsed: []
         }
     }
+
+    props: Props;
 
     collapseSection(id) {
         const {collapsed} = this.state;

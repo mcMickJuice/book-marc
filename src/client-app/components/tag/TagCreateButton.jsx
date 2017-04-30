@@ -1,19 +1,21 @@
-import React, { PropTypes as T } from 'react'
+/* @flow */
+import React, { PropTypes as T } from 'react';
 import { connect } from 'react-redux'
 import { createTag } from '../../redux/tag/actions'
 import { isValidTag } from '../../redux/tag/selectors'
 
-const TagCreateButton = ({isInvalidTag, createTag}) => {
+export type Props = {
+    isInvalidTag: boolean,
+    createTag: Function,
+};
+
+const TagCreateButton = (props: Props) => {
+    const {isInvalidTag, createTag} = props;
 
     return <div className={`bm-button ${isInvalidTag
         ? 'bm-button--disabled'
         : ''} bm-tag-search__search-row__button`}
         onClick={createTag}>Add Tag</div>
-}
-
-TagCreateButton.propTypes = {
-    isInvalidTag: T.bool.isRequired,
-    createTag: T.func.isRequired
 }
 
 const mapStateToProp = (state, ownProps) => {

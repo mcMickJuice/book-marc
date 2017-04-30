@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux'
 import { searchTags } from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-search'
@@ -17,13 +18,14 @@ const calcIndex = (idx, keyCode, resultCount) => {
     return Math.max(idx - 1, 0);
 }
 
-class TagSearch extends Component {
-    static propTypes = {
-        searchTags: T.func.isRequired,
-        selectTag: T.func.isRequired,
-        TagCreateButton: T.func //factory function
-    }
+export type Props = {
+    searchTags: Function,
+    selectTag: Function,
+    TagCreateButton?: //factory function
+    Function,
+};
 
+class TagSearch extends Component {
     static defaultProps = {
         TagCreateButton: () => false
     }
@@ -43,6 +45,8 @@ class TagSearch extends Component {
             currentIndex: 0
         }
     }
+
+    props: Props;
 
     componentDidMount() {
         this.input.focus();

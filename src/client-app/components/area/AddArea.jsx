@@ -1,16 +1,18 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import { createArea } from '../../common/areaService'
 import TagForm from '../tag/TagForm'
 import { connect } from 'react-redux'
 import { addArea } from '../../redux/area/actions'
 import TagList from '../tag/TagList'
 
-class AddArea extends Component {
-    static propTypes = {
-        history: T.any.isRequired,
-        addArea: T.func.isRequired
-    }
+export type Props = {
+    history: any,
+    addArea: Function,
+};
 
+class AddArea extends Component {
+    
     constructor() {
         super();
 
@@ -24,6 +26,12 @@ class AddArea extends Component {
             tagIds: []
         }
     }
+
+    props: Props;
+    state: {
+        name: string,
+        tagIds: Array<number>
+    };
 
     onNameBlur(evt) {
         const name = evt.target.value

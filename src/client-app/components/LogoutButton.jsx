@@ -1,9 +1,16 @@
-import React, {PropTypes as T} from 'react'
+/* @flow */
+import React, { PropTypes as T } from 'react';
 import {connect} from 'react-redux'
 import {logOut} from '../redux/user/actions'
 import {isUserLoggedIn} from '../redux/user/selectors'
 
-const LogoutButton = ({logout, isVisible}) => {
+export type Props = {
+    logout: Function,
+    isVisible: boolean,
+};
+
+const LogoutButton = (props: Props) => {
+    const {logout, isVisible} = props;
     var toRender = isVisible
         ? <a className="bm-link" href="" onClick={logout}>
             Logout
@@ -11,11 +18,6 @@ const LogoutButton = ({logout, isVisible}) => {
         : <span></span>
 
     return toRender
-}
-
-LogoutButton.propTypes = {
-    logout: T.func.isRequired,
-    isVisible: T.bool.isRequired
 }
 
 const mapStateToProps = state => {

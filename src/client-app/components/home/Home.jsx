@@ -1,7 +1,11 @@
+/* @flow */
 import React, { Component, PropTypes as T } from 'react';
 import BookmarkActivityChart from './BookmarkActivityChart'
 import TagOverviewChart from './TagOverviewChart'
 import { getDashboardData } from '../../common/dashboardService'
+
+
+export type Props = {};
 
 
 class Home extends Component {
@@ -14,6 +18,8 @@ class Home extends Component {
             isLoading: true
         }
     }
+
+    props: Props;
 
     componentDidMount() {
         getDashboardData()

@@ -1,14 +1,15 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import * as css from '../../styles/area-note-form'
 import MarkdownEditor from '../../elements/MarkdownEditor'
 
-class AreaNoteForm extends Component {
-    static propTypes = {
-        onAddNote: T.func.isRequired,
-        areaId: T.string.isRequired,
-        onCancel: T.func
-    }
+export type Props = {
+    onAddNote: Function,
+    areaId: string,
+    onCancel?: Function,
+};
 
+class AreaNoteForm extends Component {
     constructor() {
         super();
 
@@ -22,6 +23,8 @@ class AreaNoteForm extends Component {
             showNote: false
         }
     }
+
+    props: Props;
 
     onAddNote() {
         const {onAddNote, areaId} = this.props;

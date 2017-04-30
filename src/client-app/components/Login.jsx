@@ -1,7 +1,10 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import {logIn} from '../redux/user/actions'
 import {login} from '../common/authClient'
 import {connect} from 'react-redux'
+
+export type Props = { onLogin: Function };
 
 class Login extends Component {
 
@@ -19,9 +22,7 @@ class Login extends Component {
         }
     }
 
-    static propTypes = {
-        onLogin: T.func.isRequired
-    }
+    props: Props;
 
     onLogin() {
         const {username, password} = this.state;

@@ -1,18 +1,12 @@
-import React, {Component, PropTypes} from 'react';
+/* @flow */
+import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux'
 import {getBookmark} from '../redux/bookmark/actions'
 import {getBookmarkById} from '../redux/bookmark/selectors'
 
 const requireBookmark = Bookmark => {
     class RequireBookmark extends Component {
-        static propTypes = {
-            bookmark: PropTypes.shape({
-                id: PropTypes.any.isRequired,
-                title: PropTypes.string.isRequired,
-                url: PropTypes.string.isRequired
-            }),
-            maybeFetchBookmark: PropTypes.func.isRequired
-        }
+        props: Props;
 
         componentDidMount() {
             this.props.maybeFetchBookmark()

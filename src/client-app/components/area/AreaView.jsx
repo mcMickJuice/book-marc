@@ -1,18 +1,19 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import Area from './Area'
 import { connect } from 'react-redux'
 import { getAreaFromState } from '../../redux/area/selectors'
 import { getAreaById, addAreaNote, addTagToArea, removeTagFromArea } from '../../redux/area/actions'
 
-class AreaView extends Component {
-    static propTypes = {
-        area: T.object,
-        getAreaById: T.func.isRequired,
-        onAddNote: T.func.isRequired,
-        onTagAdded: T.func.isRequired,
-        onTagRemoved: T.func.isRequired
-    }
+export type Props = {
+    area?: Object,
+    getAreaById: Function,
+    onAddNote: Function,
+    onTagAdded: Function,
+    onTagRemoved: Function,
+};
 
+class AreaView extends Component {
     constructor() {
         super();
 
@@ -20,6 +21,8 @@ class AreaView extends Component {
             isLoading: true
         }
     }
+
+    props: Props;
 
     componentDidMount() {
         const {area} = this.props;

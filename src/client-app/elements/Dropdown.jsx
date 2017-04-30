@@ -1,4 +1,14 @@
+/* @flow */
 import React, { Component, PropTypes as T } from 'react';
+
+export type Props = {
+    selected: string,
+    options: Array<{
+        value: any,
+        display: string,
+    }>,
+    onSelect: Function,
+};
 
 class Dropdown extends Component {
     constructor() {
@@ -14,14 +24,7 @@ class Dropdown extends Component {
         }
     }
 
-    static propTypes = {
-        selected: T.string.isRequired,
-        options: T.arrayOf(T.shape({
-            value: T.any.isRequired,
-            display: T.string.isRequired
-        })).isRequired,
-        onSelect: T.func.isRequired
-    }
+    props: Props;
 
     componentDidMount() {
         document.addEventListener('click', this.bodyWasClicked);

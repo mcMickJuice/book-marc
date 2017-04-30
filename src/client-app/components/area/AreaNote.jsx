@@ -1,9 +1,18 @@
-import React, { PropTypes as T } from 'react'
+/* @flow */
+import React, { PropTypes as T } from 'react';
 import Card from '../../elements/Card'
 import Date from '../../elements/Date'
 import MarkdownViewer from '../../elements/MarkdownViewer'
 
-const AreaNote = ({title, blurb, createdDate, className}) => {
+export type Props = {
+    blurb: string,
+    createdDate: number,
+    title: string,
+    className?: string,
+};
+
+const AreaNote = (props: Props) => {
+    const {title, blurb, createdDate, className} = props;
     return (<Card className={className}>
         <h3>{title}</h3>
         <div>
@@ -12,14 +21,7 @@ const AreaNote = ({title, blurb, createdDate, className}) => {
         <div>
             <Date date={createdDate} />
         </div>
-    </Card>)
-}
-
-AreaNote.propTypes = {
-    blurb: T.string.isRequired,
-    createdDate: T.number.isRequired,
-    title: T.string.isRequired,
-    className: T.string
+    </Card>
 }
 
 export default AreaNote

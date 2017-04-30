@@ -1,18 +1,19 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import MarkdownViewer from './MarkdownViewer'
 import { noop } from '../common/utility'
 import * as css from '../styles/markdown-editor'
 import debounce from 'lodash.debounce'
 
-class MarkdownEditor extends Component {
-    static propTypes = {
-        onBlur: T.func,
-        onChange: T.func,
-        initialText: T.string,
-        collapsible: T.bool,
-        children: T.node
-    }
+export type Props = {
+    onBlur?: Function,
+    onChange?: Function,
+    initialText?: string,
+    collapsible?: boolean,
+    children?: number | string | React.Element | Array<any>,
+};
 
+class MarkdownEditor extends Component {
     static defaultProps = {
         onBlur: noop,
         onChange: noop,
@@ -21,7 +22,7 @@ class MarkdownEditor extends Component {
         children: 'No Text Provided'
     }
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
         this.onEditorBlur = this.onEditorBlur.bind(this);
@@ -35,6 +36,8 @@ class MarkdownEditor extends Component {
             collapsed: props.collapsible
         }
     }
+
+    props: Props;
 
     onEditorBlur(evt) {
         const {value} = evt.target;

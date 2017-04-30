@@ -1,4 +1,5 @@
-import React, {Component, PropTypes as T} from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 
 const defaultButtonFunc = (isOpen, onClick) => {
     return <div onClick={onClick} style={{cursor: 'pointer'}}>
@@ -6,20 +7,21 @@ const defaultButtonFunc = (isOpen, onClick) => {
     </div>
 }
 
-class ToggleView extends Component {
-    static propTypes = {
-        openByDefault: T.bool,
-        destroyChildOnClose: T.bool,
-        onClose: T.func, //in case we need to notify parent when closing
-        children: T.node.isRequired,
-        toggleButtonFunc: T.func
-    }  
+export type Props = {
+    openByDefault?: boolean,
+    destroyChildOnClose?: boolean,
+    onClose?: //in case we need to notify parent when closing
+    Function,
+    children: number | string | React.Element | Array<any>,
+    toggleButtonFunc?: Function,
+};
 
+class ToggleView extends Component {
     static defaultProps = {
         toggleButtonFunc: defaultButtonFunc
     }
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
         this.toggleShow = this.toggleShow.bind(this);
@@ -29,6 +31,8 @@ class ToggleView extends Component {
             isOpen: !!openByDefault
         }
     }
+
+    props: Props;
 
     toggleShow() {
         const {isOpen} = this.state;

@@ -1,4 +1,5 @@
-import React, { PropTypes as T } from 'react'
+/* @flow */
+import React, { PropTypes as T } from 'react';
 import TagSearch from './TagSearch'
 import ToggleView from '../../elements/ToggleView'
 import TagCreateButton from './TagCreateButton'
@@ -11,13 +12,13 @@ const toggleTagButtonFunc = (isOpen, onClick) => {
     </div>
 }
 
-const TagForm = (props) => {
+export type Props = {};
+
+const TagForm = (props: Props) => {
     return <ToggleView toggleButtonFunc={toggleTagButtonFunc}
         destroyChildOnClose={true}>
         <TagSearch {...props} TagCreateButton={TagCreateButton}></TagSearch>
     </ToggleView>
 }
-
-TagForm.propTypes = {}
 
 export default TagForm

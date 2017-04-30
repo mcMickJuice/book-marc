@@ -1,6 +1,9 @@
-import React, {Component, PropTypes as T} from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import {Link} from 'react-router'
 import {getAllAreas} from '../../common/areaService'
+
+export type Props = {};
 
 class Area extends Component {
     constructor() {
@@ -11,6 +14,8 @@ class Area extends Component {
             isLoading: true
         }
     }
+
+    props: Props;
 
     componentDidMount() {
         getAllAreas()

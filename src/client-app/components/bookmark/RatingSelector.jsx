@@ -1,14 +1,15 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import Rating from './Rating'
 import debounce from 'lodash.debounce'
 
-class RatingSelector extends Component {
-    static propTypes = {
-        initialRating: T.number,
-        onRatingSelect: T.func.isRequired
-    }
+export type Props = {
+    initialRating?: number,
+    onRatingSelect: Function,
+};
 
-    constructor(props) {
+class RatingSelector extends Component {
+    constructor(props: Props) {
         super(props);
 
         this.changeBlockState = debounce(this.changeBlockState, 75)
@@ -19,6 +20,8 @@ class RatingSelector extends Component {
             activeScore: initialRating
         }
     }
+
+    props: Props;
 
     onRatingBlockHover = (score, evt) => {
         const {type} = evt;

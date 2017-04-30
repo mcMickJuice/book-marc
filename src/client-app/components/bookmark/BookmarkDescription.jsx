@@ -1,7 +1,15 @@
-import React, { PropTypes as T, Component } from 'react'
+/* @flow */
+import React, { PropTypes as T, Component } from 'react';
 import RatingSelector from './RatingSelector'
 import MarkdownViewer from '../../elements/MarkdownViewer'
 import MarkdownEditor from '../../elements/MarkdownEditor'
+
+export type Props = {
+    description?: string,
+    rating?: number,
+    onDescriptionUpdate: Function,
+    onRatingUpdate: Function,
+};
 
 class BookmarkDescription extends Component {
 
@@ -13,12 +21,7 @@ class BookmarkDescription extends Component {
         }
     }
 
-    static propTypes = {
-        description: T.string,
-        rating: T.number,
-        onDescriptionUpdate: T.func.isRequired,
-        onRatingUpdate: T.func.isRequired
-    }
+    props: Props;
 
     onDescriptionEdit = () => {
         this.setState({

@@ -1,9 +1,12 @@
-import React, { Component, PropTypes as T} from 'react'
+/* @flow */
+import React, { Component, PropTypes as T } from 'react';
 import {getRecentBookmarks} from '../../common/bookmarkService'
 import BookmarkSearch from './BookmarkSearch'
 import BookmarkRow from './BookmarkRow'
 import {Link} from 'react-router'
 import * as css from '../../styles/bookmark-home'
+
+export type Props = {};
 
 class BookmarkHome extends Component {
     constructor(){
@@ -18,6 +21,8 @@ class BookmarkHome extends Component {
             isLoading: true
         }
     }
+
+    props: Props;
 
     componentDidMount() {
         getRecentBookmarks()

@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import { bookmarkShapeWithReview } from '../../common/bookmarkShape'
 import { Link } from 'react-router'
@@ -7,7 +8,10 @@ import Date from '../../elements/Date'
 import Card from '../../elements/Card'
 import * as css from '../../styles/bookmark-row'
 
-const BookmarkRow = ({bookmark}) => {
+export type Props = { bookmark?: bookmarkShapeWithReview };
+
+const BookmarkRow = (props: Props) => {
+    const {bookmark} = props;
     const {title, id, url, rating} = bookmark;
 
     return (
@@ -20,11 +24,6 @@ const BookmarkRow = ({bookmark}) => {
                 <Rating score={rating} />
             </div>
         </Card>
-    )
-}
-
-BookmarkRow.propTypes = {
-    bookmark: bookmarkShapeWithReview
 }
 
 export default BookmarkRow

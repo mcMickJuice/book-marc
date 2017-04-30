@@ -30,7 +30,10 @@ const authHook = (_, replace: () => void): boolean => {
 
 const viewBookmarkWrapped = requireBookmark(ViewBookmark)
 
-const Routes = ({history}: {history: any}) => {
+export type Props = { history: Object };
+
+const Routes = (props: Props) => {
+    const {history}: {history: any} = props;
     return <Router history={history}>
         <Route path="/login" component={Login} />
         <Route path="/" component={Main} onEnter={authHook}>
@@ -50,10 +53,6 @@ const Routes = ({history}: {history: any}) => {
         </Route>
         <Route path="*" component={NotFound} />
     </Router>
-}
-
-Routes.propTypes = {
-    history: PropTypes.object.isRequired
 }
 
 export default Routes;

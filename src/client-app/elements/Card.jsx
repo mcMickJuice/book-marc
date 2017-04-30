@@ -1,14 +1,16 @@
-import React, {PropTypes as T} from 'react'
+/* @flow */
+import React, { PropTypes as T } from 'react';
 
-const Card = ({children, className}) => {
+export type Props = {
+    children: any,
+    className?: string,
+};
+
+const Card = (props: Props) => {
+    const {children, className} = props;
     return <div className={`bm-card ${className}`}>
         {children}
     </div>
-}
-
-Card.propTypes = {
-    children: T.any.isRequired,
-    className: T.string
 }
 
 export default Card

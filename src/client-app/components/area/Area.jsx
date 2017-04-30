@@ -1,4 +1,5 @@
-import React, { PropTypes as T, Component } from 'react'
+/* @flow */
+import React, { PropTypes as T, Component } from 'react';
 import AreaNoteForm from './AreaNoteForm'
 import AreaNote from './AreaNote'
 import TagList from '../tag/TagList'
@@ -7,6 +8,18 @@ import TagForm from '../tag/TagForm'
 const sortByLatestDate = (first, second) => {
     return second.createdDate - first.createdDate
 }
+
+export type Props = {
+    area?: {
+        id: string,
+        name: string,
+        notes?: Array<{ blurb: string }>,
+        tags?: Array<string>,
+    },
+    onAddNote: Function,
+    onTagAdded: Function,
+    onTagRemoved: Function,
+};
 
 class Area extends Component {
     constructor() {
@@ -19,6 +32,8 @@ class Area extends Component {
             isAddingNote: false
         }
     }
+
+    props: Props;
 
     toggleNoteForm() {
         this.setState(state => ({
@@ -67,21 +82,6 @@ class Area extends Component {
         </div>)
 
     }
-
-}
-
-Area.propTypes = {
-    area: T.shape({
-        id: T.string.isRequired,
-        name: T.string.isRequired,
-        notes: T.arrayOf(T.shape({
-            blurb: T.string.isRequired
-        })),
-        tags: T.arrayOf(T.string)
-    }),
-    onAddNote: T.func.isRequired,
-    onTagAdded: T.func.isRequired,
-    onTagRemoved: T.func.isRequired
 }
 
 export default Area
