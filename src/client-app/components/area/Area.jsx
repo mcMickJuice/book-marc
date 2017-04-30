@@ -22,6 +22,8 @@ export type Props = {
 };
 
 class Area extends Component {
+    onAddNote: Function;
+    toggleNoteForm: Function;
     constructor() {
         super();
 

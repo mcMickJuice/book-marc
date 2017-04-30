@@ -7,6 +7,9 @@ import {connect} from 'react-redux'
 export type Props = { onLogin: Function };
 
 class Login extends Component {
+    onPasswordBlur: Function;
+    onUsernameBlur: Function;
+    onLogin: Function;
 
     constructor() {
         super();

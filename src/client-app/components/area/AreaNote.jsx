@@ -21,7 +21,7 @@ const AreaNote = (props: Props) => {
         <div>
             <Date date={createdDate} />
         </div>
-    </Card>
+    </Card>)
 }
 
 export default AreaNote

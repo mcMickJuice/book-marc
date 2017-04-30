@@ -9,6 +9,8 @@ import * as css from '../../styles/bookmark-home'
 export type Props = {};
 
 class BookmarkHome extends Component {
+    onSearchReset: Function;
+    onSearchResults: Function;
     constructor(){
         super()
 

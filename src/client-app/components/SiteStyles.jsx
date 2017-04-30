@@ -24,6 +24,7 @@ const buildSectionParams = (id, collapsed, callback) => {
 export type Props = {};
 
 class StyleContainer extends Component {
+    collapseSection: Function;
     constructor() {
         super();
 

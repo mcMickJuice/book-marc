@@ -12,6 +12,10 @@ export type Props = {
 };
 
 class BookmarkSearch extends Component {
+    performSearch: Function;
+    onRemoveTag: Function;
+    onTagSelect: Function;
+    onSearchChange: Function;
     constructor() {
         super()
 

@@ -11,6 +11,10 @@ export type Props = {
 };
 
 class Dropdown extends Component {
+    selectItem: Function;
+    toggleList: Function;
+    preventBubble: Function;
+    bodyWasClicked: Function;
     constructor() {
         super();
 

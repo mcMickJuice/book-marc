@@ -6,7 +6,6 @@ import {getBookmarkById} from '../redux/bookmark/selectors'
 
 const requireBookmark = Bookmark => {
     class RequireBookmark extends Component {
-        props: Props;
 
         componentDidMount() {
             this.props.maybeFetchBookmark()

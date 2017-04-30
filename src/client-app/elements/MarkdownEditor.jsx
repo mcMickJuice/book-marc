@@ -14,6 +14,10 @@ export type Props = {
 };
 
 class MarkdownEditor extends Component {
+    expandEditor: Function;
+    onEditorChangeImpl: Function;
+    onEditorChange: Function;
+    onEditorBlur: Function;
     static defaultProps = {
         onBlur: noop,
         onChange: noop,

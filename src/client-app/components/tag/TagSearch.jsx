@@ -26,6 +26,11 @@ export type Props = {
 };
 
 class TagSearch extends Component {
+    onCreateTag: Function;
+    onSelectTag: Function;
+    onTagSearchChange: Function;
+    onKeyDown: Function;
+    setResultIndex: Function;
     static defaultProps = {
         TagCreateButton: () => false
     }

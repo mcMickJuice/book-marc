@@ -10,6 +10,9 @@ export type Props = {
 };
 
 class AreaNoteForm extends Component {
+    onBlurbBlur: Function;
+    onTitleBlur: Function;
+    onAddNote: Function;
     constructor() {
         super();
 

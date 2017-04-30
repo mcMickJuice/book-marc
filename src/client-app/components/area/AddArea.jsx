@@ -12,7 +12,11 @@ export type Props = {
 };
 
 class AddArea extends Component {
-    
+    onTagRemove: Function;
+    onTagSelect: Function;
+    addArea: Function;
+    onNameBlur: Function;
+
     constructor() {
         super();
 

@@ -56,6 +56,7 @@ const BookmarkActivityChart = (props: BookmarkActivityChartProps) => {
             <Area />
         </AreaChart>
     </ResponsiveContainer>
+    )
 }
 
 export default BookmarkActivityChart

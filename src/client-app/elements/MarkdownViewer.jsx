@@ -9,6 +9,7 @@ import { queryAll } from '../common/domHelpers'
 export type Props = { rawText: string };
 
 class MarkdownViewer extends Component {
+    highlightCodeBlocks: Function;
     constructor() {
         super();
     }

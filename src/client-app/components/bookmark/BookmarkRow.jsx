@@ -24,6 +24,7 @@ const BookmarkRow = (props: Props) => {
                 <Rating score={rating} />
             </div>
         </Card>
+    )
 }
 
 export default BookmarkRow
