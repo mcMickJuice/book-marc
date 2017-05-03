@@ -1,7 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
 import RatingSelector from './RatingSelector'
-import MarkdownViewer from '../../elements/MarkdownViewer'
 import MarkdownEditor from '../../elements/MarkdownEditor'
 
 export type Props = {
@@ -15,9 +14,16 @@ type State = { isEditingDescription: boolean };
 
 class BookmarkDescription extends Component {
     state: State;
+    onDescriptionExit: number => void
+    onRatingSelect: number => void
+    onDescriptionEdit: () => void
 
     constructor() {
         super();
+
+        this.onDescriptionExit = this.onDescriptionExit.bind(this)
+        this.onRatingSelect = this.onRatingSelect.bind(this)
+        this.onDescriptionEdit = this.onDescriptionEdit.bind(this)
 
         this.state = {
             isEditingDescription: false
@@ -26,28 +32,28 @@ class BookmarkDescription extends Component {
 
     props: Props;
 
-    onDescriptionEdit = () => {
+    onDescriptionEdit() {
         this.setState({
             isEditingDescription: true
         })
     }
 
-    onDescriptionExit = (nextDescription) => {
-        const {onDescriptionUpdate, description} = this.props;
+    onDescriptionExit(nextDescription: string) {
+        const { onDescriptionUpdate, description } = this.props;
 
         if (nextDescription === description) return;
 
         onDescriptionUpdate(nextDescription);
     }
 
-    onRatingSelect = (newRating) => {
-        const {onRatingUpdate} = this.props
+    onRatingSelect(newRating: number) {
+        const { onRatingUpdate } = this.props
 
         onRatingUpdate(newRating);
     }
 
     render() {
-        const {description, rating} = this.props;
+        const { description, rating } = this.props;
 
         return <div>
             <div>
@@ -57,10 +63,10 @@ class BookmarkDescription extends Component {
                         collapsible={true}
                         onBlur={this.onDescriptionExit}>
                         <span className="bm-description__no-text"
-                        style={{color: 'gray'}}>
+                            style={{ color: 'gray' }}>
                             No Description Provided
                             </span>
-                        </MarkdownEditor>
+                    </MarkdownEditor>
                 </div>
             </div>
             <div className="row">

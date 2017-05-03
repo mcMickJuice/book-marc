@@ -12,7 +12,7 @@ export type Props = {
 };
 
 type State = {
-    selectedTag: any,
+    selectedTag?: TagType,
     searchTerm: string,
 };
 
@@ -31,25 +31,25 @@ class BookmarkSearch extends Component {
         this.performSearch = debounce(this.performSearch.bind(this), 500)
 
         this.state = {
-            selectedTag: null,
+            selectedTag: undefined,
             searchTerm: ''
         }
     }
 
     props: Props;
 
-    onSearchChange(evt) {
+    onSearchChange(evt: SyntheticInputEvent) {
         const {value} = evt.target;
 
         this.setState({
             searchTerm: value,
-            selectedTag: null
+            selectedTag: undefined
         })
 
         this.performSearch(value)
     }
 
-    onTagSelect(tag) {
+    onTagSelect(tag: TagType) {
         const {onSearchResults} = this.props;
 
         this.setState({
@@ -67,13 +67,13 @@ class BookmarkSearch extends Component {
         const {onSearchReset} = this.props;
 
         this.setState({
-            selectedTag: null
+            selectedTag: undefined
         })
 
         onSearchReset();
     }
 
-    performSearch(text) {
+    performSearch(text: string) {
         const {onSearchResults, onSearchReset} = this.props;
 
         const trimmedSearch = text.trim();

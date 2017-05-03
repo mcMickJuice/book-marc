@@ -50,7 +50,7 @@ class AreaNoteForm extends Component {
         onAddNote(note);
     }
 
-    onTitleBlur(evt) {
+    onTitleBlur(evt: any) {
         const title = evt.target.value;
 
         this.setState({
@@ -58,7 +58,7 @@ class AreaNoteForm extends Component {
         })
     }
 
-    onBlurbBlur(blurb) {
+    onBlurbBlur(blurb: string) {
         this.setState({
             blurb
         })

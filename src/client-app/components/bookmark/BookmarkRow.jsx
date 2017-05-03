@@ -2,7 +2,6 @@
 import React from 'react';
 import { bookmarkShapeWithReview } from '../../common/bookmarkShape'
 import { Link } from 'react-router'
-import BookmarkUrlLink from './BookmarkUrlLink'
 import Rating from './Rating'
 import Date from '../../elements/Date'
 import Card from '../../elements/Card'

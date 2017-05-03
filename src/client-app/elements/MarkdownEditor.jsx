@@ -24,6 +24,8 @@ class MarkdownEditor extends Component {
     onEditorChangeImpl: Function;
     onEditorChange: Function;
     onEditorBlur: Function;
+    textArea: React.Element<*>;
+
     static defaultProps = {
         onBlur: noop,
         onChange: noop,
@@ -62,7 +64,7 @@ class MarkdownEditor extends Component {
         }
     }
 
-    onEditorChange(evt) {
+    onEditorChange(evt: SyntheticEvent) {
         const {value} = evt.target;
 
         this.onEditorChangeImpl(value);
