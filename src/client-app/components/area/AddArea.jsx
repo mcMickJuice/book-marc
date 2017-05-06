@@ -106,7 +106,7 @@ class AddArea extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
         addArea: area => {
             return dispatch(addArea(area))

@@ -15,3 +15,4 @@ module.file_ext=.jsx
 module.file_ext=.css
 module.file_ext=.less
 module.name_mapper='\.less$' -> 'css-module-flow'
+module.name_mapper='highlight$' -> 'HighlightJs'

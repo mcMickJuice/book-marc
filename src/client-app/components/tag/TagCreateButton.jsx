@@ -10,7 +10,7 @@ export type Props = {
 };
 
 const TagCreateButton = (props: Props) => {
-    const {isInvalidTag, createTag} = props;
+    const { isInvalidTag, createTag } = props;
 
     return <div className={`bm-button ${isInvalidTag
         ? 'bm-button--disabled'
@@ -26,8 +26,8 @@ const mapStateToProp = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch,ownProps) => {
-    const {tagSearch} = ownProps;
+const mapDispatchToProps = (dispatch: Function, ownProps) => {
+    const { tagSearch } = ownProps;
 
     return {
         createTag: () => {
@@ -40,14 +40,14 @@ const mapDispatchToProps = (dispatch,ownProps) => {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const {isInvalidTag} = stateProps;
-    const {createTag} = dispatchProps;
-    const {onCreateTag} = ownProps;
+    const { isInvalidTag } = stateProps;
+    const { createTag } = dispatchProps;
+    const { onCreateTag } = ownProps;
 
     return {
         isInvalidTag,
         createTag: () => {
-            if(isInvalidTag) return;
+            if (isInvalidTag) return;
 
             return createTag().then(tag => onCreateTag(tag))
         }

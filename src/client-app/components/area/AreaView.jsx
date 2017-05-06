@@ -54,7 +54,7 @@ class AreaView extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+function mapStateToProps (state, ownProps, stateProps) {
     const {id} = ownProps.routeParams;
     const area = getAreaFromState(state)(id);
 
@@ -63,7 +63,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+function mapDispatchToProps (dispatch: Function, ownProps) {
     const {id} = ownProps.routeParams
 
     return {
@@ -82,7 +82,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const mergeProps = (stateProps, dispatchProps) => {
+function mergeProps(stateProps, dispatchProps, ownProps) {
     const {area, ...otherStateProps} = stateProps
     const {onTagAdded, ...otherDispatchProps} = dispatchProps;
 

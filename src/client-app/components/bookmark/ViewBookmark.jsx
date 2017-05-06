@@ -58,7 +58,7 @@ const ViewBookmark = (props: Props) => {
     );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch: Function, ownProps) => {
     const {id} = ownProps.bookmark;
     const {bookmark} = ownProps;
 

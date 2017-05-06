@@ -1,10 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
+import {connect, ConnectedComponent} from 'react-redux'
 import {getBookmark} from '../redux/bookmark/actions'
 import {getBookmarkById} from '../redux/bookmark/selectors'
 
-const requireBookmark = (Bookmark: React.Component<*, *, *>)  => {
+const requireBookmark = (Bookmark: React.Component<*, *, *> | ConnectedComponent<*,*,*,*>)  => {
     class RequireBookmark extends Component {
 
         props: {
@@ -40,7 +40,7 @@ const requireBookmark = (Bookmark: React.Component<*, *, *>)  => {
         }
     }
 
-    const mapDispatchToProps = (dispatch, ownProps) => {
+    const mapDispatchToProps = (dispatch: Function, ownProps) => {
         const {params: {id}} = ownProps;
 
         return {

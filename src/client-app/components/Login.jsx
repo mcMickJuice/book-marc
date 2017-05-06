@@ -97,7 +97,7 @@ class Login extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
         onLogin: userInfo => dispatch(logIn(userInfo))
     }

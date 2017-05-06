@@ -104,7 +104,7 @@ class AddBookmark extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
         addBookmark: bookmark => {
             dispatch(addBookmark(bookmark))

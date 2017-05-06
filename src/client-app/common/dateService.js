@@ -17,10 +17,6 @@ const monthMap = {
 
 const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
 
-const calcYear = (year: number) => {
-    return 1900 + year
-}
-
 export const getDateDiffByDays = (timeInMs: number, numOfDays: number) => {
     const diffInMs = numOfDays * ONE_DAY_IN_MS;
     return timeInMs + diffInMs
@@ -31,7 +27,7 @@ export const getDateString = (timeInMs: number) => {
 
     const month = date.getMonth();
     const day = date.getDate();
-    const year = calcYear(date.getYear());
+    const year = date.getFullYear();
 
     return `${monthMap[month]} ${day}, ${year}`
 }
