@@ -7,17 +7,20 @@ import * as css from '../../styles/rating'
 const MAX_SCORE = 5;
 
 const scoreLabelMap = {
-    1: { color: '#c71212', label: 'Prolly should delete' },
-    2: { color: '#d48f11', label: 'Bad' },
-    3: { color: 'gold', label: 'Just OK' },
-    4: { color: 'lightgreen', label: 'Pretty Good' },
-    5: { color: 'darkgreen', label: 'Great!' }
+    '1': { color: '#c71212', label: 'Prolly should delete' },
+    '2': { color: '#d48f11', label: 'Bad' },
+    '3': { color: 'gold', label: 'Just OK' },
+    '4': { color: 'lightgreen', label: 'Pretty Good' },
+    '5': { color: 'darkgreen', label: 'Great!' }
 }
 
 const notRankedDescription = { color: '', label: 'Not Ranked' }
 
-const getScoreDescription = score => {
-    return scoreLabelMap[score] || notRankedDescription
+const getScoreDescription = (score?: number) => {
+    if(score == null){
+        return notRankedDescription
+    }
+    return scoreLabelMap[score]
 }
 
 export type Props = {
@@ -27,7 +30,7 @@ export type Props = {
 };
 
 const Rating = (props: Props) => {
-    const {score, onHover = noop, onRatingSelect = noop} = props;
+    const { score, onHover = noop, onRatingSelect = noop } = props;
     const description = getScoreDescription(score)
 
     const ratingBars = range(MAX_SCORE).map(idx => <RatingBlock key={idx}

@@ -14,6 +14,8 @@ class MarkdownViewer extends Component {
         super();
     }
 
+    convertor: showdown.Convertor
+
     props: Props;
 
     componentWillMount() {

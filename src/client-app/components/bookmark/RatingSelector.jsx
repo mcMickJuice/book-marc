@@ -20,7 +20,7 @@ class RatingSelector extends Component {
 
         this.changeBlockState = debounce(this.changeBlockState, 75)
 
-        const {initialRating = 0} = props;
+        const { initialRating = 0 } = props;
         this.state = {
             defaultScore: initialRating,
             activeScore: initialRating
@@ -29,9 +29,9 @@ class RatingSelector extends Component {
 
     props: Props;
 
-    onRatingBlockHover = (score, evt) => {
-        const {type} = evt;
-        const {defaultScore} = this.state
+    onRatingBlockHover = (score: number, evt: any) => {
+        const type: string = evt.type;
+        const { defaultScore } = this.state
 
         const scoreToApply = type === 'mouseenter' ? score : defaultScore
 
@@ -39,25 +39,25 @@ class RatingSelector extends Component {
         this.changeBlockState(scoreToApply)
     }
 
-    onRatingSelect = score => {
-        const {onRatingSelect} = this.props
+    onRatingSelect = (score: number) => {
+        const { onRatingSelect } = this.props
 
         onRatingSelect(score)
-        
+
         this.setState({
             defaultScore: score,
             activeScore: score
         })
     }
 
-    changeBlockState = (score) => {
+    changeBlockState = (score: number) => {
         this.setState({
             activeScore: score
         })
     }
 
     render() {
-        const {activeScore} = this.state
+        const { activeScore } = this.state
 
         return <Rating onHover={this.onRatingBlockHover}
             onRatingSelect={this.onRatingSelect}

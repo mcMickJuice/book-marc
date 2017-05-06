@@ -14,7 +14,7 @@ const Root = (props: Props) => {
     const history = syncHistoryWithStore(browserHistory, store);
     return (<Provider store={store}>
         <Routes history={history} />
-    </Provider>
+    </Provider>)
 }
 
 export default Root;

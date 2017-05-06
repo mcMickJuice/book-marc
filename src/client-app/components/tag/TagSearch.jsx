@@ -18,11 +18,15 @@ const calcIndex = (idx, keyCode, resultCount) => {
     return Math.max(idx - 1, 0);
 }
 
+export type TagCreateButtonProps = {
+    tagSearch: string,
+    onCreateTag: Function
+}
+
 export type Props = {
     searchTags: Function,
     selectTag: Function,
-    TagCreateButton?: //factory function
-    Function,
+    TagCreateButton?: React.Element<any>,
 };
 
 type State = {
@@ -38,6 +42,9 @@ class TagSearch extends Component {
     onTagSearchChange: Function;
     onKeyDown: Function;
     setResultIndex: Function;
+    container: HTMLElement;
+    input: HTMLInputElement;
+
     static defaultProps = {
         TagCreateButton: () => false
     }
@@ -76,8 +83,8 @@ class TagSearch extends Component {
     }
 
     onKeyDown(evt) {
-        const {keyCode} = evt;
-        const {currentIndex, tags} = this.state;
+        const { keyCode } = evt;
+        const { currentIndex, tags } = this.state;
 
         if (applicableKeys.indexOf(keyCode) === -1) {
             return;
@@ -98,7 +105,7 @@ class TagSearch extends Component {
 
     onTagSearchChange(evt) {
         let tagSearch = evt.target.value;
-        const {searchTags} = this.props;
+        const { searchTags } = this.props;
 
         const tags = tagSearch === '' ? [] : searchTags(tagSearch.trim())
 
@@ -110,7 +117,7 @@ class TagSearch extends Component {
     }
 
     onSelectTag(tag) {
-        const {selectTag} = this.props;
+        const { selectTag } = this.props;
 
         selectTag(tag);
 
@@ -125,8 +132,8 @@ class TagSearch extends Component {
     }
 
     render() {
-        const {tags, tagSearch, currentIndex} = this.state
-        const {TagCreateButton} = this.props;
+        const { tags, tagSearch, currentIndex } = this.state
+        const { TagCreateButton } = this.props;
 
         const tagResult = tags.map((t, idx) => (<div className={`bm-tag-search__dropdown__item ${idx === currentIndex ? 'bm-tag-search__dropdown__item--highlighted' : ''}`}
             key={t.id}
@@ -135,22 +142,21 @@ class TagSearch extends Component {
         </div>))
 
         return (<div ref={(container) => { this.container = container }} className="bm-tag-search">
-                    <div className="bm-tag-search__search-row">
-                        <input type="text" name="tagSearch"
-                            placeholder="Search Tags"
-                            className="bm-tag-search__search-row__input"
-                            value={tagSearch}
-                            ref={t=> this.input = t}
-                            onChange={this.onTagSearchChange}
-                            onBlur={this.onTagSearchBlur} />
-                        <TagCreateButton tagSearch={tagSearch} 
-                            onCreateTag={this.onCreateTag}
-                        ></TagCreateButton>
-                    </div>
-                    <div className="bm-tag-search__dropdown">
-                        {tagResult}
-                    </div>
-                </div>)
+            <div className="bm-tag-search__search-row">
+                <input type="text" name="tagSearch"
+                    placeholder="Search Tags"
+                    className="bm-tag-search__search-row__input"
+                    value={tagSearch}
+                    ref={t => this.input = t}
+                    onChange={this.onTagSearchChange} />
+                <TagCreateButton tagSearch={tagSearch}
+                    onCreateTag={this.onCreateTag}
+                ></TagCreateButton>
+            </div>
+            <div className="bm-tag-search__dropdown">
+                {tagResult}
+            </div>
+        </div>)
     }
 }
 

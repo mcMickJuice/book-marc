@@ -2,14 +2,14 @@
 import React from 'react';
 import { Area, AreaChart, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
-const calcY = (y, chartY) => {
+const calcY = (y, chartY: number) => {
     //push datapoints down below lines 
     //...but not too far down. set minimum at 10 px below chart Y
     return Math.min(y + (chartY * .1), chartY - 10)
 }
 
 export type CustomLabelProps = {
-    valueKey?: string,
+    valueKey: string,
     x?: number,
     y?: number,
     height?: number,

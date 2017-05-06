@@ -1,14 +1,8 @@
 /* @flow */
 import React from 'react';
 
-export type Props = {
-    children: any,
-    className?: string,
-};
-
-const Card = (props: Props) => {
-    const {children, className} = props;
-    return <div className={`bm-card ${className}`}>
+const Card = ({ children, className }: { children: any, className?: string }) => {
+    return <div className={`bm-card ${className || ''}`}>
         {children}
     </div>
 }

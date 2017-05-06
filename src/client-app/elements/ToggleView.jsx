@@ -11,7 +11,7 @@ export type Props = {
     openByDefault?: boolean,
     destroyChildOnClose?: boolean,
     onClose?: Function,//in case we need to notify parent when closing
-    children: number | string | React.Element | Array<any>,
+    children: number | string | React.Element<any> | Array<any>,
     toggleButtonFunc?: Function,
 };
 
@@ -34,8 +34,6 @@ class ToggleView extends Component {
             isOpen: !!openByDefault
         }
     }
-
-    props: Props;
 
     toggleShow() {
         const { isOpen } = this.state;

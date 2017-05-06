@@ -15,12 +15,7 @@ import TagList from '../tag/TagList'
 import TagForm from '../tag/TagForm'
 
 export type Props = {
-    bookmark?: {
-        id: any,
-        title: string,
-        url: string,
-        tags?: Array<string>,
-    },
+    bookmark: BookmarkType,
     markAsRead: Function,
     onDescriptionUpdate: Function,
     onRatingUpdate: Function,
@@ -31,7 +26,7 @@ export type Props = {
 const ViewBookmark = (props: Props) => {
     const {bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate, onTagAdd, onTagRemove} = props;
 
-    const markAsReadElement = bookmark.isRead
+    const markAsReadElement = bookmark.readDate != null
         ? <Date date={bookmark.readDate} />
         :
         <div className="bm-button" onClick={markAsRead}>

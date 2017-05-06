@@ -44,7 +44,7 @@ class BookmarkHome extends Component {
             })
     }
 
-    onSearchResults(bookmarks) {
+    onSearchResults(bookmarks: Array<BookmarkType>) {
         this.setState({
             bookmarks
         })

@@ -7,7 +7,7 @@ import { getAllTags } from '../redux/tag/actions'
 import {connect} from 'react-redux'
 
 export type Props = {
-    children: number | string | React.Element | Array<any>,
+    children: number | string | React.Element<any> | Array<any>,
     dispatch: Function,
 };
 

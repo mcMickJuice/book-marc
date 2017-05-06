@@ -2,14 +2,13 @@
 import React, { Component } from 'react';
 import * as css from '../styles/site'
 
-const StyleSection = ({isVisible, toggleClick, children}) => {
+const StyleSection = ({ isVisible, toggleClick, children }: { isVisible: boolean, toggleClick?: () => void, children?: any }) => {
     const display = isVisible ? 'initial' : 'none';
     const sectionHeader = isVisible ? 'Collapse' : 'Expand';
     return <div>
         <h3 onClick={toggleClick}>({sectionHeader})</h3>
         <div style={{ display }}>
-        {children}
-        
+            {children}
         </div>
     </div>
 }
@@ -40,9 +39,9 @@ class StyleContainer extends Component {
 
     props: Props;
 
-    collapseSection(id) {
-        const {collapsed} = this.state;
-        console.log(id, collapsed )
+    collapseSection(id: number) {
+        const { collapsed } = this.state;
+        console.log(id, collapsed)
 
         let newCollapsed = []
         if (collapsed.indexOf(id) > -1) {
@@ -57,20 +56,20 @@ class StyleContainer extends Component {
     }
 
     render() {
-        const {collapsed} = this.state;
+        const { collapsed } = this.state;
 
         return <div>
-         <StyleSection {...buildSectionParams(1, collapsed, this.collapseSection)}
-        >
-        <ListStyles></ListStyles>
-        </StyleSection>
-        <StyleSection {...buildSectionParams(2, collapsed, this.collapseSection)}>
-            <SiteStyles></SiteStyles>
-        </StyleSection>
+            <StyleSection {...buildSectionParams(1, collapsed, this.collapseSection) }
+            >
+                <ListStyles></ListStyles>
+            </StyleSection>
+            <StyleSection {...buildSectionParams(2, collapsed, this.collapseSection) }>
+                <SiteStyles></SiteStyles>
+            </StyleSection>
 
-       
+
         </div>
-        
+
     }
 }
 

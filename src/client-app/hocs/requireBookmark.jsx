@@ -1,11 +1,17 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {getBookmark} from '../redux/bookmark/actions'
 import {getBookmarkById} from '../redux/bookmark/selectors'
 
-const requireBookmark = Bookmark => {
+const requireBookmark = (Bookmark: React.Component<*, *, *>)  => {
     class RequireBookmark extends Component {
+
+        props: {
+            bookmark: BookmarkType,
+            rest: Array<any>,
+            maybeFetchBookmark: () => void
+        }
 
         componentDidMount() {
             this.props.maybeFetchBookmark()

@@ -7,7 +7,7 @@ export type Props = {
         value: any,
         display: string,
     }>,
-    onSelect: Function,
+    onSelect: string => void,
 };
 
 type State = { showList: boolean };
@@ -18,6 +18,9 @@ class Dropdown extends Component {
     toggleList: Function;
     preventBubble: Function;
     bodyWasClicked: Function;
+    dropdownContainer: HTMLDivElement;
+    discardClick: boolean;
+
     constructor() {
         super();
 
@@ -25,6 +28,7 @@ class Dropdown extends Component {
         this.selectItem = this.selectItem.bind(this);
         this.bodyWasClicked = this.bodyWasClicked.bind(this);
         this.preventBubble = this.preventBubble.bind(this);
+        this.discardClick = false;
 
         this.state = {
             showList: false
@@ -70,7 +74,7 @@ class Dropdown extends Component {
         })
     }
 
-    selectItem(selected) {
+    selectItem(selected: string) {
         const {onSelect} = this.props;
 
         this.setState({

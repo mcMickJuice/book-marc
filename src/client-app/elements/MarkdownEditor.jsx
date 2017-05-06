@@ -6,11 +6,11 @@ import * as css from '../styles/markdown-editor'
 import debounce from 'lodash.debounce'
 
 export type Props = {
-    onBlur?: Function,
-    onChange?: Function,
+    onBlur: string => void,
+    onChange: string => void,
     initialText?: string,
     collapsible?: boolean,
-    children?: number | string | React.Element | Array<any>,
+    children?: number | string | React.Element<any> | Array<any>,
 };
 
 type State = {
@@ -24,7 +24,7 @@ class MarkdownEditor extends Component {
     onEditorChangeImpl: Function;
     onEditorChange: Function;
     onEditorBlur: Function;
-    textArea: React.Element<*>;
+    textArea: HTMLInputElement;
 
     static defaultProps = {
         onBlur: noop,
@@ -51,8 +51,8 @@ class MarkdownEditor extends Component {
 
     props: Props;
 
-    onEditorBlur(evt) {
-        const {value} = evt.target;
+    onEditorBlur(evt: any) {
+        const value: string = evt.target.value;
         const {onBlur, collapsible} = this.props;
 
         onBlur(value);
@@ -64,13 +64,13 @@ class MarkdownEditor extends Component {
         }
     }
 
-    onEditorChange(evt: SyntheticEvent) {
-        const {value} = evt.target;
+    onEditorChange(evt: any) {
+        const value:string = evt.target.value;
 
         this.onEditorChangeImpl(value);
     }
 
-    onEditorChangeImpl(value) {
+    onEditorChangeImpl(value: string) {
         const {onChange} = this.props;
 
         onChange(value);

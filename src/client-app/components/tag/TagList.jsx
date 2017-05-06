@@ -6,7 +6,7 @@ import * as css from '../../styles/tag-list'
 import Tag from './Tag'
 
 export type Props = {
-    tags?: Array<{
+    tags: Array<{
         id: string,
         name: string,
     }>,
@@ -16,7 +16,7 @@ export type Props = {
 const TagView = (props: Props) => {
     const {tags, onRemoveTag} = props;
     if (tags.length === 0) {
-        return false
+        return
     }
     const tagList = tags.map(t => {
         return <Tag className="bm-tag-list__tag"
