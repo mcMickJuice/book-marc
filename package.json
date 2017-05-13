@@ -13,7 +13,7 @@
     "analyze-bundle": "set NODE_ENV=production&&webpack --config webpack.analyze.config.js",
     "style-app": "node style-app",
     "run-docker": "docker run -p 127.0.0.1:27017:27017 --name bookmarc-mongo -d mongo",
-    "seed-user": "set USER=mike&&set PW=pw&&node ./seed-scripts/createUser.js",
+    "init-db": "node seed-scripts/initDb.js",
     "flow": "flow"
   },
   "keywords": [],
