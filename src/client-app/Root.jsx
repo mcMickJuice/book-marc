@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {Provider} from 'react-redux'
 import {browserHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'

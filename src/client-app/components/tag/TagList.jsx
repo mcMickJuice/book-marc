@@ -16,8 +16,9 @@ export type Props = {
 const TagView = (props: Props) => {
     const {tags, onRemoveTag} = props;
     if (tags.length === 0) {
-        return
+        return null;
     }
+
     const tagList = tags.map(t => {
         return <Tag className="bm-tag-list__tag"
             key={t.id}
@@ -27,9 +28,9 @@ const TagView = (props: Props) => {
         </Tag>
     })
 
-    return <div className="bm-tag-list">
+    return (<div className="bm-tag-list">
         {tagList}
-    </div>
+    </div>)
 }
 
 const mapStateToProps = (state, ownProps) => {

@@ -16,8 +16,8 @@ const scoreLabelMap = {
 
 const notRankedDescription = { color: '', label: 'Not Ranked' }
 
-const getScoreDescription = (score?: number) => {
-    if(score == null){
+const getScoreDescription = (score: number) => {
+    if(score === 0){
         return notRankedDescription
     }
     return scoreLabelMap[score]
@@ -31,7 +31,7 @@ export type Props = {
 
 const Rating = (props: Props) => {
     const { score, onHover = noop, onRatingSelect = noop } = props;
-    const description = getScoreDescription(score)
+    const description = getScoreDescription(score || 0)
 
     const ratingBars = range(MAX_SCORE).map(idx => <RatingBlock key={idx}
         activeColor={description.color}

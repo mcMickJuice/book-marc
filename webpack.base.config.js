@@ -15,15 +15,15 @@ var apiUrl = process.env.API_URL;
 
 var vendorLibs = ['react',
     'react-dom',
-    'es6-promise', 
-    'react-redux', 
-    'react-router', 
-    'react-router-redux', 
-    'redux', 
-    'redux-thunk', 
-    'superagent', 
-    'superagent-promise-plugin', 
-    'showdown', 
+    'es6-promise',
+    'react-redux',
+    'react-router',
+    'react-router-redux',
+    'redux',
+    'redux-thunk',
+    'superagent',
+    'superagent-promise-plugin',
+    'showdown',
     'highlight']
 
 module.exports = {
@@ -44,7 +44,11 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.jsx?$/, include: srcFolder, loader: 'babel-loader' },
+            {
+                test: /\.jsx?$/, include: srcFolder, loader: 'babel-loader', options: {
+                    cacheDirectory: true
+                }
+            },
             {
                 test: /\.less/, include: srcFolder, use: [
                     'style-loader',
