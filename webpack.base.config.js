@@ -3,11 +3,11 @@ var webpack = require('webpack')
 
 var srcFolder = path.join(__dirname, 'src')
 
-var babelSettings = {
-    cacheDirectory: true,
-    presets: ['es2015', 'react'],
-    plugins: ['transform-object-rest-spread', 'transform-class-properties']
-}
+// var babelSettings = {
+//     cacheDirectory: true,
+//     presets: ['es2015', 'react'],
+//     plugins: ['transform-object-rest-spread', 'transform-class-properties']
+// }
 
 var env = process.env.NODE_ENV || 'development';
 
@@ -44,7 +44,7 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.jsx?$/, include: srcFolder, loader: 'babel-loader', options: babelSettings },
+            { test: /\.jsx?$/, include: srcFolder, loader: 'babel-loader' },
             {
                 test: /\.less/, include: srcFolder, use: [
                     'style-loader',

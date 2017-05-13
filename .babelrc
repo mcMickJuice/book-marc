@@ -2,13 +2,16 @@
     "presets": ["stage-0", "react", "es2015", "flow"],
     "plugins": [
         ["module-resolver", {
-            "root": ["./src/client-app"],
+            "root": ["src/client-app"],
             "alias": {
-                "common": "./common",
-                "components": "./components",
-                "elements": "./elements",
-                "redux": "./redux"
+                "common": "common",
+                "components": "components",
+                "elements": "elements",
+                "redux": "redux"
             }
-        }]
+        }],
+        "transform-flow-strip-types",
+        "transform-object-rest-spread", 
+        "transform-class-properties"
     ]
 }
