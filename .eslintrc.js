@@ -29,7 +29,8 @@ module.exports = {
             "error",
             "single"
         ],
-        "no-console": [0]
+        "no-console": [0],
+        "react/prop-types": 0
     },
     "settings": {
         "flowtype": {

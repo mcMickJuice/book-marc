@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import MarkdownViewer from './MarkdownViewer'
 import { noop } from '../common/utility'
+/* eslint-disable no-unused-vars */
 import * as css from '../styles/markdown-editor'
+ /* eslint-enable no-unused-vars */
 import debounce from 'lodash.debounce'
 
 export type Props = {

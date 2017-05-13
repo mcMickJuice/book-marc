@@ -1,17 +1,18 @@
-/* @flow */
 import React, { Component } from 'react';
-import {connect, ConnectedComponent} from 'react-redux'
+// import {connect, ConnectedComponent} from 'react-redux'
+import {connect} from 'react-redux'
 import {getBookmark} from '../redux/bookmark/actions'
 import {getBookmarkById} from '../redux/bookmark/selectors'
 
-const requireBookmark = (Bookmark: React.Component<*, *, *> | ConnectedComponent<*,*,*,*>)  => {
+// const requireBookmark = (Bookmark: React.Component<*, *, *> | ConnectedComponent<*,*,*,*>)  => {
+const requireBookmark = (Bookmark)  => {
     class RequireBookmark extends Component {
 
-        props: {
-            bookmark: BookmarkType,
-            rest: Array<any>,
-            maybeFetchBookmark: () => void
-        }
+        // props: {
+        //     bookmark: BookmarkType,
+        //     rest: Array<any>,
+        //     maybeFetchBookmark: () => void
+        // }
 
         componentDidMount() {
             this.props.maybeFetchBookmark()
@@ -22,6 +23,7 @@ const requireBookmark = (Bookmark: React.Component<*, *, *> | ConnectedComponent
 
             const toRender = bookmark == null
                 ? <div>Loading Bookmark...</div>
+                //TODO flow-error React element Bookmark Expected React Component instead of React%Component
                 : <Bookmark bookmark={bookmark} {...rest} />
 
             return <div>
@@ -40,7 +42,8 @@ const requireBookmark = (Bookmark: React.Component<*, *, *> | ConnectedComponent
         }
     }
 
-    const mapDispatchToProps = (dispatch: Function, ownProps) => {
+    // const mapDispatchToProps = (dispatch: Function, ownProps) => {
+    const mapDispatchToProps = (dispatch, ownProps) => {
         const {params: {id}} = ownProps;
 
         return {

@@ -1,8 +1,9 @@
-/* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { searchTags } from '../../redux/tag/selectors'
+/* eslint-disable no-unused-vars */
 import * as css from '../../styles/tag-search'
+/* eslint-enable no-unused-vars */
 
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
@@ -18,32 +19,32 @@ const calcIndex = (idx, keyCode, resultCount) => {
     return Math.max(idx - 1, 0);
 }
 
-export type TagCreateButtonProps = {
-    tagSearch: string,
-    onCreateTag: Function
-}
+// export type TagCreateButtonProps = {
+//     tagSearch: string,
+//     onCreateTag: Function
+// }
 
-export type Props = {
-    searchTags: Function,
-    selectTag: Function,
-    TagCreateButton?: React.Element<any>,
-};
+// export type Props = {
+//     searchTags: Function,
+//     selectTag: Function,
+//     TagCreateButton?: React.Element<any>,
+// };
 
-type State = {
-    tagSearch: string,
-    tags: Array<any>,
-    currentIndex: number,
-};
+// type State = {
+//     tagSearch: string,
+//     tags: Array<any>,
+//     currentIndex: number,
+// };
 
 class TagSearch extends Component {
-    state: State;
-    onCreateTag: Function;
-    onSelectTag: Function;
-    onTagSearchChange: Function;
-    onKeyDown: Function;
-    setResultIndex: Function;
-    container: HTMLElement;
-    input: HTMLInputElement;
+    // state: State;
+    // onCreateTag: Function;
+    // onSelectTag: Function;
+    // onTagSearchChange: Function;
+    // onKeyDown: Function;
+    // setResultIndex: Function;
+    // container: HTMLElement;
+    // input: HTMLInputElement;
 
     static defaultProps = {
         TagCreateButton: () => false
@@ -65,7 +66,7 @@ class TagSearch extends Component {
         }
     }
 
-    props: Props;
+    // props: Props;
 
     componentDidMount() {
         this.input.focus();
@@ -149,6 +150,7 @@ class TagSearch extends Component {
                     value={tagSearch}
                     ref={t => this.input = t}
                     onChange={this.onTagSearchChange} />
+                    {/* TODO flow-error TagCreateButton expected React component instead of React$element */}
                 <TagCreateButton tagSearch={tagSearch}
                     onCreateTag={this.onCreateTag}
                 ></TagCreateButton>
