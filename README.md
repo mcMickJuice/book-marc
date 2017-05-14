@@ -16,4 +16,13 @@ All npm dependencies needed for build must be under the dependencies collection 
 Automatic deployment is setup on `master`. Any commits to `master` will trigger a deployment.
 
 ## Running locally
-I develop on a Windows 10 machine so I use Vagrant to run a vm that hosts a docker image that hosts mongodb.  Can run without VM/Container if you have mongo running locally, you'll just need to update the mongodb config.
+I use Docker for running mongodb in a container.  While this isn't necessary, it's the easiest way to get started (note the below two tasks are only required when first running the application):
+
+1) run `npm run run-docker` to start Docker container based on mongo and named `bookmarc-mongo`.  This script binds your localhost:27017 to the container's 27017 port
+2) run `npm run init-db` to perform db setup steps and insert a user login into the database.
+3) a `.env` file is expected to be in the project root (not currently checked into git) that contains the following keys
+- DB_URL - full url to mongo instance
+- BOOKMARC_DB - name of bookmarc database
+- SECRET - secret used by bcrypt for hashing passwords
+
+Note that Docker is not required to run the app, you just need to have an instance of mongo with the url set as DB_URL value in `.env` or set as environment variable
