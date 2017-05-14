@@ -1,18 +1,18 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component } from 'react';
+// import {connect, ConnectedComponent} from 'react-redux'
 import {connect} from 'react-redux'
 import {getBookmark} from '../redux/bookmark/actions'
 import {getBookmarkById} from '../redux/bookmark/selectors'
 
-const requireBookmark = Bookmark => {
+// const requireBookmark = (Bookmark: React.Component<*, *, *> | ConnectedComponent<*,*,*,*>)  => {
+const requireBookmark = (Bookmark)  => {
     class RequireBookmark extends Component {
-        static propTypes = {
-            bookmark: PropTypes.shape({
-                id: PropTypes.any.isRequired,
-                title: PropTypes.string.isRequired,
-                url: PropTypes.string.isRequired
-            }),
-            maybeFetchBookmark: PropTypes.func.isRequired
-        }
+
+        // props: {
+        //     bookmark: BookmarkType,
+        //     rest: Array<any>,
+        //     maybeFetchBookmark: () => void
+        // }
 
         componentDidMount() {
             this.props.maybeFetchBookmark()
@@ -23,6 +23,7 @@ const requireBookmark = Bookmark => {
 
             const toRender = bookmark == null
                 ? <div>Loading Bookmark...</div>
+                //TODO flow-error React element Bookmark Expected React Component instead of React%Component
                 : <Bookmark bookmark={bookmark} {...rest} />
 
             return <div>
@@ -41,6 +42,7 @@ const requireBookmark = Bookmark => {
         }
     }
 
+    // const mapDispatchToProps = (dispatch: Function, ownProps) => {
     const mapDispatchToProps = (dispatch, ownProps) => {
         const {params: {id}} = ownProps;
 

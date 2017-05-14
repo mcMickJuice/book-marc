@@ -1,10 +1,22 @@
-import React, { Component, PropTypes as T } from 'react';
+/* @flow */
+import React, { Component } from 'react';
 import BookmarkActivityChart from './BookmarkActivityChart'
 import TagOverviewChart from './TagOverviewChart'
 import { getDashboardData } from '../../common/dashboardService'
 
 
+export type Props = {};
+
+
+type State = {
+    tagData: Array<any>,
+    bookmarkData: Array<any>,
+    isLoading: boolean,
+};
+
+
 class Home extends Component {
+    state: State;
     constructor() {
         super()
 
@@ -14,6 +26,8 @@ class Home extends Component {
             isLoading: true
         }
     }
+
+    props: Props;
 
     componentDidMount() {
         getDashboardData()

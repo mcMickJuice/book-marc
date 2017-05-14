@@ -1,16 +1,20 @@
-import React, { PropTypes as T, Component } from 'react';
+/* @flow */
+import React, { Component } from 'react';
 import { Link } from 'react-router'
 import * as css from '../styles/main'
 import LogoutButton from './LogoutButton'
 import { getAllTags } from '../redux/tag/actions'
 import {connect} from 'react-redux'
 
-class Main extends Component {
-    static propTypes = {
-        children: T.node.isRequired,
-        dispatch: T.func.isRequired
-    }
+export type Props = {
+    children: number | string | React.Element<any> | Array<any>,
+    dispatch: Function,
+};
 
+type State = { isLoading: boolean };
+
+class Main extends Component {
+    state: State;
     constructor() {
         super();
 
@@ -18,6 +22,8 @@ class Main extends Component {
             isLoading: true
         }
     }
+
+    props: Props;
 
     componentDidMount() {
         const {dispatch} = this.props;

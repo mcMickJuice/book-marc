@@ -1,15 +1,27 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import { createArea } from '../../common/areaService'
 import TagForm from '../tag/TagForm'
 import { connect } from 'react-redux'
 import { addArea } from '../../redux/area/actions'
 import TagList from '../tag/TagList'
 
+export type Props = {
+    history: any,
+    addArea: Function,
+};
+
+type State = {
+    name: string,
+    tagIds: Array<any>,
+};
+
 class AddArea extends Component {
-    static propTypes = {
-        history: T.any.isRequired,
-        addArea: T.func.isRequired
-    }
+    state: State;
+    onTagRemove: Function;
+    onTagSelect: Function;
+    addArea: Function;
+    onNameBlur: Function;
 
     constructor() {
         super();
@@ -24,6 +36,8 @@ class AddArea extends Component {
             tagIds: []
         }
     }
+
+    props: Props;
 
     onNameBlur(evt) {
         const name = evt.target.value
@@ -92,7 +106,7 @@ class AddArea extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
         addArea: area => {
             return dispatch(addArea(area))
@@ -100,4 +114,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(AddArea)
+export default connect(undefined, mapDispatchToProps)(AddArea)

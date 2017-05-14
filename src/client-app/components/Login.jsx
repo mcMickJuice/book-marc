@@ -1,9 +1,22 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import {logIn} from '../redux/user/actions'
 import {login} from '../common/authClient'
 import {connect} from 'react-redux'
 
+export type Props = { onLogin: Function };
+
+type State = {
+    username: string,
+    password: string,
+    error: any,
+};
+
 class Login extends Component {
+    state: State;
+    onPasswordBlur: Function;
+    onUsernameBlur: Function;
+    onLogin: Function;
 
     constructor() {
         super();
@@ -19,9 +32,7 @@ class Login extends Component {
         }
     }
 
-    static propTypes = {
-        onLogin: T.func.isRequired
-    }
+    props: Props;
 
     onLogin() {
         const {username, password} = this.state;
@@ -86,10 +97,10 @@ class Login extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
         onLogin: userInfo => dispatch(logIn(userInfo))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(undefined, mapDispatchToProps)(Login)

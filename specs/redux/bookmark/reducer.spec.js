@@ -1,14 +1,13 @@
-var test = require('tape');
-var reducer = require('../../../src/client-app/redux/bookmark/reducer').default
+var reducer = require('redux/bookmark/reducer').default
 var {BOOKMARK_LOADED,
     BOOKMARK_UPDATED,
     RECENT_BOOKMARKS_LOADED,
     TAG_ADDED,
-    TAG_REMOVED} = require('../../../src/client-app/redux/bookmark/actions')
+    TAG_REMOVED} = require('redux/bookmark/actions')
 
 
-test('BOOKMARK_ADDED adds bookmark to state', t => {
-    t.plan(1);
+test('BOOKMARK_ADDED adds bookmark to state', () => {
+    expect.assertions(1);
     const initialState = {
         bookmarks: []
     }
@@ -27,11 +26,11 @@ test('BOOKMARK_ADDED adds bookmark to state', t => {
 
     const result = reducer(initialState, action);
 
-    t.true(result.bookmarks.indexOf(bookmark) > -1)
+    expect(result.bookmarks.indexOf(bookmark) > -1).toBeTruthy()
 })
 
-test('BOOKMARK_UPDATED updates existing bookmark', t => {
-    t.plan(2);
+test('BOOKMARK_UPDATED updates existing bookmark', () => {
+    expect.assertions(2);
     const id = 1;
     const initialState = {
         bookmarks: [
@@ -56,19 +55,19 @@ test('BOOKMARK_UPDATED updates existing bookmark', t => {
 
     const foundBookmark = result.bookmarks.filter(b => b.id === id)[0];
 
-    t.equal(foundBookmark.title, updatedBookmark.title)
-    t.equal(foundBookmark.url, updatedBookmark.url);
+    expect(foundBookmark.title).toBe(updatedBookmark.title)
+    expect(foundBookmark.url).toBe(updatedBookmark.url);
 })
 
-test('RECENT_BOOKMARKS_LOADED loads bookmarks', t => {
-    t.plan(2)
+test('RECENT_BOOKMARKS_LOADED loads bookmarks', () => {
+    expect.assertions(2)
 
     const initialState = {
         bookmarks: []
     }
 
     const firstState = reducer(initialState, { type: 'FAKE' })
-    t.equal(firstState.bookmarks, initialState.bookmarks)
+    expect(firstState.bookmarks).toBe(initialState.bookmarks)
 
     const newBookmarks = [{ id: 1, title: 'hello' }, { id: 2, title: 'another one' }]
     const action = {
@@ -80,11 +79,11 @@ test('RECENT_BOOKMARKS_LOADED loads bookmarks', t => {
 
     const result = reducer(firstState, action)
 
-    t.deepEqual(result.bookmarks, newBookmarks)
+    expect(result.bookmarks).toEqual(newBookmarks)
 })
 
-test('TAG_ADDED will add tagId to specified bookmark', t => {
-    t.plan(2)
+test('TAG_ADDED will add tagId to specified bookmark', () => {
+    expect.assertions(2)
 
     const initialState = {
         bookmarks: [
@@ -102,12 +101,12 @@ test('TAG_ADDED will add tagId to specified bookmark', t => {
 
     const result = reducer(initialState, action);
 
-    t.equal(result.bookmarks[0].tags.length,1, 'Bookmark has 1 tag')
-    t.equal(action.payload.tagId,result.bookmarks[0].tags[0], 'Bookmark has added tagId')
+    expect(result.bookmarks[0].tags.length).toBe(1)
+    expect(action.payload.tagId).toBe(result.bookmarks[0].tags[0])
 })
 
-test('TAG_ADDED will not add TagId to incorrect bookmarkId', t => {
-    t.plan(1)
+test('TAG_ADDED will not add TagId to incorrect bookmarkId', () => {
+    expect.assertions(1)
 
     const initialState = {
         bookmarks: [
@@ -128,11 +127,11 @@ test('TAG_ADDED will not add TagId to incorrect bookmarkId', t => {
 
     const incorrectBm = result.bookmarks.filter(b => b.id === 4)[0]
 
-    t.assert(incorrectBm.tags.indexOf(action.payload.tagId) === -1, 'Other bookmark does not added TagId')
+    expect(incorrectBm.tags.indexOf(action.payload.tagId) === -1).toBeTruthy()
 })
 
-test('TAG_ADDED will create tags array and add tagId to bookmark', t => {
-    t.plan(2)
+test('TAG_ADDED will create tags array and add tagId to bookmark', () => {
+    expect.assertions(2)
 
     const initialState = {
         bookmarks: [
@@ -150,12 +149,12 @@ test('TAG_ADDED will create tags array and add tagId to bookmark', t => {
 
     const result = reducer(initialState, action);
 
-    t.assert(result.bookmarks[0].tags != null, 'Tag array was created')
-    t.assert(result.bookmarks[0].tags.indexOf(100) > -1, 'tag id was added to bookmark')
+    expect(result.bookmarks[0].tags != null).toBeTruthy()
+    expect(result.bookmarks[0].tags.indexOf(100) > -1).toBeTruthy()
 })
 
-test('TAG_REMOVED will remove tagId from specified bookmarkId', t => {
-    t.plan(1)
+test('TAG_REMOVED will remove tagId from specified bookmarkId', () => {
+    expect.assertions(1)
 
     const initialState = {
         bookmarks: [
@@ -173,11 +172,11 @@ test('TAG_REMOVED will remove tagId from specified bookmarkId', t => {
 
     const result = reducer(initialState, action);
 
-    t.equal(result.bookmarks[0].tags.length, 0, 'Bookmark had tag removed')
+    expect(result.bookmarks[0].tags.length).toBe(0)
 })
 
-test('TAG_REMOVED will still work for non-existent tag array', t => {
-    t.plan(2)
+test('TAG_REMOVED will still work for non-existent tag array', () => {
+    expect.assertions(2)
 
     const initialState = {
         bookmarks: [
@@ -195,12 +194,12 @@ test('TAG_REMOVED will still work for non-existent tag array', t => {
 
     const result = reducer(initialState, action);
 
-    t.assert(result.bookmarks[0].tags != null, 'Tags array exists on bookmark')
-    t.equal(result.bookmarks[0].tags.length, 0, 'No tags exist in array')
+    expect(result.bookmarks[0].tags != null).toBeTruthy()
+    expect(result.bookmarks[0].tags.length).toBe(0)
 })
 
-test('Unknown action type doesn\'t alter state', t => {
-    t.plan(1)
+test('Unknown action type doesn\'t alter state', () => {
+    expect.assertions(1)
 
     const initialState = {
         bookmarks: []
@@ -212,5 +211,5 @@ test('Unknown action type doesn\'t alter state', t => {
 
     const result = reducer(initialState, action);
 
-    t.equal(result, initialState)
+    expect(result).toBe(initialState)
 })

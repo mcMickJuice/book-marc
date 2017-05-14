@@ -1,14 +1,33 @@
-import React, { PropTypes as T, Component } from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import AreaNoteForm from './AreaNoteForm'
 import AreaNote from './AreaNote'
 import TagList from '../tag/TagList'
 import TagForm from '../tag/TagForm'
 
-const sortByLatestDate = (first, second) => {
+const sortByLatestDate = (first: AreaNoteType, second: AreaNoteType) => {
     return second.createdDate - first.createdDate
 }
 
+export type Props = {
+    area: {
+        id: string,
+        name: string,
+        notes: Array<AreaNoteType>,
+        tags: Array<string>,
+    },
+    onAddNote: Function,
+    onTagAdded: Function,
+    onTagRemoved: Function,
+};
+
+type State = { isAddingNote: boolean };
+
 class Area extends Component {
+    state: State;
+    onAddNote: Function;
+
+    toggleNoteForm: Function;
     constructor() {
         super();
 
@@ -20,13 +39,15 @@ class Area extends Component {
         }
     }
 
+    props: Props;
+
     toggleNoteForm() {
         this.setState(state => ({
             isAddingNote: !state.isAddingNote
         }))
     }
 
-    onAddNote(note) {
+    onAddNote(note: string) {
         const { onAddNote } = this.props;
 
         this.setState({
@@ -67,21 +88,6 @@ class Area extends Component {
         </div>)
 
     }
-
-}
-
-Area.propTypes = {
-    area: T.shape({
-        id: T.string.isRequired,
-        name: T.string.isRequired,
-        notes: T.arrayOf(T.shape({
-            blurb: T.string.isRequired
-        })),
-        tags: T.arrayOf(T.string)
-    }),
-    onAddNote: T.func.isRequired,
-    onTagAdded: T.func.isRequired,
-    onTagRemoved: T.func.isRequired
 }
 
 export default Area

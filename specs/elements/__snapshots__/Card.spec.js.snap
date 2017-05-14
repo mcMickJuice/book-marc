@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`children passed in should be rendered in container 1`] = `
+<div
+  className="bm-card super-awesome-class"
+>
+  This is the text in the Card
+</div>
+`;
+
+exports[`className passed in should be in classList 1`] = `
+<div
+  className="bm-card my-class"
+>
+  Hello
+</div>
+`;

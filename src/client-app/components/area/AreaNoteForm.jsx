@@ -1,14 +1,25 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import * as css from '../../styles/area-note-form'
 import MarkdownEditor from '../../elements/MarkdownEditor'
 
-class AreaNoteForm extends Component {
-    static propTypes = {
-        onAddNote: T.func.isRequired,
-        areaId: T.string.isRequired,
-        onCancel: T.func
-    }
+export type Props = {
+    onAddNote: Function,
+    areaId: string,
+    onCancel?: Function,
+};
 
+type State = {
+    title: string,
+    blurb: string,
+    showNote: boolean,
+};
+
+class AreaNoteForm extends Component {
+    state: State;
+    onBlurbBlur: Function;
+    onTitleBlur: Function;
+    onAddNote: Function;
     constructor() {
         super();
 
@@ -22,6 +33,8 @@ class AreaNoteForm extends Component {
             showNote: false
         }
     }
+
+    props: Props;
 
     onAddNote() {
         const {onAddNote, areaId} = this.props;
@@ -37,7 +50,7 @@ class AreaNoteForm extends Component {
         onAddNote(note);
     }
 
-    onTitleBlur(evt) {
+    onTitleBlur(evt: any) {
         const title = evt.target.value;
 
         this.setState({
@@ -45,7 +58,7 @@ class AreaNoteForm extends Component {
         })
     }
 
-    onBlurbBlur(blurb) {
+    onBlurbBlur(blurb: string) {
         this.setState({
             blurb
         })
