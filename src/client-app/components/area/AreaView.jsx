@@ -1,18 +1,22 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import Area from './Area'
 import { connect } from 'react-redux'
 import { getAreaFromState } from '../../redux/area/selectors'
 import { getAreaById, addAreaNote, addTagToArea, removeTagFromArea } from '../../redux/area/actions'
 
-class AreaView extends Component {
-    static propTypes = {
-        area: T.object,
-        getAreaById: T.func.isRequired,
-        onAddNote: T.func.isRequired,
-        onTagAdded: T.func.isRequired,
-        onTagRemoved: T.func.isRequired
-    }
+export type Props = {
+    area?: Object,
+    getAreaById: Function,
+    onAddNote: Function,
+    onTagAdded: Function,
+    onTagRemoved: Function,
+};
 
+type State = { isLoading: boolean };
+
+class AreaView extends Component {
+    state: State;
     constructor() {
         super();
 
@@ -20,6 +24,8 @@ class AreaView extends Component {
             isLoading: true
         }
     }
+
+    props: Props;
 
     componentDidMount() {
         const {area} = this.props;
@@ -48,7 +54,7 @@ class AreaView extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+function mapStateToProps (state, ownProps, stateProps) {
     const {id} = ownProps.routeParams;
     const area = getAreaFromState(state)(id);
 
@@ -57,7 +63,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+function mapDispatchToProps (dispatch: Function, ownProps) {
     const {id} = ownProps.routeParams
 
     return {
@@ -76,7 +82,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-const mergeProps = (stateProps, dispatchProps) => {
+function mergeProps(stateProps, dispatchProps, ownProps) {
     const {area, ...otherStateProps} = stateProps
     const {onTagAdded, ...otherDispatchProps} = dispatchProps;
 

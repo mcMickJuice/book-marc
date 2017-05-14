@@ -1,9 +1,8 @@
-const test = require('tape')
-const reducer = require('../../../src/client-app/redux/tag/reducer').default
-const {TAG_CREATED, ALL_TAGS_LOADED} = require('../../../src/client-app/redux/tag/actions')
+const reducer = require('redux/tag/reducer').default
+const {TAG_CREATED, ALL_TAGS_LOADED} = require('redux/tag/actions')
 
-test('TAG_CREATED adds tag to state', t => {
-    t.plan(1);
+test('TAG_CREATED adds tag to state', () => {
+    expect.assertions(1);
 
     const initialState = []
 
@@ -21,11 +20,11 @@ test('TAG_CREATED adds tag to state', t => {
 
     const result = reducer(initialState, action)
 
-    t.true(result.indexOf(tag) > -1)
+    expect(result.indexOf(tag) > -1).toBeTruthy()
 })
 
-test('ALL_TAGS_LOADED loads tags in state', t => {
-    t.plan(2);
+test('ALL_TAGS_LOADED loads tags in state', () => {
+    expect.assertions(2);
 
     const initialState = [];
 
@@ -49,12 +48,12 @@ test('ALL_TAGS_LOADED loads tags in state', t => {
 
     const result = reducer(initialState, action)
 
-    t.equal(result.length, tags.length)
-    t.deepEqual(result, tags)
+    expect(result.length).toBe(tags.length)
+    expect(result).toEqual(tags)
 })
 
-test('Unknown action type doesn\'t alter state', t => {
-    t.plan(1);
+test('Unknown action type doesn\'t alter state', () => {
+    expect.assertions(1);
 
     const initialState = [{
         name: 'tag 1',
@@ -63,5 +62,5 @@ test('Unknown action type doesn\'t alter state', t => {
 
     const result = reducer(initialState, {type: 'UNKNOWN_TYPE'})
 
-    t.deepEqual(result, initialState)
+    expect(result).toEqual(initialState)
 })

@@ -1,16 +1,27 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import { searchBookmarksByTitle, searchBookmarksByTag } from '../../common/bookmarkService'
 import debounce from 'lodash.debounce'
 import TagSearch from '../tag/TagSearch'
 import Tag from '../tag/Tag'
 import * as css from '../../styles/bookmark-search'
 
-class BookmarkSearch extends Component {
-    static propTypes = {
-        onSearchResults: T.func.isRequired,
-        onSearchReset: T.func.isRequired
-    }
+export type Props = {
+    onSearchResults: Function,
+    onSearchReset: Function,
+};
 
+type State = {
+    selectedTag?: TagType,
+    searchTerm: string,
+};
+
+class BookmarkSearch extends Component {
+    state: State;
+    performSearch: Function;
+    onRemoveTag: Function;
+    onTagSelect: Function;
+    onSearchChange: Function;
     constructor() {
         super()
 
@@ -20,23 +31,25 @@ class BookmarkSearch extends Component {
         this.performSearch = debounce(this.performSearch.bind(this), 500)
 
         this.state = {
-            selectedTag: null,
+            selectedTag: undefined,
             searchTerm: ''
         }
     }
 
-    onSearchChange(evt) {
+    props: Props;
+
+    onSearchChange(evt: SyntheticInputEvent) {
         const {value} = evt.target;
 
         this.setState({
             searchTerm: value,
-            selectedTag: null
+            selectedTag: undefined
         })
 
         this.performSearch(value)
     }
 
-    onTagSelect(tag) {
+    onTagSelect(tag: TagType) {
         const {onSearchResults} = this.props;
 
         this.setState({
@@ -54,13 +67,13 @@ class BookmarkSearch extends Component {
         const {onSearchReset} = this.props;
 
         this.setState({
-            selectedTag: null
+            selectedTag: undefined
         })
 
         onSearchReset();
     }
 
-    performSearch(text) {
+    performSearch(text: string) {
         const {onSearchResults, onSearchReset} = this.props;
 
         const trimmedSearch = text.trim();

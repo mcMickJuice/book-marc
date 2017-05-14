@@ -1,18 +1,22 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import showdown from 'showdown'
 import * as codeSyntaxCss from '../styles/markdown-themes/monokai-sublime.css'
 import highlightJs from 'highlight'
 import * as widgetCss from '../styles/markdown-viewer'
 import { queryAll } from '../common/domHelpers'
 
-class MarkdownViewer extends Component {
-    static propTypes = {
-        rawText: T.string.isRequired
-    }
+export type Props = { rawText: string };
 
+class MarkdownViewer extends Component {
+    highlightCodeBlocks: Function;
     constructor() {
         super();
     }
+
+    convertor: showdown.Convertor
+
+    props: Props;
 
     componentWillMount() {
         this.convertor = new showdown.Converter();

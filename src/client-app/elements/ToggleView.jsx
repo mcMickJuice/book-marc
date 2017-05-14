@@ -1,57 +1,62 @@
-import React, {Component, PropTypes as T} from 'react'
+/* @flow */
+import React, { Component } from 'react';
 
 const defaultButtonFunc = (isOpen, onClick) => {
-    return <div onClick={onClick} style={{cursor: 'pointer'}}>
+    return <div onClick={onClick} style={{ cursor: 'pointer' }}>
         Click to {isOpen ? 'Close' : 'Open'}
     </div>
 }
 
-class ToggleView extends Component {
-    static propTypes = {
-        openByDefault: T.bool,
-        destroyChildOnClose: T.bool,
-        onClose: T.func, //in case we need to notify parent when closing
-        children: T.node.isRequired,
-        toggleButtonFunc: T.func
-    }  
+export type Props = {
+    openByDefault?: boolean,
+    destroyChildOnClose?: boolean,
+    onClose?: Function,//in case we need to notify parent when closing
+    children: number | string | React.Element<any> | Array<any>,
+    toggleButtonFunc?: Function,
+};
 
+type State = { isOpen: any };
+
+class ToggleView extends Component {
+    state: State;
+    toggleShow: Function;
     static defaultProps = {
         toggleButtonFunc: defaultButtonFunc
     }
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
         this.toggleShow = this.toggleShow.bind(this);
 
-        const {openByDefault} = props;
+        const { openByDefault } = props;
         this.state = {
             isOpen: !!openByDefault
         }
     }
 
     toggleShow() {
-        const {isOpen} = this.state;
+        const { isOpen } = this.state;
         this.setState({
             isOpen: !isOpen
         })
     }
 
     render() {
-        const {children, toggleButtonFunc, destroyChildOnClose} = this.props;
-        const {isOpen} = this.state;
+        const { children, toggleButtonFunc, destroyChildOnClose } = this.props;
+        const { isOpen } = this.state;
 
         const button = toggleButtonFunc(isOpen, this.toggleShow)
 
-        
 
-        return (<div style={{position: 'relative'}}>
+
+        return (<div style={{ position: 'relative' }}>
             {button}
             {destroyChildOnClose && !isOpen
-            ? false
-            : <div style={{display: (isOpen ? 'block': 'none') }}>
-                {children}
-            </div>}
+                ? false
+                : <div style={{ display: (isOpen ? 'block' : 'none') }}>
+                    {children}
+                </div>}
         </div>)
     }
 }

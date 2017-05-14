@@ -1,19 +1,21 @@
-import React, { PropTypes as T } from 'react'
+/* @flow */
+import React from 'react';
 import { connect } from 'react-redux'
 import { createTag } from '../../redux/tag/actions'
 import { isValidTag } from '../../redux/tag/selectors'
 
-const TagCreateButton = ({isInvalidTag, createTag}) => {
+export type Props = {
+    isInvalidTag: boolean,
+    createTag: Function,
+};
+
+const TagCreateButton = (props: Props) => {
+    const { isInvalidTag, createTag } = props;
 
     return <div className={`bm-button ${isInvalidTag
         ? 'bm-button--disabled'
         : ''} bm-tag-search__search-row__button`}
         onClick={createTag}>Add Tag</div>
-}
-
-TagCreateButton.propTypes = {
-    isInvalidTag: T.bool.isRequired,
-    createTag: T.func.isRequired
 }
 
 const mapStateToProp = (state, ownProps) => {
@@ -24,8 +26,8 @@ const mapStateToProp = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch,ownProps) => {
-    const {tagSearch} = ownProps;
+const mapDispatchToProps = (dispatch: Function, ownProps) => {
+    const { tagSearch } = ownProps;
 
     return {
         createTag: () => {
@@ -38,14 +40,14 @@ const mapDispatchToProps = (dispatch,ownProps) => {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const {isInvalidTag} = stateProps;
-    const {createTag} = dispatchProps;
-    const {onCreateTag} = ownProps;
+    const { isInvalidTag } = stateProps;
+    const { createTag } = dispatchProps;
+    const { onCreateTag } = ownProps;
 
     return {
         isInvalidTag,
         createTag: () => {
-            if(isInvalidTag) return;
+            if (isInvalidTag) return;
 
             return createTag().then(tag => onCreateTag(tag))
         }

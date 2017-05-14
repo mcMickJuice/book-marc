@@ -1,14 +1,20 @@
-import React, { Component, PropTypes as T } from 'react';
+/* @flow */
+import React, { Component } from 'react';
 import { addBookmark } from '../../redux/bookmark/actions'
 import { connect } from 'react-redux'
 import TagForm from '../tag/TagForm'
 import TagList from '../tag/TagList'
 
-class AddBookmark extends Component {
-    static propTypes = {
-        addBookmark: T.func.isRequired
-    }
+export type Props = { addBookmark: Function };
 
+type State = {
+    title: string,
+    url: string,
+    tagIds: Array<any>,
+};
+
+class AddBookmark extends Component {
+    state: State;
     constructor() {
         super();
 
@@ -18,6 +24,8 @@ class AddBookmark extends Component {
             tagIds: []
         }
     }
+
+    props: Props;
 
     onTitleBlur = (evt) => {
         const title = evt.target.value;
@@ -96,7 +104,7 @@ class AddBookmark extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Function) => {
     return {
         addBookmark: bookmark => {
             dispatch(addBookmark(bookmark))

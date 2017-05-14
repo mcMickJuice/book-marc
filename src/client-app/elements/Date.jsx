@@ -1,14 +1,14 @@
-import React, {PropTypes as T} from 'react'
+/* @flow */
+import React from 'react';
 import {getDateString} from '../common/dateService'
 
-const Date = ({date}) => {
+export type Props = { date: number };
+
+const Date = (props: Props) => {
+    const {date} = props;
     const dateString = getDateString(date);
 
     return <span>{dateString}</span>
-}
-
-Date.propTypes = {
-    date: T.number.isRequired
 }
 
 export default Date

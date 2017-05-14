@@ -1,13 +1,12 @@
-const test = require('tape')
-const reducer = require('../../../src/client-app/redux/area/reducer').default
+const reducer = require('redux/area/reducer').default
 const {AREA_LOADED,
     AREA_NOTE_ADDED,
     ALL_AREAS_LOADED,
     AREA_TAG_ADDED,
-    AREA_TAG_REMOVED} = require('../../../src/client-app/redux/area/actions')
+    AREA_TAG_REMOVED} = require('redux/area/actions')
 
-test('AREA_LOADED should add area to state', t => {
-    t.plan(2)
+test('AREA_LOADED should add area to state', () => {
+    expect.assertions(2)
 
     const initialState = [];
 
@@ -25,12 +24,12 @@ test('AREA_LOADED should add area to state', t => {
 
     const result = reducer(initialState, action)
 
-    t.equal(result.length, 1)
-    t.equal(result[0], area)
+    expect(result.length).toBe(1)
+    expect(result[0]).toBe(area)
 })
 
-test('AREA_NOTE_ADDED should add note to specified areaId', t => {
-    t.plan(2);
+test('AREA_NOTE_ADDED should add note to specified areaId', () => {
+    expect.assertions(2);
 
     const initialState = [
         { id: 1, title: 'Not touched', notes: [] },
@@ -54,12 +53,12 @@ test('AREA_NOTE_ADDED should add note to specified areaId', t => {
     const untouchedArea = result.filter(r => r.id === 1)[0]
     const touchedArea = result.filter(r => r.id === 2)[0]
 
-    t.true(untouchedArea.notes.length === 0, 'Note is not added to other Area')
-    t.equal(touchedArea.notes[0], note, 'Note is added to correct Area')
+    expect(untouchedArea.notes.length === 0).toBeTruthy()
+    expect(touchedArea.notes[0]).toBe(note)
 })
 
-test('AREA_TAG_ADDED should add tag to specified areaId', t => {
-    t.plan(2);
+test('AREA_TAG_ADDED should add tag to specified areaId', () => {
+    expect.assertions(2);
 
     const initialState = [
         { id: 1, title: 'Not touched', tags: [] },
@@ -78,12 +77,12 @@ test('AREA_TAG_ADDED should add tag to specified areaId', t => {
     const untouchedArea = result.filter(r => r.id === 1)[0]
     const touchedArea = result.filter(r => r.id === 2)[0]
 
-    t.true(untouchedArea.tags.length === 0, 'Tag is not added to other Area')
-    t.equal(touchedArea.tags[0], 67, 'Tag is added to correct Area')
+    expect(untouchedArea.tags.length === 0).toBeTruthy()
+    expect(touchedArea.tags[0]).toBe(67)
 })
 
-test('AREA_TAG_ADDED should create tags and add tag if no tag array exists', t => {
-    t.plan(2);
+test('AREA_TAG_ADDED should create tags and add tag if no tag array exists', () => {
+    expect.assertions(2);
 
     const initialState = [
         {id: 1}
@@ -99,12 +98,12 @@ test('AREA_TAG_ADDED should create tags and add tag if no tag array exists', t =
 
     const result = reducer(initialState, action)
 
-    t.assert(result[0].tags != null, 'Tag array is created')
-    t.equal(result[0].tags[0], 70, 'Tag is added')
+    expect(result[0].tags != null).toBeTruthy()
+    expect(result[0].tags[0]).toBe(70)
 })
 
-test('AREA_TAG_REMOVED should remove tagId from specified area', t => {
-    t.plan(1);
+test('AREA_TAG_REMOVED should remove tagId from specified area', () => {
+    expect.assertions(1);
 
     const initialState = [
         {id: 1, tags: [100]}
@@ -120,11 +119,11 @@ test('AREA_TAG_REMOVED should remove tagId from specified area', t => {
 
     const result = reducer(initialState, action);
 
-    t.equal(result[0].tags.length, 0, 'Tag is removed from area')
+    expect(result[0].tags.length).toBe(0)
 })
 
-test('AREA_TAG_REMOVED should not remove tagId from other area', t => {
-    t.plan(1);
+test('AREA_TAG_REMOVED should not remove tagId from other area', () => {
+    expect.assertions(1);
 
     const initialState = [
         {id: 1, tags: [100]},
@@ -142,11 +141,11 @@ test('AREA_TAG_REMOVED should not remove tagId from other area', t => {
     const result = reducer(initialState, action);
     const otherArea = result.filter(area => area.id === 2)[0]
 
-    t.equal(otherArea.tags[0], 100, 'Tag is not removed from other area')
+    expect(otherArea.tags[0]).toBe(100)
 })
 
-test('AREA_TAG_REMOVED should remove tagId from specified area even if array is not on area', t => {
-    t.plan(1);
+test('AREA_TAG_REMOVED should remove tagId from specified area even if array is not on area', () => {
+    expect.assertions(1);
 
     const initialState = [
         {id: 1}
@@ -162,11 +161,11 @@ test('AREA_TAG_REMOVED should remove tagId from specified area even if array is 
 
     const result = reducer(initialState, action);
 
-    t.assert(result[0].tags != null, 'Tag array is created on area')
+    expect(result[0].tags != null).toBeTruthy()
 })
 
-test('ALL_AREAS_LOADED should load areas into state', t => {
-    t.plan(1)
+test('ALL_AREAS_LOADED should load areas into state', () => {
+    expect.assertions(1)
 
     const initialState = [];
 
@@ -185,11 +184,11 @@ test('ALL_AREAS_LOADED should load areas into state', t => {
 
     const result = reducer(initialState, action)
 
-    t.deepEqual(result, areas)
+    expect(result).toEqual(areas)
 })
 
-test('Unknown action doesn\'t alter state', t => {
-    t.plan(1);
+test('Unknown action doesn\'t alter state', () => {
+    expect.assertions(1);
 
     const initialState = [
         { id: 1, title: 'something' }
@@ -197,5 +196,5 @@ test('Unknown action doesn\'t alter state', t => {
 
     const result = reducer(initialState, { type: 'UNknown!???' })
 
-    t.equal(result, initialState)
+    expect(result).toBe(initialState)
 })
