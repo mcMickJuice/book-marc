@@ -3,11 +3,11 @@ var webpack = require('webpack')
 
 var srcFolder = path.join(__dirname, 'src')
 
-var babelSettings = {
-    cacheDirectory: true,
-    presets: ['es2015', 'react'],
-    plugins: ['transform-object-rest-spread', 'transform-class-properties']
-}
+// var babelSettings = {
+//     cacheDirectory: true,
+//     presets: ['es2015', 'react'],
+//     plugins: ['transform-object-rest-spread', 'transform-class-properties']
+// }
 
 var env = process.env.NODE_ENV || 'development';
 
@@ -15,15 +15,15 @@ var apiUrl = process.env.API_URL;
 
 var vendorLibs = ['react',
     'react-dom',
-    'es6-promise', 
-    'react-redux', 
-    'react-router', 
-    'react-router-redux', 
-    'redux', 
-    'redux-thunk', 
-    'superagent', 
-    'superagent-promise-plugin', 
-    'showdown', 
+    'es6-promise',
+    'react-redux',
+    'react-router',
+    'react-router-redux',
+    'redux',
+    'redux-thunk',
+    'superagent',
+    'superagent-promise-plugin',
+    'showdown',
     'highlight']
 
 module.exports = {
@@ -44,7 +44,11 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.jsx?$/, include: srcFolder, loader: 'babel-loader', options: babelSettings },
+            {
+                test: /\.jsx?$/, include: srcFolder, loader: 'babel-loader', options: {
+                    cacheDirectory: true
+                }
+            },
             {
                 test: /\.less/, include: srcFolder, use: [
                     'style-loader',

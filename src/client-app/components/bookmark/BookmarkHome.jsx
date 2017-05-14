@@ -1,11 +1,23 @@
-import React, { Component, PropTypes as T} from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import {getRecentBookmarks} from '../../common/bookmarkService'
 import BookmarkSearch from './BookmarkSearch'
 import BookmarkRow from './BookmarkRow'
 import {Link} from 'react-router'
 import * as css from '../../styles/bookmark-home'
 
+export type Props = {};
+
+type State = {
+    recentBookmarks: Array<any>,
+    bookmarks: Array<any>,
+    isLoading: boolean,
+};
+
 class BookmarkHome extends Component {
+    state: State;
+    onSearchReset: Function;
+    onSearchResults: Function;
     constructor(){
         super()
 
@@ -19,6 +31,8 @@ class BookmarkHome extends Component {
         }
     }
 
+    props: Props;
+
     componentDidMount() {
         getRecentBookmarks()
             .then(recentBookmarks => {
@@ -30,7 +44,7 @@ class BookmarkHome extends Component {
             })
     }
 
-    onSearchResults(bookmarks) {
+    onSearchResults(bookmarks: Array<BookmarkType>) {
         this.setState({
             bookmarks
         })

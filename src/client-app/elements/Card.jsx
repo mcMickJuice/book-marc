@@ -1,14 +1,10 @@
-import React, {PropTypes as T} from 'react'
+//@flow
+import React from 'react';
 
-const Card = ({children, className}) => {
-    return <div className={`bm-card ${className}`}>
+const Card = ({ children, className }: { children?: string | React.Element<any>, className?: string }): React.Element<any> => {
+    return <div className={`bm-card ${className || ''}`}>
         {children}
     </div>
-}
-
-Card.propTypes = {
-    children: T.any.isRequired,
-    className: T.string
 }
 
 export default Card

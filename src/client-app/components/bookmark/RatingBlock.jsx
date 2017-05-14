@@ -1,6 +1,16 @@
-import React, {PropTypes as T} from 'react'
+/* @flow */
+import React from 'react';
 
-const RatingBlock = ({activeColor, score, currentIdx, onHover, onRatingSelect}) => {
+export type Props = {
+    activeColor: string,
+    score?: number,
+    currentIdx: number,
+    onHover: Function,
+    onRatingSelect: Function,
+};
+
+const RatingBlock = (props: Props) => {
+    const {activeColor, score, currentIdx, onHover, onRatingSelect} = props;
     const style = {
         'backgroundColor': activeColor,
         borderColor: activeColor
@@ -16,14 +26,6 @@ const RatingBlock = ({activeColor, score, currentIdx, onHover, onRatingSelect}) 
         className={`bm-rating__block ${notRated ? 'bm-rating__block--inactive': ''}`}>
 
     </div>
-}
-
-RatingBlock.propTypes = {
-    activeColor: T.string.isRequired,
-    score: T.number,
-    currentIdx: T.number.isRequired,
-    onHover: T.func.isRequired,
-    onRatingSelect: T.func.isRequired
 }
 
 export default RatingBlock

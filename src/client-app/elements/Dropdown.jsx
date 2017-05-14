@@ -1,6 +1,26 @@
-import React, { Component, PropTypes as T } from 'react';
+/* @flow */
+import React, { Component } from 'react';
+
+export type Props = {
+    selected: string,
+    options: Array<{
+        value: any,
+        display: string,
+    }>,
+    onSelect: string => void,
+};
+
+type State = { showList: boolean };
 
 class Dropdown extends Component {
+    state: State;
+    selectItem: Function;
+    toggleList: Function;
+    preventBubble: Function;
+    bodyWasClicked: Function;
+    dropdownContainer: HTMLDivElement;
+    discardClick: boolean;
+
     constructor() {
         super();
 
@@ -8,20 +28,14 @@ class Dropdown extends Component {
         this.selectItem = this.selectItem.bind(this);
         this.bodyWasClicked = this.bodyWasClicked.bind(this);
         this.preventBubble = this.preventBubble.bind(this);
+        this.discardClick = false;
 
         this.state = {
             showList: false
         }
     }
 
-    static propTypes = {
-        selected: T.string.isRequired,
-        options: T.arrayOf(T.shape({
-            value: T.any.isRequired,
-            display: T.string.isRequired
-        })).isRequired,
-        onSelect: T.func.isRequired
-    }
+    props: Props;
 
     componentDidMount() {
         document.addEventListener('click', this.bodyWasClicked);
@@ -60,7 +74,7 @@ class Dropdown extends Component {
         })
     }
 
-    selectItem(selected) {
+    selectItem(selected: string) {
         const {onSelect} = this.props;
 
         this.setState({

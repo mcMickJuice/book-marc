@@ -1,17 +1,32 @@
-import React, { Component, PropTypes as T } from 'react'
+/* @flow */
+import React, { Component } from 'react';
 import MarkdownViewer from './MarkdownViewer'
 import { noop } from '../common/utility'
+/* eslint-disable no-unused-vars */
 import * as css from '../styles/markdown-editor'
+ /* eslint-enable no-unused-vars */
 import debounce from 'lodash.debounce'
 
+export type Props = {
+    onBlur: string => void,
+    onChange: string => void,
+    initialText?: string,
+    collapsible?: boolean,
+    children?: number | string | React.Element<any> | Array<any>,
+};
+
+type State = {
+    text: any,
+    collapsed: any,
+};
+
 class MarkdownEditor extends Component {
-    static propTypes = {
-        onBlur: T.func,
-        onChange: T.func,
-        initialText: T.string,
-        collapsible: T.bool,
-        children: T.node
-    }
+    state: State;
+    expandEditor: Function;
+    onEditorChangeImpl: Function;
+    onEditorChange: Function;
+    onEditorBlur: Function;
+    textArea: HTMLInputElement;
 
     static defaultProps = {
         onBlur: noop,
@@ -21,7 +36,7 @@ class MarkdownEditor extends Component {
         children: 'No Text Provided'
     }
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
         this.onEditorBlur = this.onEditorBlur.bind(this);
@@ -36,8 +51,10 @@ class MarkdownEditor extends Component {
         }
     }
 
-    onEditorBlur(evt) {
-        const {value} = evt.target;
+    props: Props;
+
+    onEditorBlur(evt: any) {
+        const value: string = evt.target.value;
         const {onBlur, collapsible} = this.props;
 
         onBlur(value);
@@ -49,13 +66,13 @@ class MarkdownEditor extends Component {
         }
     }
 
-    onEditorChange(evt) {
-        const {value} = evt.target;
+    onEditorChange(evt: any) {
+        const value:string = evt.target.value;
 
         this.onEditorChangeImpl(value);
     }
 
-    onEditorChangeImpl(value) {
+    onEditorChangeImpl(value: string) {
         const {onChange} = this.props;
 
         onChange(value);

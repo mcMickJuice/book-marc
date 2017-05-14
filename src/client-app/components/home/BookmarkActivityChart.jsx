@@ -1,29 +1,41 @@
-import React, { PropTypes as T } from 'react'
+/* @flow */
+import React from 'react';
 import { Area, AreaChart, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
-const calcY = (y, chartY) => {
+const calcY = (y, chartY?: number = 0) => {
     //push datapoints down below lines 
     //...but not too far down. set minimum at 10 px below chart Y
     return Math.min(y + (chartY * .1), chartY - 10)
 }
 
-export const CustomLabel = ({ valueKey, x, y, height, payload }) => {
-    const value = payload[valueKey]
+export type CustomLabelProps = {
+    valueKey: string,
+    x?: number,
+    y?: number,
+    height?: number,
+    payload?: Object,
+};
+
+export const CustomLabel = (props: CustomLabelProps) => {
+    const { valueKey, x, y, height, payload } = props;
+    const value = (payload || {})[valueKey]
 
     const yPos = calcY(y, height)
 
     return <text x={x} y={yPos} textAnchor="middle" fill="#666">{value}</text>
 }
 
-CustomLabel.propTypes = {
-    valueKey: T.string,
-    x: T.number,
-    y: T.number,
-    height: T.number,
-    payload: T.object
-}
+export type BookmarkActivityChartProps = {
+    data: Array<{
+        week: string,
+        added: number,
+        read: number,
+    }>,
+    hideLabels?: boolean,
+};
 
-const BookmarkActivityChart = ({ data, hideLabels }) => {
+const BookmarkActivityChart = (props: BookmarkActivityChartProps) => {
+    const { data, hideLabels } = props;
     return (<ResponsiveContainer>
         <AreaChart
             data={data}>
@@ -43,16 +55,8 @@ const BookmarkActivityChart = ({ data, hideLabels }) => {
             <Area type="linear" dataKey="read" stackId="1" stroke="#F5E663" fill="#F5E663" label={!hideLabels && <CustomLabel valueKey="read" />} />
             <Area />
         </AreaChart>
-    </ResponsiveContainer>)
-}
-
-BookmarkActivityChart.propTypes = {
-    data: T.arrayOf(T.shape({
-        week: T.string.isRequired,
-        added: T.number.isRequired,
-        read: T.number.isRequired
-    })).isRequired,
-    hideLabels: T.bool
+    </ResponsiveContainer>
+    )
 }
 
 export default BookmarkActivityChart

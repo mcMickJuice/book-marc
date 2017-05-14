@@ -12,5 +12,5 @@ webServer.start(port, (err) => {
         return;
     }
 
-    console.log('dev-app server started!!')
+    console.log(`dev-app server started at port ${port}`)
 })

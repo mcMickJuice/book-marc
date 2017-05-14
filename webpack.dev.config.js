@@ -14,6 +14,6 @@ var devPlugins = [
 ]
 
 baseConfig.plugins = (baseConfig.plugins || []).concat(devPlugins)
-baseConfig.devtool = 'eval-source-map'
+baseConfig.devtool = 'source-map'
 
 module.exports = baseConfig;

@@ -1,4 +1,5 @@
-import React, { PropTypes as T } from 'react';
+/* @flow */
+import React from 'react';
 import {
     updateBookmarkAsRead,
     updateBookmarkDescription,
@@ -13,9 +14,19 @@ import Date from '../../elements/Date'
 import TagList from '../tag/TagList'
 import TagForm from '../tag/TagForm'
 
-const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate, onTagAdd, onTagRemove}) => {
+export type Props = {
+    bookmark: BookmarkType,
+    markAsRead: Function,
+    onDescriptionUpdate: Function,
+    onRatingUpdate: Function,
+    onTagAdd: Function,
+    onTagRemove: Function,
+};
 
-    const markAsReadElement = bookmark.isRead
+const ViewBookmark = (props: Props) => {
+    const {bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate, onTagAdd, onTagRemove} = props;
+
+    const markAsReadElement = bookmark.readDate != null
         ? <Date date={bookmark.readDate} />
         :
         <div className="bm-button" onClick={markAsRead}>
@@ -47,21 +58,7 @@ const ViewBookmark = ({bookmark, markAsRead, onDescriptionUpdate, onRatingUpdate
     );
 };
 
-ViewBookmark.propTypes = {
-    bookmark: T.shape({
-        id: T.any.isRequired,
-        title: T.string.isRequired,
-        url: T.string.isRequired,
-        tags: T.arrayOf(T.string)
-    }),
-    markAsRead: T.func.isRequired,
-    onDescriptionUpdate: T.func.isRequired,
-    onRatingUpdate: T.func.isRequired,
-    onTagAdd: T.func.isRequired,
-    onTagRemove: T.func.isRequired
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch: Function, ownProps) => {
     const {id} = ownProps.bookmark;
     const {bookmark} = ownProps;
 

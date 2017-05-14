@@ -1,13 +1,24 @@
-import React, { PropTypes as T } from 'react'
+/* @flow */
+import React from 'react';
 import { connect } from 'react-redux'
 import { mapTag } from '../../redux/tag/selectors'
 import * as css from '../../styles/tag-list'
 import Tag from './Tag'
 
-const TagView = ({tags, onRemoveTag}) => {
+export type Props = {
+    tags: Array<{
+        id: string,
+        name: string,
+    }>,
+    onRemoveTag?: Function,
+};
+
+const TagView = (props: Props) => {
+    const {tags, onRemoveTag} = props;
     if (tags.length === 0) {
-        return false
+        return null;
     }
+
     const tagList = tags.map(t => {
         return <Tag className="bm-tag-list__tag"
             key={t.id}
@@ -17,18 +28,9 @@ const TagView = ({tags, onRemoveTag}) => {
         </Tag>
     })
 
-    return <div className="bm-tag-list">
+    return (<div className="bm-tag-list">
         {tagList}
-    </div>
-}
-
-TagView.propTypes = {
-    tags: T.arrayOf(T.shape({
-        id: T.string.isRequired,
-        name: T.string.isRequired,
-    })),
-    onRemoveTag: T.func
-
+    </div>)
 }
 
 const mapStateToProps = (state, ownProps) => {

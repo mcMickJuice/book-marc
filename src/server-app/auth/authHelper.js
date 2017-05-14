@@ -14,9 +14,10 @@ module.exports.authenticateUser = function(username, password) {
     //query db for user
     return connect()
         .then(db => {
+            const lowerCaseUser = username.toLowerCase();
             const coll = db.collection(USER_COLLECTION)
 
-            return coll.findOne({username: username})
+            return coll.findOne({username: lowerCaseUser})
                 .then(user => {
                     return new Promise((resolve, reject) => {
                         if(user == null) {

@@ -1,4 +1,6 @@
-import React, {PropTypes} from 'react'
+//@flow
+
+import React from 'react'
 import {Router, Route, IndexRoute} from 'react-router'
 import Main from './components/Main'
 import Home from './components/home/Home'
@@ -18,7 +20,7 @@ const NotFound = () => {
     </div>
 }
 
-const authHook = (nextState, replace) => {
+const authHook = (_, replace: () => void): boolean => {
     if(!isAuthenticated()) {
         replace('/login')
         return false;
@@ -28,7 +30,10 @@ const authHook = (nextState, replace) => {
 
 const viewBookmarkWrapped = requireBookmark(ViewBookmark)
 
-const Routes = ({history}) => {
+export type Props = { history: Object };
+
+const Routes = (props: Props) => {
+    const {history}: {history: any} = props;
     return <Router history={history}>
         <Route path="/login" component={Login} />
         <Route path="/" component={Main} onEnter={authHook}>
@@ -48,10 +53,6 @@ const Routes = ({history}) => {
         </Route>
         <Route path="*" component={NotFound} />
     </Router>
-}
-
-Routes.propTypes = {
-    history: PropTypes.object.isRequired
 }
 
 export default Routes;
